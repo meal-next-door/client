@@ -17,8 +17,6 @@ function MealsList() {
         getAllMeals();
     }, []);
 
-    console.log(meals)
-
     return (
         <div className="MealsList">
 
@@ -27,7 +25,8 @@ function MealsList() {
                     <div className="meals card" key={meal._id} >
                             <h3>{meal.title}</h3>
                             <p>Description: {meal.description}</p>
-                            <p>Cook: {meal.cook}</p>
+                            <p>Cook: {meal.cook?.username}</p>
+                        
                             <Link to={`/meals/${meal._id}`}></Link>
                     </div>
                 );
