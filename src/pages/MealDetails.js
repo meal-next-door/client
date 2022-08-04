@@ -1,45 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 function MealDetails() {
-    //modifier à partir d'ici
-    const [meals, setMeals] = useState([]);
+    const [meal, setMeal] = useState([]);
 
-    const getAllMeals = () => {
+    const { mealId } = useParams();
+
+    const getMeal = () => {
         axios
-            .get(`${process.env.REACT_APP_API_URL}/meals`)
-            .then((response) => setMeals(response.data))
+            .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
+            .then((response) => setMeal(response.data))
             .catch((error) => console.log(error));
     };
 
     useEffect(() => {
-        getAllMeals();
+        getMeal();
     }, []);
 
     return (
         <div className="MealsList">
-
-            {meals?.map((meal) => {
-                return (
-                    <div className="meals card" key={meal._id} >
-                        <Link to={`/cooks/${meal._id}`}>
+            {meal &&
+                    <div className="meal card" key={meal._id} >
                             <h3>{meal.title}</h3>
                             <p>Description: {meal.desciption}</p>
-                            {meals.diet.map((diet) => {
-                                    return (
-                                        <p>{meal.diet}</p>
-                                    )
-                                })}
+                            <p>Diet: {meal.diet}</p>
                             <p>Cuisine: {meal.cuisine}</p>
                             <p>Preparation date: {meal.date}</p>
-                            <p>Cook: {meal.cook}</p>
-                        </Link>
+                            <p>Cook: {meal.cook.username}</p>
                     </div>
-                );
-            })}
-
+            }
         </div>
     );
 }
