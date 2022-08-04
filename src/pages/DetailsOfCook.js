@@ -13,8 +13,7 @@ function CookDetailsPage(props) {
         axios
             .get(`${process.env.REACT_APP_API_URL}/users/${cookId}`)
             .then((response) => {
-                const oneProject = response.data;
-                setCook(oneProject);
+                setCook(response.data);
             })
             .catch((error) => console.log(error));
     };
