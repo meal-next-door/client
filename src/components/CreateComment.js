@@ -21,7 +21,7 @@ function AddComment() {
 
         axios
             .post(
-                `${process.env.REACT_APP_API_URL}/new-comment`, 
+                `${process.env.REACT_APP_API_URL}/new-comment`,
                 requestBody,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
@@ -41,12 +41,12 @@ function AddComment() {
         <div className="AddComment">
             <h3>Add Comment</h3>
 
-            { errorMsg && 
+            {errorMsg &&
                 <p className="error">
                     {errorMsg}
                 </p>
             }
-            
+
             <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                 <input
@@ -62,6 +62,14 @@ function AddComment() {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                />
+
+                <label>Author:</label>
+                <input
+                    type="text"
+                    name="author"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
                 />
 
                 <button type="submit">Submit</button>
