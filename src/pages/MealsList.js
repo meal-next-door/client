@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-function MealsList() {
-    const [meals, setMeals] = useState([]);
+function MealsList(props) {
+    
 
     const getAllMeals = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/meals`)
-            .then((response) => setMeals(response.data))
+            .then((response) => props.setMeals(response.data))
             .catch((error) => console.log(error));
     };
 
@@ -20,7 +20,7 @@ function MealsList() {
     return (
         <div className="MealsList">
 
-            {meals?.map((meal) => {
+            {props.meals?.map((meal) => {
                 return (
                     <div className="meals card" key={meal._id} >
                             <h3>{meal.title}</h3>
