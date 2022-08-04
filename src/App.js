@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import CooksList from './pages/CooksList';
 import CookDetailsPage from './pages/DetailsOfCook';
 import ProfilePage from './pages/Profile';
+import MealsList from './pages/MealsList';
+import MealDetails from './pages/MealDetails';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="cooks" element={<CooksList />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
         <Route path="profile/:userId" element={<ProfilePage />}></Route>
+        <Route path="meals" element={<MealsList />}></Route>
+        <Route path="meals/:mealId" element={<MealDetails />}></Route>
       </Routes>
 
       <Footer />

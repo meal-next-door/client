@@ -16,7 +16,6 @@ function CooksList() {
     useEffect(() => {
         getAllCooks();
     }, []);
-    console.log(cooks)
 
     return (
         <div className="CooksList">

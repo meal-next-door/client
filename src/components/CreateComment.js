@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import userEvent from "@testing-library/user-event";
+import {AuthContext} from "../context/auth.context"
 
-function AddComment(props) {
+function AddComment() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [author, setAuthor] = useState("");
+    const { user } = useContext(AuthContext);
+
 
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -12,10 +16,8 @@ function AddComment(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         setErrorMsg("");
-
-        const requestBody = { title, description, author };
+        const requestBody = { title, description, author: user?._id };
 
         axios
             .post(
@@ -24,10 +26,9 @@ function AddComment(props) {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                props.refreshComments();
-                setTitle("");
-                setDescription("");
-                setAuthor("");
+                // setTitle("");
+                // setDescription("");
+                // setAuthor("");
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new comment");
@@ -61,13 +62,6 @@ function AddComment(props) {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                />
-
-                 <input
-                    type="text"
-                    name="author"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
                 />
 
                 <button type="submit">Submit</button>

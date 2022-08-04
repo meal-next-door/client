@@ -30,6 +30,7 @@ function ProfilePage(props) {
                 <>
                     <h1>{user.username}</h1>
                     <p>{user.address}</p>
+                    <p>{user.role}</p>
                 </>
             )}
 
