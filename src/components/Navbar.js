@@ -9,7 +9,7 @@ function Navbar(){
     return (
         <nav className="Navbar">
             <NavLink to="/">Home</NavLink> | 
-            <NavLink to="/projects">Projects</NavLink> | 
+            <NavLink to="/cooks">Cooks</NavLink> | 
             {isLoggedIn && (
                 <>
                     <span> Hi, {user && user.name}</span>

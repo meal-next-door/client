@@ -8,7 +8,7 @@ function CooksList() {
 
     const getAllCooks = () => {
         axios
-            .get(`${process.env.REACT_APP_API_URL}/cooks`)
+            .get(`${process.env.REACT_APP_API_URL}/users`)
             .then((response) => setCooks(response.data))
             .catch((error) => console.log(error));
     };
@@ -16,27 +16,34 @@ function CooksList() {
     useEffect(() => {
         getAllCooks();
     }, []);
-
+    console.log(cooks)
 
     return (
         <div className="CooksList">
 
-            {cooks.map((cook) => {
+            {cooks?.map((cook) => {
                 return (
                     <div className="cooks card" key={cook._id} >
-                        <Link to={`/projects/${cook._id}`}>
+                        <Link to={`/cooks/${cook._id}`}>
                             <h3>{cook.username}</h3>
                             <p>{cook.address}</p>
-                            {cooks.favorites.map((favorite) => {
-                                return (
-                                    <p>{cook.favorites}</p>
-                                )
-                            })}
-                            {cooks.comments.map((favorite) => {
-                                return (
-                                    <p>{cook.comments}</p>
-                                )
-                            })}
+                            {cooks.favorite
+                                ? cooks.favorites.map((favorite) => {
+                                    return (
+                                        <p>{cook.favorites}</p>
+                                    )
+                                })
+                                : <p>No Favorites yet</p>
+                            }
+                            {
+                                cooks.comment
+                                    ? cooks.comments.map((favorite) => {
+                                        return (
+                                            <p>{cook.comments}</p>
+                                        )
+                                    })
+                                    : <p>No comments yet</p>
+                            }
                         </Link>
                     </div>
                 );
