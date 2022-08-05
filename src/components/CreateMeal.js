@@ -11,9 +11,7 @@ function AddMeal(props) {
     const [date, setDate] = useState("");
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-
     const [errorMsg, setErrorMsg] = useState("");
-
     const storedToken = localStorage.getItem("authToken");
 
     const handleSubmit = (e) => {

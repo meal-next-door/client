@@ -2,13 +2,15 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import userEvent from "@testing-library/user-event";
 import {AuthContext} from "../context/auth.context"
+import { useParams, useNavigate } from "react-router-dom";
 
 function AddComment() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [author, setAuthor] = useState("");
     const { user } = useContext(AuthContext);
-
+    const {cookId} =useParams();
+    const navigate = useNavigate();
 
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -29,11 +31,15 @@ function AddComment() {
                 setTitle("");
                 setDescription("");
                 setAuthor("");
+                // return axios.put(`${process.env.REACT_APP_API_URL}/users/${cookId}`,{comments: response.data._id} , { headers: { Authorization: `Bearer ${storedToken}` }})
             })
+            // .then((response) => {
+            //     navigate(`/cooks/${cookId}`)
+            // })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new comment");
                 console.log(error)
-            });
+            });     
     };
 
 
@@ -62,14 +68,6 @@ function AddComment() {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                />
-
-                <label>Author:</label>
-                <input
-                    type="text"
-                    name="author"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
                 />
 
                 <button type="submit">Submit</button>
