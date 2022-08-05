@@ -4,12 +4,12 @@ import { NavLink } from "react-router-dom";
 
 function Navbar() {
 
-    const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+    const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
     return (
         <nav className="Navbar">
             <NavLink to="/">Home</NavLink> |
-            <NavLink to="/projects">Projects</NavLink> |
+
             {isLoggedIn && (
                 <>
                     <button onClick={logOutUser}>Logout</button>
