@@ -21,6 +21,10 @@ function AddMeal(props) {
         setErrorMsg("");
         const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
 
+        props.update((prevMeals) => {
+            return [requestBody, ...prevMeals];
+        })
+
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/meals`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -30,7 +34,6 @@ function AddMeal(props) {
                 setDiet("");
                 setCuisine("");
                 setDate("");
-                props.refreshMeals();
                 navigate(`/meals`)
             })
             .catch((error) => {
