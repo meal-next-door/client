@@ -32,7 +32,9 @@ function MealsList(props) {
                 return (
                     <div className="meals card" key={meal._id} >
                         <h3>{meal.title}</h3>
-                        <p>Description: {meal.description}</p>
+                        <p>Diet: {meal.diet}</p>
+                        <p>Cuisine: {meal.cuisine}</p>
+                        <p>Preparation date: {meal.date}</p>
                         <p>Cook: {meal.cook?.username}</p>
 
                         <NavLink to={`/meals/${meal._id}`}>View details</NavLink>

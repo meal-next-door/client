@@ -17,15 +17,15 @@ function MealDetails(props) {
             .then((response) => setMeal(response.data))
             .catch((error) => console.log(error));
     };
-    
+
     useEffect(() => {
-      getMeal();
+        getMeal();
     }, []);
 
     const deleteMeal = () => {
         axios
             .delete(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
-            .then( () => {
+            .then(() => {
                 return (
                     navigate("/meals", { replace: true })
                 )
@@ -37,17 +37,17 @@ function MealDetails(props) {
             {meal &&
                 <div className="meal card" key={meal._id} >
                     <h3>{meal.title}</h3>
-                    <p>Description: {meal.description}</p>
                     <p>Diet: {meal.diet}</p>
                     <p>Cuisine: {meal.cuisine}</p>
                     <p>Preparation date: {meal.date}</p>
                     <p>Cook: {meal.cook?.username}</p>
+                    <p>Description: {meal.description}</p>
                     {user?._id === meal.cook?._id
-                    ? <>
-                    <button>Edit</button>
-                    <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
-                    </>
-                    : <p> </p>}
+                        ? <>
+                            <button>Edit</button>
+                            <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
+                        </>
+                        : <p> </p>}
                 </div>
             }
         </div>

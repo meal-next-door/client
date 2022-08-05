@@ -96,7 +96,7 @@ function AddMeal(props) {
 
                 <label>Preparation date:</label>
                 <input
-                    type="text"
+                    type="date"
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
