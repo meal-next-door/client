@@ -14,6 +14,7 @@ import LoginPage from './pages/LoginPage';
 import IsAnon from './components/IsAnon';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import EditMeal from './pages/EditMeal';
 
 
 function App() {
@@ -27,11 +28,11 @@ function App() {
         .catch((error) => console.log(error));
 };
 
-useEffect(() => {
+  useEffect(() => {
     getAllMeals();
-}, []);
+  }, []);
 
-const deleteMeal = (mealId) => {
+  const deleteMeal = (mealId) => {
   setMeals( (meals) => {
       const newList = meals.filter( (element) => {
           return element._id !== mealId;
@@ -47,14 +48,15 @@ const deleteMeal = (mealId) => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
+        <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
+        <Route path="profile/:userId" element={<ProfilePage />}></Route>
         <Route path="new-comment" element={<CreateComment />}></Route>
         <Route path="cooks" element={<CooksList />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
-        <Route path="profile/:userId" element={<ProfilePage />}></Route>
         <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals}/>}></Route>
         <Route path="meals/:mealId" element={<MealDetails deleteMeal={deleteMeal} meals={meals} />}></Route>
-        <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
-        <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
+        <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
       </Routes>
 
       <Footer />
