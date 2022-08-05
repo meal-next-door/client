@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 
 function CooksList() {
@@ -17,33 +18,19 @@ function CooksList() {
     }, []);
 
     return (
-        <div className="CooksList"> 
-            
+        <div className="CooksList">
+
             {cooks?.map((cook) => {
                 return (
                     cook.role === 'cook'
-                    ? <div className="cooks card" key={cook._id} >
+                        ? <div className="cooks card" key={cook._id} >
                             <h3>{cook.username}</h3>
                             <p>{cook.address}</p>
-                            {cooks.favorite
-                                ? cooks.favorites.map((favorite) => {
-                                    return (
-                                        <p>{cook.favorites}</p>
-                                    )
-                                })
-                                : <p>No Favorites yet</p>
-                            }
-                            {
-                                cooks.comment
-                                    ? cooks.comments.map((favorite) => {
-                                        return (
-                                            <p>{cook.comments}</p>
-                                        )
-                                    })
-                                    : <p>No comments yet</p>
-                            }
-                    </div>
-                    : <p> </p>
+                            <NavLink to={`/cooks/${cook._id}`}>
+                                <button>Visit Profile</button>
+                            </NavLink>
+                        </div>
+                        : <p> </p>
                 );
             })}
 

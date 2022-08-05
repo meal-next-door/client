@@ -12,6 +12,13 @@ function Navbar() {
             <NavLink to="/">Home</NavLink> |
             <NavLink to="/cooks">Cooks</NavLink> |
             <NavLink to="/meals">Meals</NavLink> |
+
+            {user?.role === "cook" && (
+                <>
+                    <NavLink to="/create-meal">Create</NavLink> |
+                </>
+            )}
+
             {isLoggedIn && (
                 <>
                     <NavLink to={`/profile/${user._id}`}>Profile</NavLink> |

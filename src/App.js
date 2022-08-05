@@ -19,6 +19,16 @@ import CreateMeal from './components/CreateMeal';
 
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [meals, setMeals] = useState([]);
+
+
+  const getAllUsers = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/users`)
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.log(error));
+  };
 
   const [meals, setMeals] = useState();
 
@@ -30,6 +40,7 @@ function App() {
   };
 
   useEffect(() => {
+    getAllUsers();
     getAllMeals();
   }, []);
 
@@ -38,7 +49,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage users={users} meals={meals} />} />
         <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="profile/:userId" element={<ProfilePage />}></Route>

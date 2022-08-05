@@ -1,31 +1,18 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-function HomePage() {
-    const [users, setUsers] = useState([]);
+function HomePage(props) {
 
-    const getUsers = () => {
-        axios
-            .get(`${process.env.REACT_APP_API_URL}/users`)
-            .then((response) => {
-                setUsers(response.data)
-            })
-            .catch((error) => console.log(error));
-    };
+    const users = props.users;
+    const meals = props.meals;
 
-    const recentUsers = [...users].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
-
-    useEffect(() => {
-        getUsers();
-    }, []);
-
+    const cooks = [...users].filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
+    const recentMeals = [...meals].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
 
 
     return (
         <div>
             <div className="cover">
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"></img>
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="cover" />
             </div>
             <div>
                 <h3>How does it work?</h3>
@@ -33,21 +20,32 @@ function HomePage() {
             </div>
             <div>
                 <h3>Meet the community</h3>
-                {recentUsers.map((user) => {
+                {cooks.map((user) => {
                     return (
                         <div className="UserCard card" key={user._id} >
-                            <Link to={`/cooks/${user._id}`}>
-                                <h3>{user.username}</h3>
-                            </Link>
+                            <h3>{user.username}</h3>
+                            <p>{user.role}</p>
+                            <NavLink to={`/cooks/${user._id}`}>
+                                <button>Visit Profile</button>
+                            </NavLink>
                         </div>
                     )
                 })}
             </div>
             <div>
                 <h3>Find your next meal</h3>
-            </div>
-            <div>
-                <h3>Reviews</h3>
+                {recentMeals.map((meal) => {
+                    return (
+                        <div key={meal._id}>
+                            <h3>{meal.title}</h3>
+                            <p>{meal.date}</p>
+                            <p>{meal.cook.username}</p>
+                            <NavLink to={`/meals/${meal._id}`}>
+                                <button>See details</button>
+                            </NavLink>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );

@@ -19,7 +19,9 @@ function AddMeal(props) {
         setErrorMsg("");
         const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
 
-        console.log(user?._id)
+        props.update((prevMeals) => {
+            return [requestBody, ...prevMeals];
+        })
 
         axios
             .post(
@@ -30,7 +32,6 @@ function AddMeal(props) {
                 setDiet("");
                 setCuisine("");
                 setDate("");
-                props.refreshMeals();
                 navigate(`/meals`)
             })
             .catch((error) => {
@@ -96,7 +97,7 @@ function AddMeal(props) {
 
                 <label>Preparation date:</label>
                 <input
-                    type="text"
+                    type="date"
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
