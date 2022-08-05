@@ -10,11 +10,8 @@ function EditMeal(props) {
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
     const [cook, setCook] = useState("");
-
-
     const { mealId } = useParams();
     const navigate = useNavigate();
-
     const storedToken = localStorage.getItem("authToken");
 
     useEffect(() => {

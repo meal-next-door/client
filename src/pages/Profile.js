@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 
 function ProfilePage(props) {
     const [user, setUser] = useState(null);
-
     const { userId } = useParams();
-
 
     const getUser = () => {
         axios
@@ -34,7 +32,7 @@ function ProfilePage(props) {
                 </>
             )}
 
-            
+
             {user &&
                 user.favorites.map((favorite) => (
                     <li className="CookCard card" key={favorite._id}>
@@ -44,9 +42,9 @@ function ProfilePage(props) {
                     </li>
                 ))}
 
-            <Link to="/cooks">
-                <button>Back to the list of cooks</button>
-            </Link>
+            <NavLink to="/">
+                <button>Back to home</button>
+            </NavLink>
         </div>
     );
 }

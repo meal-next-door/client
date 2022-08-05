@@ -21,27 +21,17 @@ import CreateMeal from './components/CreateMeal';
 function App() {
 
   const [meals, setMeals] = useState();
-  
+
   const getAllMeals = () => {
     axios
-        .get(`${process.env.REACT_APP_API_URL}/meals`)
-        .then((response) => setMeals(response.data))
-        .catch((error) => console.log(error));
-};
+      .get(`${process.env.REACT_APP_API_URL}/meals`)
+      .then((response) => setMeals(response.data))
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getAllMeals();
   }, []);
-
-  const deleteMeal = (mealId) => {
-  setMeals( (meals) => {
-      const newList = meals.filter( (element) => {
-          return element._id !== mealId;
-      });
-      console.log(newList)
-      return newList;
-  });
-}
 
   return (
     <div className="App">
@@ -55,9 +45,9 @@ function App() {
         <Route path="new-comment" element={<CreateComment />}></Route>
         <Route path="cooks" element={<CooksList />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
-        <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals}/>}></Route>
+        <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} />}></Route>
         <Route path="create-meal" element={<CreateMeal refreshMeals={getAllMeals} />}></Route>
-        <Route path="meals/:mealId" element={<MealDetails deleteMeal={deleteMeal} meals={meals} />}></Route>
+        <Route path="meals/:mealId" element={<MealDetails meals={meals} refreshMeals={getAllMeals} />}></Route>
         <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
       </Routes>
 

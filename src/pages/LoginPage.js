@@ -7,11 +7,8 @@ import { AuthContext } from '../context/auth.context';
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
     const [errorMessage, setErrorMessage] = useState(undefined);
-
     const { storeToken, authenticateUser } = useContext(AuthContext);
-
     const navigate = useNavigate();
 
 

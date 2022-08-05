@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { NavLink, useParams, Link } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 
@@ -17,15 +17,18 @@ function MealDetails(props) {
             .then((response) => setMeal(response.data))
             .catch((error) => console.log(error));
     };
-    
+
     useEffect(() => {
-      getMeal();
+        getMeal();
     }, []);
 
     const deleteMeal = () => {
         axios
             .delete(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
-            .then( () => {
+            .then(() => {
+                props.refreshMeals();
+            })
+            .then(() => {
                 return (
                     navigate("/meals", { replace: true })
                 )
@@ -34,7 +37,7 @@ function MealDetails(props) {
 
     return (
         <div className="MealsList">
-            {meal &&    
+            {meal &&
                 <div className="meal card" key={meal._id} >
                     <h3>{meal.title}</h3>
                     <p>Description: {meal.description}</p>
@@ -43,11 +46,13 @@ function MealDetails(props) {
                     <p>Preparation date: {meal.date}</p>
                     <p>Cook: {meal.cook?.username}</p>
                     {user?._id === meal.cook?._id
-                    ? <>
-                    <NavLink to={`/edit-meal/${mealId}`} >Edit</NavLink>
-                    <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
-                    </>
-                    : <p> </p>}
+                        ? <>
+                            <NavLink to={`/edit-meal/${mealId}`} >
+                                <button>Edit</button>
+                            </NavLink>
+                            <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
+                        </>
+                        : <p> </p>}
                 </div>
             }
         </div>

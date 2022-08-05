@@ -8,9 +8,7 @@ function SignupPage() {
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
     const [role, setRole] = useState("cook");
-
     const [errorMessage, setErrorMessage] = useState(undefined);
-
     const navigate = useNavigate();
 
 
