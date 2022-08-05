@@ -1,13 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../context/auth.context"
+import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
 
 
 function MealDetails(props) {
     const [meal, setMeal] = useState([]);
     const { user } = useContext(AuthContext);
     const { mealId } = useParams();
+    let navigate = useNavigate();
 
     const getMeal = () => {
         axios
@@ -19,6 +21,16 @@ function MealDetails(props) {
     useEffect(() => {
       getMeal();
     }, []);
+
+    const deleteMeal = () => {
+        axios
+            .delete(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
+            .then( () => {
+                return (
+                    navigate("/meals", { replace: true })
+                )
+            })
+    }
 
     return (
         <div className="MealsList">
@@ -33,7 +45,7 @@ function MealDetails(props) {
                     {user?._id === meal.cook?._id
                     ? <>
                     <button>Edit</button>
-                    <button onClick={() => { props.deleteMeal(mealId) }}>Delete</button>
+                    <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
                     </>
                     : <p> </p>}
                 </div>
