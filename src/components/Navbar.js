@@ -9,7 +9,8 @@ function Navbar() {
     return (
         <nav className="Navbar">
             <NavLink to="/">Home</NavLink> |
-
+            <NavLink to="/cooks">Cooks</NavLink> |
+            <NavLink to="/meals">Meals</NavLink> |
             {isLoggedIn && (
                 <>
                     <button onClick={logOutUser}>Logout</button>

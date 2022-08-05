@@ -1,45 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../context/auth.context"
 
 
-function MealDetails() {
-    //modifier à partir d'ici
-    const [meals, setMeals] = useState([]);
+function MealDetails(props) {
+    const [meal, setMeal] = useState([]);
+    const { user } = useContext(AuthContext);
+    const { mealId } = useParams();
 
-    const getAllMeals = () => {
+    const getMeal = () => {
         axios
-            .get(`${process.env.REACT_APP_API_URL}/meals`)
-            .then((response) => setMeals(response.data))
+            .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
+            .then((response) => setMeal(response.data))
             .catch((error) => console.log(error));
     };
-
+    
     useEffect(() => {
-        getAllMeals();
+      getMeal();
     }, []);
 
     return (
         <div className="MealsList">
-
-            {meals?.map((meal) => {
-                return (
-                    <div className="meals card" key={meal._id} >
-                        <Link to={`/cooks/${meal._id}`}>
-                            <h3>{meal.title}</h3>
-                            <p>Description: {meal.desciption}</p>
-                            {meals.diet.map((diet) => {
-                                    return (
-                                        <p>{meal.diet}</p>
-                                    )
-                                })}
-                            <p>Cuisine: {meal.cuisine}</p>
-                            <p>Preparation date: {meal.date}</p>
-                            <p>Cook: {meal.cook}</p>
-                        </Link>
-                    </div>
-                );
-            })}
-
+            {meal &&
+                <div className="meal card" key={meal._id} >
+                    <h3>{meal.title}</h3>
+                    <p>Description: {meal.description}</p>
+                    <p>Diet: {meal.diet}</p>
+                    <p>Cuisine: {meal.cuisine}</p>
+                    <p>Preparation date: {meal.date}</p>
+                    <p>Cook: {meal.cook?.username}</p>
+                    {user?._id === meal.cook?._id
+                    ? <>
+                    <button>Edit</button>
+                    <button onClick={() => { props.deleteMeal(mealId) }}>Delete</button>
+                    </>
+                    : <p> </p>}
+                </div>
+            }
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 
 function CooksList() {
@@ -18,12 +17,12 @@ function CooksList() {
     }, []);
 
     return (
-        <div className="CooksList">
-
+        <div className="CooksList"> 
+            
             {cooks?.map((cook) => {
                 return (
-                    <div className="cooks card" key={cook._id} >
-                        <Link to={`/cooks/${cook._id}`}>
+                    cook.role === 'cook'
+                    ? <div className="cooks card" key={cook._id} >
                             <h3>{cook.username}</h3>
                             <p>{cook.address}</p>
                             {cooks.favorite
@@ -43,8 +42,8 @@ function CooksList() {
                                     })
                                     : <p>No comments yet</p>
                             }
-                        </Link>
                     </div>
+                    : <p> </p>
                 );
             })}
 
