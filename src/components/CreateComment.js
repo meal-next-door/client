@@ -26,9 +26,9 @@ function AddComment() {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                // setTitle("");
-                // setDescription("");
-                // setAuthor("");
+                setTitle("");
+                setDescription("");
+                setAuthor("");
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new comment");

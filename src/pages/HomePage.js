@@ -4,11 +4,10 @@ function HomePage(props) {
 
     const users = props.users;
     const meals = props.meals;
-    const comments = props.comments;
 
     const recentUsers = [...users].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
     const recentMeals = [...meals].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
-    const recentComments = [...comments].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
+
 
     return (
         <div>
@@ -43,18 +42,6 @@ function HomePage(props) {
                             <Link to={`/meals/${meal._id}`}>
                                 <button>See details</button>
                             </Link>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h3>Reviews</h3>
-                {recentComments.map((comment) => {
-                    return (
-                        <div key={comment._id}>
-                            <h4>{comment.title}</h4>
-                            <p>{comment.description}</p>
-                            <p>{comment.author.username}</p>
                         </div>
                     )
                 })}
