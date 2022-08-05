@@ -29,10 +29,17 @@ function CookDetailsPage(props) {
                 <>
                     <h1>{cook.username}</h1>
                     <p>{cook.address}</p>
+                    {cook.comments?.map((comment) => (
+                        <li className="CookCard card" key={comment._id}>
+                            <h3>{comment.title}</h3>
+                            <p>{comment.description}</p>
+                            <p>{comment.author}</p>
+                        </li>
+                    ))}
                 </>
             )}
 
-            {cook &&
+            {/* {cook &&
                 cook.comments?.map((comment) => (
                     <li className="CookCard card" key={comment._id}>
                         <h3>{comment.title}</h3>
@@ -40,7 +47,7 @@ function CookDetailsPage(props) {
                         <p>{comment.description}</p>
                         <p>{comment.author}</p>
                     </li>
-                ))}
+                ))} */}
 
             <Link to="/cooks">
                 <button>Back to the list of cooks</button>
