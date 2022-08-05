@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function HomePage(props) {
 
     const users = props.users;
     const meals = props.meals;
 
-    const recentUsers = [...users].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
+    const cooks = [...users].filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
     const recentMeals = [...meals].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
 
 
@@ -20,13 +20,14 @@ function HomePage(props) {
             </div>
             <div>
                 <h3>Meet the community</h3>
-                {recentUsers.map((user) => {
+                {cooks.map((user) => {
                     return (
                         <div className="UserCard card" key={user._id} >
                             <h3>{user.username}</h3>
-                            <Link to={`/cooks/${user._id}`}>
+                            <p>{user.role}</p>
+                            <NavLink to={`/cooks/${user._id}`}>
                                 <button>Visit Profile</button>
-                            </Link>
+                            </NavLink>
                         </div>
                     )
                 })}
@@ -39,9 +40,9 @@ function HomePage(props) {
                             <h3>{meal.title}</h3>
                             <p>{meal.date}</p>
                             <p>{meal.cook.username}</p>
-                            <Link to={`/meals/${meal._id}`}>
+                            <NavLink to={`/meals/${meal._id}`}>
                                 <button>See details</button>
-                            </Link>
+                            </NavLink>
                         </div>
                     )
                 })}

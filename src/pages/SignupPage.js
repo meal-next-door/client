@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
@@ -61,9 +61,9 @@ function SignupPage() {
 
                 <label>Role:</label>
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
+                    <option value="" disabled selected>Select your role</option>
                     <option value="cook">Cook</option>
                     <option value="customer">Customer</option>
-                    <option value="both">Both</option>
                 </select>
 
                 <button type="submit">Sign Up</button>
@@ -71,7 +71,7 @@ function SignupPage() {
 
 
             <p>Already have account?</p>
-            <Link to={"/login"}> Login</Link>
+            <NavLink to={"/login"}> Login</NavLink>
         </div>
     );
 }

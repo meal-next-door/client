@@ -18,24 +18,24 @@ function MealsList(props) {
         getAllMeals();
     }, []);
 
-console.log(user)
+
 
     return (
         <div className="MealsList">
-            
-            { user?.role === "cook"
-            ? <button>Add your own meal</button>
-            : <p> </p>
+
+            {user?.role === "cook"
+                ? <button>Add your own meal</button>
+                : <p> </p>
             }
-            
+
             {props.meals?.map((meal) => {
                 return (
                     <div className="meals card" key={meal._id} >
-                            <h3>{meal.title}</h3>
-                            <p>Description: {meal.description}</p>
-                            <p>Cook: {meal.cook?.username}</p>
-                        
-                            <NavLink to={`/meals/${meal._id}`}>View details</NavLink>
+                        <h3>{meal.title}</h3>
+                        <p>Description: {meal.description}</p>
+                        <p>Cook: {meal.cook?.username}</p>
+
+                        <NavLink to={`/meals/${meal._id}`}>View details</NavLink>
                     </div>
                 );
             })}

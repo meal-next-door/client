@@ -21,8 +21,6 @@ function AddMeal(props) {
         setErrorMsg("");
         const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
 
-        console.log(user?._id)
-
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/meals`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })

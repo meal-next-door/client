@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.context';
 
 
@@ -24,8 +24,6 @@ function LoginPage() {
             .then((response) => {
                 // Request to the server's endpoint `/auth/login` returns a response
                 // with the JWT string ->  response.data.authToken
-                console.log('JWT token', response.data.authToken);
-
                 storeToken(response.data.authToken); // store token in browser
                 authenticateUser();
                 navigate('/');
@@ -66,7 +64,7 @@ function LoginPage() {
 
 
             <p>Don't have an account yet?</p>
-            <Link to={"/signup"}> Sign Up</Link>
+            <NavLink to={"/signup"}> Sign Up</NavLink>
         </div>
     );
 }
