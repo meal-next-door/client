@@ -27,7 +27,7 @@ function EditMeal(props) {
                 setDiet(mealToUpdate.diet);
                 setCuisine(mealToUpdate.cuisine);
                 setDate(mealToUpdate.date);
-                setCook(mealToUpdate.cook);
+                setCook(mealToUpdate.cook.username);
             })
             .catch((error) => console.log(error));
 
@@ -66,28 +66,28 @@ function EditMeal(props) {
                     onChange={(e) => setDescription(e.target.value)}
                 />
 
-<label>Diet:</label>
+                <label>Diet:</label>
                 <textarea
                     name="diet"
                     value={diet}
                     onChange={(e) => setDiet(e.target.value)}
                 />
 
-<label>Cuisine:</label>
+                <label>Cuisine:</label>
                 <textarea
                     name="cuisine"
                     value={cuisine}
                     onChange={(e) => setCuisine(e.target.value)}
                 />
 
-<label>Date:</label>
+                <label>Date:</label>
                 <textarea
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                 />
 
-<label>Cook:</label>
+                <label>Cook:</label>
                 <textarea
                     name="cook"
                     value={cook}

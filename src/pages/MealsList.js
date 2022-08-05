@@ -18,8 +18,6 @@ function MealsList(props) {
         getAllMeals();
     }, []);
 
-console.log(user)
-
     return (
         <div className="MealsList">
             

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,7 @@ function MealDetails(props) {
 
     return (
         <div className="MealsList">
-            {meal &&
+            {meal &&    
                 <div className="meal card" key={meal._id} >
                     <h3>{meal.title}</h3>
                     <p>Description: {meal.description}</p>
@@ -44,7 +44,7 @@ function MealDetails(props) {
                     <p>Cook: {meal.cook?.username}</p>
                     {user?._id === meal.cook?._id
                     ? <>
-                    <button>Edit</button>
+                    <NavLink to={`/edit-meal/${mealId}`} >Edit</NavLink>
                     <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
                     </>
                     : <p> </p>}
