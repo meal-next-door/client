@@ -20,8 +20,6 @@ import CreateMeal from './components/CreateMeal';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [meals, setMeals] = useState([]);
-
 
   const getAllUsers = () => {
     axios

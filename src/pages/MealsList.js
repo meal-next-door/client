@@ -10,7 +10,10 @@ function MealsList(props) {
         <div className="MealsList">
 
             {user?.role === "cook"
-                ? <button>Add your own meal</button>
+                ?<NavLink to="/create-meal">
+                    <button>Add your own meal</button>
+                </NavLink> 
+                
                 : <p> </p>
             }
 
