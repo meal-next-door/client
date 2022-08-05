@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../context/auth.context"
 
 function MealsList(props) {
-    
+
+    const { user } = useContext(AuthContext);
 
     const getAllMeals = () => {
         axios
@@ -17,9 +18,16 @@ function MealsList(props) {
         getAllMeals();
     }, []);
 
+console.log(user)
+
     return (
         <div className="MealsList">
-
+            
+            { user?.role === "cook"
+            ? <button>Add your own meal</button>
+            : <p> </p>
+            }
+            
             {props.meals?.map((meal) => {
                 return (
                     <div className="meals card" key={meal._id} >
@@ -27,7 +35,7 @@ function MealsList(props) {
                             <p>Description: {meal.description}</p>
                             <p>Cook: {meal.cook?.username}</p>
                         
-                            <Link to={`/meals/${meal._id}`}></Link>
+                            <NavLink to={`/meals/${meal._id}`}>View details</NavLink>
                     </div>
                 );
             })}

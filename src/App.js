@@ -15,6 +15,7 @@ import IsAnon from './components/IsAnon';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import EditMeal from './pages/EditMeal';
+import CreateMeal from './components/CreateMeal';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Route path="cooks" element={<CooksList />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
         <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals}/>}></Route>
+        <Route path="create-meal" element={<CreateMeal refreshMeals={getAllMeals} />}></Route>
         <Route path="meals/:mealId" element={<MealDetails deleteMeal={deleteMeal} meals={meals} />}></Route>
         <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
       </Routes>
