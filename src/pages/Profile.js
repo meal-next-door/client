@@ -42,6 +42,8 @@ function ProfilePage(props) {
                     </li>
                 ))}
 
+            <h1>Reviews</h1>
+
             <NavLink to="/">
                 <button>Back to home</button>
             </NavLink>
