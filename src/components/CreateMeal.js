@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 function AddMeal(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [diet, setDiet] = useState("vegetarian");
-    const [cuisine, setCuisine] = useState("french");
+    const [diet, setDiet] = useState("");
+    const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
