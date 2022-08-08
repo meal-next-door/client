@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function MealsList(props) {
 
     const { user } = useContext(AuthContext);
-
-
     const [search, setSearch] = useState("");
 
 
@@ -21,6 +19,19 @@ function MealsList(props) {
             return filterResult;
         })
     }
+
+
+    const handleDiet = (dietInput) => {
+
+        props.setMeals(() => {
+            const result = props.mealsCopy?.filter(e => {
+                return e.diet === dietInput;
+            })
+            console.log(result)
+            return result;
+        })
+    }
+
 
 
     return (
@@ -38,6 +49,16 @@ function MealsList(props) {
                 <label>Search</label>
                 <input type="text" value={search} onChange={(e) => handleSearch(e.target.value)} />
             </form>
+
+            <button onClick={() => handleDiet('vegetarian')}>Vegetarian</button>
+            <button onClick={() => handleDiet('vegan')}>Vegan</button>
+            <button onClick={() => handleDiet('gluten-free')}>Gluten-free</button>
+            <button onClick={() => handleDiet('dairy-free')}>Dairy-free</button>
+            <button onClick={() => handleDiet('allergens-free')}>Allergens-free</button>
+            <button onClick={() => handleDiet('sugar-free')}>Sugar-free</button>
+            <button onClick={() => handleDiet('kosher')}>Kosher</button>
+            <button onClick={() => handleDiet('halal')}>Halal</button>
+
 
             {props.meals?.map((meal) => {
                 return (

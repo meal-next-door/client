@@ -58,7 +58,7 @@ function App() {
         <Route path="new-comment/:cookId" element={<CreateComment />}></Route>
         <Route path="cooks" element={<CooksList users={users} />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
-        <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} mealsCopy={mealsCopy} />}></Route>
+        <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} mealsCopy={mealsCopy} setMealsCopy={setMealsCopy} />}></Route>
         <Route path="create-meal" element={<CreateMeal refreshMeals={getAllMeals} />}></Route>
         <Route path="meals/:mealId" element={<MealDetails meals={meals} refreshMeals={getAllMeals} />}></Route>
         <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
