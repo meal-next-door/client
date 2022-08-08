@@ -45,25 +45,17 @@ function CookDetailsPage(props) {
                 <>
                     <h1>{cook.username}</h1>
                     <p>{cook.address}</p>
-                    {cook.comments?.map((comment) => (
-                        <li className="CookCard card" key={comment._id}>
-                            <h3>{comment.title}</h3>
-                            <p>{comment.description}</p>
-                            <p>{comment.author}</p>
-                        </li>
-                    ))}
                 </>
             )}
-
-            {/* {cook &&
+            <h1>Reviews: </h1>
+            {cook &&
                 cook.comments?.map((comment) => (
-                    <li className="CookCard card" key={comment._id}>
+                    <>
                         <h3>{comment.title}</h3>
-                        <h4>Description:</h4>
                         <p>{comment.description}</p>
-                        <p>{comment.author}</p>
-                    </li>
-                ))} */}
+                        <p>Author: {comment.author.username}</p>
+                    </>  
+                ))}
             <NavLink to={`/profile/${user?._id}`} >
                 <button onClick={() => { addFavorite(cookId) }}>Add as a favorite</button>
             </NavLink>
