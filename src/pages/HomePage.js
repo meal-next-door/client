@@ -4,7 +4,6 @@ function HomePage(props) {
 
     const users = props.users;
     const meals = props.meals;
-
     const cooks = [...users].filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
     const recentMeals = [...meals].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
 

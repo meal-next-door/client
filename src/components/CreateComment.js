@@ -31,11 +31,11 @@ function AddComment() {
                 setTitle("");
                 setDescription("");
                 setAuthor("");
-                // return axios.put(`${process.env.REACT_APP_API_URL}/users/${cookId}`,{comments: response.data._id} , { headers: { Authorization: `Bearer ${storedToken}` }})
+                return axios.put(`${process.env.REACT_APP_API_URL}/users/${cookId}/comments`,{comments: response.data._id} , { headers: { Authorization: `Bearer ${storedToken}` }})
             })
-            // .then((response) => {
-            //     navigate(`/cooks/${cookId}`)
-            // })
+            .then(() => {
+                navigate(`/cooks/${cookId}`)
+            })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new comment");
                 console.log(error)

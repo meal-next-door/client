@@ -32,7 +32,7 @@ function ProfilePage(props) {
                 </>
             )}
 
-
+            <h1>Favorites</h1>        
             {user &&
                 user.favorites.map((favorite) => (
                     <li className="CookCard card" key={favorite._id}>
@@ -41,6 +41,8 @@ function ProfilePage(props) {
                         <p>{favorite.address}</p>
                     </li>
                 ))}
+
+            <h1>Reviews</h1>
 
             <NavLink to="/">
                 <button>Back to home</button>
