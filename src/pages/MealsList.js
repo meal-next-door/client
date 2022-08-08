@@ -10,10 +10,10 @@ function MealsList(props) {
         <div className="MealsList">
 
             {user?.role === "cook"
-                ?<NavLink to="/create-meal">
+                ? <NavLink to="/create-meal">
                     <button>Add your own meal</button>
-                </NavLink> 
-                
+                </NavLink>
+
                 : <p> </p>
             }
 
@@ -21,7 +21,8 @@ function MealsList(props) {
                 return (
                     <div className="meals card" key={meal._id} >
                         <h3>{meal.title}</h3>
-                        <p>Description: {meal.description}</p>
+                        <p>{meal.description}</p>
+                        <p>{meal.diet}</p>
                         <p>Cook: {meal.cook?.username}</p>
 
                         <NavLink to={`/meals/${meal._id}`}>

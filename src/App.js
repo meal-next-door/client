@@ -28,7 +28,7 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  const [meals, setMeals] = useState();
+  const [meals, setMeals] = useState([]);
 
   const getAllMeals = () => {
     axios
