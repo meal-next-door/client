@@ -44,6 +44,9 @@ function MealDetails(props) {
                     <p>Cuisine: {meal.cuisine}</p>
                     <p>Preparation date: {meal.date}</p>
                     <p>Cook: {meal.cook?.username}</p>
+                    <NavLink to={`/cooks/${meal.cook?._id}`} >
+                        <button>View cook profile</button>
+                    </NavLink>
                     <p>Description: {meal.description}</p>
                     {user?._id === meal.cook?._id
                         ? <>
