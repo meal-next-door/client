@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 function AddMeal(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [diet, setDiet] = useState("vegetarian");
-    const [cuisine, setCuisine] = useState("french");
+    const [diet, setDiet] = useState("");
+    const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -68,7 +68,8 @@ function AddMeal(props) {
                 />
 
                 <label>Diet:</label>
-                <select value={diet} onChange={(e) => setDiet(e.target.value)}>
+                <select value={diet} onChange={(e) => setDiet(e.target.value)} multiple>
+                    <option value="" disabled selected>Select your options</option>
                     <option value="vegetarian">Vegetarian</option>
                     <option value="vegan">Vegan</option>
                     <option value="gluten-free">Gluten-free</option>
@@ -82,16 +83,19 @@ function AddMeal(props) {
 
                 <label>Cuisine:</label>
                 <select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
-                    <option value="italian">Italian</option>
-                    <option value="mexican">Mexican</option>
-                    <option value="greek">Greek</option>
-                    <option value="french">French</option>
-                    <option value="indian">Indian</option>
-                    <option value="thai">Thai</option>
-                    <option value="mediterranean">Mediterranean</option>
-                    <option value="japanese">Japanese</option>
+                    <option value="" disabled selected>Select the cuisine</option>
                     <option value="chinese">Chinese</option>
+                    <option value="french">French</option>
+                    <option value="greek">Greek</option>
+                    <option value="indian">Indian</option>
+                    <option value="italian">Italian</option>
+                    <option value="japanese">Japanese</option>
                     <option value="lebanese">Lebanese</option>
+                    <option value="mediterranean">Mediterranean</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="lebanese">Peruvian</option>
+                    <option value="lebanese">Spanish</option>
+                    <option value="thai">Thai</option>
                 </select>
 
                 <label>Preparation date:</label>
