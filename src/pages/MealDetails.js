@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { useNavigate } from "react-router-dom";
 
 
 function MealDetails(props) {
@@ -33,6 +32,18 @@ function MealDetails(props) {
                     navigate("/meals", { replace: true })
                 )
             })
+            .catch((error) => console.log(error));
+    }
+
+    const addFavorite = () => {
+        axios
+        .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}`)
+        .then(() => {
+            return (
+            navigate(`/users/${user?._id}`, { replace: true })
+            )
+            })
+        .catch((error) => console.log(error));
     }
 
     return (
@@ -49,6 +60,9 @@ function MealDetails(props) {
                         ? <>
                             <NavLink to={`/edit-meal/${mealId}`} >
                                 <button>Edit</button>
+                            </NavLink>
+                            <NavLink to={`/users/${user?._id}`} >
+                                <button onClick={() => { addFavorite(user?._id) }}>Add as a favorite</button>
                             </NavLink>
                             <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
                         </>
