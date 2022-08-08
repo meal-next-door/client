@@ -1,21 +1,10 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 
-function CooksList() {
-    const [cooks, setCooks] = useState([]);
+function CooksList(props) {
+    const users = props.users;
 
-    const getAllCooks = () => {
-        axios
-            .get(`${process.env.REACT_APP_API_URL}/users`)
-            .then((response) => setCooks(response.data))
-            .catch((error) => console.log(error));
-    };
-
-    useEffect(() => {
-        getAllCooks();
-    }, []);
+    const cooks = [...users].filter(user => user.role === "cook")
 
     return (
         <div className="CooksList">

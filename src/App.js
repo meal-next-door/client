@@ -52,7 +52,7 @@ function App() {
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="profile/:userId" element={<ProfilePage />}></Route>
         <Route path="new-comment/:cookId" element={<CreateComment />}></Route>
-        <Route path="cooks" element={<CooksList />}></Route>
+        <Route path="cooks" element={<CooksList users={users} />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
         <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} />}></Route>
         <Route path="create-meal" element={<CreateMeal refreshMeals={getAllMeals} />}></Route>
