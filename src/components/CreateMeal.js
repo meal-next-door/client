@@ -19,7 +19,7 @@ function AddMeal(props) {
         setErrorMsg("");
         const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
 
-        props.update((prevMeals) => {
+        props.refreshMeals((prevMeals) => {
             return [requestBody, ...prevMeals];
         })
 
@@ -39,7 +39,6 @@ function AddMeal(props) {
                 console.log(error)
             });
     };
-
 
     return (
         <div className="AddMeal">
@@ -105,6 +104,7 @@ function AddMeal(props) {
 
                 <button type="submit">Submit</button>
             </form>
+
         </div>
     );
 }
