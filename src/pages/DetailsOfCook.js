@@ -29,13 +29,13 @@ function CookDetailsPage(props) {
 
     const addFavorite = () => {
         axios
-        .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}/favorites`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
-        .then(() => {
-            return (
-                navigate(`/profile/${user?._id}`, { replace: true })
-            )
-        })
-        .catch((error) => console.log(error));
+            .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}/favorites`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .then(() => {
+                return (
+                    navigate(`/profile/${user?._id}`, { replace: true })
+                )
+            })
+            .catch((error) => console.log(error));
     }
 
     return (
@@ -48,21 +48,25 @@ function CookDetailsPage(props) {
                 </>
             )}
             <h1>Reviews: </h1>
-            {cook &&
-                cook.comments?.map((comment) => (
+            {cook?.comments.length >0
+                ? cook.comments?.map((comment) => (
                     <>
                         <h3>{comment.title}</h3>
                         <p>{comment.description}</p>
                         <p>Author: {comment.author.username}</p>
-                    </>  
-                ))}
+                    </>
+                ))
+                : <p>No reviews yet for this cook</p>}
             <NavLink to={`/profile/${user?._id}`} >
                 <button onClick={() => { addFavorite(cookId) }}>Add as a favorite</button>
             </NavLink>
             <NavLink to="/cooks">
                 <button>Back to the list of cooks</button>
             </NavLink>
-            
+            <NavLink to={`/new-comment/${cookId}`}>
+                <button>Add a review for this cook</button>
+            </NavLink>
+
         </div>
     );
 }

@@ -32,7 +32,7 @@ function ProfilePage(props) {
                 </>
             )}
 
-            <h1>Favorites:</h1>        
+            <h1>Favorites</h1>        
             {user &&
                 user.favorites.map((favorite) => (
                     <li className="CookCard card" key={favorite._id}>
