@@ -1,10 +1,27 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"
+import { useState } from "react";
 
 function MealsList(props) {
 
     const { user } = useContext(AuthContext);
+
+
+    const [search, setSearch] = useState("");
+
+
+    const handleSearch = (event) => {
+        setSearch(event)
+
+        props.setMeals(() => {
+            const filterResult = props.mealsCopy.filter(e => {
+                return e.title.toLowerCase().includes(event.toLowerCase())
+            })
+            return filterResult;
+        })
+    }
+
 
     return (
         <div className="MealsList">
@@ -16,6 +33,11 @@ function MealsList(props) {
 
                 : <p> </p>
             }
+
+            <form>
+                <label>Search</label>
+                <input type="text" value={search} onChange={(e) => handleSearch(e.target.value)} />
+            </form>
 
             {props.meals?.map((meal) => {
                 return (
