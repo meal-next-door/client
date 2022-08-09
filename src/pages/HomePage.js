@@ -15,7 +15,7 @@ function HomePage(props) {
         recentMeals = mealCopy?.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 1);
     }
 
-
+    console.log(props)
     return (
         <div>
             <div className="cover">
@@ -46,7 +46,7 @@ function HomePage(props) {
                         <div key={meal._id}>
                             <h3>{meal.title}</h3>
                             <p>{meal.date}</p>
-                            <p>{meal.cook.username}</p>
+                            <p>{meal.cook?.username}</p>
                             <NavLink to={`/meals/${meal._id}`}>
                                 <button>See details</button>
                             </NavLink>
