@@ -112,9 +112,11 @@ function AddMeal(props) {
                     onChange={(e) => setDate(e.target.value)}
                 />
 
+                <input type="file"
+                />
+
                 <button type="submit">Submit</button>
             </form>
-
         </div>
     );
 }
