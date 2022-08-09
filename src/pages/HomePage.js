@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function HomePage(props) {
 
+
     const users = props.users;
     const meals = props.meals;
 
@@ -29,8 +30,8 @@ function HomePage(props) {
                 {users.length > 0 && cooks?.map((user) => {
                     return (
                         <div className="UserCard card" key={user._id} >
-                            <h3>{user.username}</h3>
-                            <p>{user.role}</p>
+                            <h3>{user?.username}</h3>
+                            <p>{user?.role}</p>
                             <NavLink to={`/cooks/${user._id}`}>
                                 <button>Visit Profile</button>
                             </NavLink>
