@@ -20,12 +20,13 @@ function MealsList(props) {
         })
     }
 
-    // Functionality to SEARCH BY CATEGORY
+
+    // Functionality to SEARCH BY DIET
     const handleDiet = (dietInput) => {
 
         props.setMeals(() => {
             const result = props.mealsCopy?.filter(e => {
-                return e.diet === dietInput;
+                return e.diet.includes(dietInput);
             })
             return result;
         })
@@ -67,9 +68,13 @@ function MealsList(props) {
                 return (
                     <div className="meals card" key={meal._id} >
                         <h3>{meal.title}</h3>
-                        <p>{meal.description}</p>
-                        <p>{meal.diet}</p>
+
+                        {meal.diet.map(e => {
+                            return <span>{e} </span>
+                        })}
+
                         <p>Cook: {meal.cook?.username}</p>
+                        <p>{meal.description}</p>
 
                         <NavLink to={`/meals/${meal._id}`}>
                             <button>View details</button>

@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
 
 function AddMeal(props) {
     const [title, setTitle] = useState("");
@@ -9,9 +10,13 @@ function AddMeal(props) {
     const [diet, setDiet] = useState("");
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
-    const { user } = useContext(AuthContext);
+
+    const [isValid, setIsValid] = useState(false);
+
     const navigate = useNavigate();
     const [errorMsg, setErrorMsg] = useState("");
+
+    const { user } = useContext(AuthContext);
     const storedToken = localStorage.getItem("authToken");
 
 
@@ -20,11 +25,9 @@ function AddMeal(props) {
         e.preventDefault();
         setErrorMsg("");
 
-        const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
+        const dietArr = diet.map(e => e.value)
 
-        props.refreshMeals((prevMeals) => {
-            return [requestBody, ...prevMeals];
-        })
+        const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
 
         axios
             .post(
@@ -35,7 +38,10 @@ function AddMeal(props) {
                 setDiet("");
                 setCuisine("");
                 setDate("");
-                navigate(`/meals`)
+                navigate(`/meals`);
+                props.refreshMeals((prevMeals) => {
+                    return [requestBody, ...prevMeals];
+                })
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new meal");
@@ -43,6 +49,23 @@ function AddMeal(props) {
             });
     };
 
+
+    const handleSelect = (e) => {
+        setDiet(e)
+        setIsValid(true)
+    }
+
+    // Select options using React-Select
+    const options = [
+        { value: 'vegetarian', label: 'Vegetarian' },
+        { value: 'vegan', label: 'Vegan' },
+        { value: 'gluten-free', label: 'Gluten-free' },
+        { value: 'dairy-free', label: 'Dairy-free' },
+        { value: 'allergens-free', label: 'Allergens-free' },
+        { value: 'sugar-free', label: 'Sugar-free' },
+        { value: 'kosher', label: 'Kosher' },
+        { value: 'halal', label: 'Halal' }
+    ]
 
 
     return (
@@ -63,6 +86,7 @@ function AddMeal(props) {
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                 />
 
                 <label>Description:</label>
@@ -71,25 +95,15 @@ function AddMeal(props) {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    required
                 />
 
-                <label>Diet:</label>
-                <select value={diet} onChange={(e) => setDiet(e.target.value)} multiple>
-                    <option value="" disabled selected>Select your options</option>
-                    <option value="vegetarian">Vegetarian</option>
-                    <option value="vegan">Vegan</option>
-                    <option value="gluten-free">Gluten-free</option>
-                    <option value="dairy-free">Dairy-free</option>
-                    <option value="allergens-free">Allergens-free</option>
-                    <option value="sugar-free">Sugar-free</option>
-                    <option value="kosher">Kosher</option>
-                    <option value="halal">Halal</option>
-                    <option value="none">None</option>
-                </select>
+
+                <Select options={options} onChange={handleSelect} placeholder="Select special diet" isMulti />
 
                 <label>Cuisine:</label>
-                <select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
-                    <option value="" disabled selected>Select the cuisine</option>
+                <select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
+                    <option value="" disabled selected>Select an option</option>
                     <option value="chinese">Chinese</option>
                     <option value="french">French</option>
                     <option value="greek">Greek</option>
@@ -110,12 +124,13 @@ function AddMeal(props) {
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
+                    required
                 />
 
-                <input type="file"
-                />
+                <input type="file" />
 
-                <button type="submit">Submit</button>
+                {!isValid && <p>You must fill in all fields to be able to submit</p>}
+                <button type="submit" disabled={!isValid}>Submit</button>
             </form>
         </div>
     );

@@ -91,14 +91,19 @@ function MealDetails(props) {
                 {meal &&
                     <div className="meal card" key={meal._id} >
                         <h3>{meal.title}</h3>
-                        <p>Diet: {meal.diet}</p>
+
+                        {meal.diet?.map(e => {
+                            return <span key={e}>{e} </span>
+                        })}
+
                         <p>Cuisine: {meal.cuisine}</p>
                         <p>Preparation date: {meal.date}</p>
-                        <p>Cook: {meal.cook?.username}</p>
+                        <p>Cooked by: {meal.cook?.username}</p>
+
                         <NavLink to={`/cooks/${meal.cook?._id}`} >
-                            <button>View cook profile</button>
+                            <button>View {meal.cook?.username}'s profile</button>
                         </NavLink>
-                        <p>Description: {meal.description}</p>
+
                         {user?._id === meal.cook?._id
                             ? <>
                                 <NavLink to={`/edit-meal/${mealId}`} >
@@ -106,7 +111,10 @@ function MealDetails(props) {
                                 </NavLink>
                                 <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
                             </>
-                            : <p> </p>}
+                            : <p> </p>
+                        }
+
+                        <p>Description: {meal.description}</p>
                     </div>
                 }
             </div>

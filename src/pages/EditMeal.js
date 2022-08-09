@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
+import Select from 'react-select';
+import { AuthContext } from "../context/auth.context";
 
 function EditMeal() {
     const [title, setTitle] = useState("");
@@ -10,21 +11,25 @@ function EditMeal() {
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
     const [cook, setCook] = useState("");
+
+    const [isValid, setIsValid] = useState(false);
+
     const { mealId } = useParams();
     const navigate = useNavigate();
+
     const storedToken = localStorage.getItem("authToken");
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
             .then((response) => {
-                const mealToUpdate = response.data;
-                setTitle(mealToUpdate.title);
-                setDescription(mealToUpdate.description);
-                setDiet(mealToUpdate.diet);
-                setCuisine(mealToUpdate.cuisine);
-                setDate(mealToUpdate.date);
-                setCook(mealToUpdate.cook.username);
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+                setDiet(response.data.diet);
+                setCuisine(response.data.cuisine);
+                setDate(response.data.date);
+                setCook(response.data.cook.username);
             })
             .catch((error) => console.log(error));
 
@@ -33,19 +38,42 @@ function EditMeal() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { title, description, diet, cuisine, date, cook };
+        const dietArr = diet.map(e => e.value)
+
+        const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
 
         axios
             .put(`${process.env.REACT_APP_API_URL}/meals/${mealId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
+                console.log(response)
                 navigate(`/meals/${mealId}`)
-            });
+            })
+            .catch((error) => console.log(error));;
     };
 
 
+    const handleSelect = (e) => {
+        setDiet(e)
+        setIsValid(true)
+    }
+
+    // Select options using React-Select
+    const options = [
+        { value: 'vegetarian', label: 'Vegetarian' },
+        { value: 'vegan', label: 'Vegan' },
+        { value: 'gluten-free', label: 'Gluten-free' },
+        { value: 'dairy-free', label: 'Dairy-free' },
+        { value: 'allergens-free', label: 'Allergens-free' },
+        { value: 'sugar-free', label: 'Sugar-free' },
+        { value: 'kosher', label: 'Kosher' },
+        { value: 'halal', label: 'Halal' }
+    ]
+
+
+
     return (
-        <div className="EditProjectPage">
-            <h3>Edit the Project</h3>
+        <div className="EditMeal">
+            <h3>Edit your meal</h3>
 
             <form onSubmit={handleFormSubmit}>
 
@@ -55,6 +83,7 @@ function EditMeal() {
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                 />
 
                 <label>Description:</label>
@@ -62,38 +91,50 @@ function EditMeal() {
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    required
                 />
 
-                <label>Diet:</label>
-                <textarea
-                    name="diet"
-                    value={diet}
-                    onChange={(e) => setDiet(e.target.value)}
-                />
+                <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti />
 
                 <label>Cuisine:</label>
-                <textarea
-                    name="cuisine"
-                    value={cuisine}
-                    onChange={(e) => setCuisine(e.target.value)}
-                />
+                <select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
+                    <option value="" disabled>Select the cuisine</option>
+                    <option value="chinese">Chinese</option>
+                    <option value="french">French</option>
+                    <option value="greek">Greek</option>
+                    <option value="indian">Indian</option>
+                    <option value="italian">Italian</option>
+                    <option value="japanese">Japanese</option>
+                    <option value="lebanese">Lebanese</option>
+                    <option value="mediterranean">Mediterranean</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="lebanese">Peruvian</option>
+                    <option value="lebanese">Spanish</option>
+                    <option value="thai">Thai</option>
+                </select>
 
                 <label>Date:</label>
-                <textarea
+                <input
+                    type="date"
                     name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
+                    required
                 />
 
                 <label>Cook:</label>
-                <textarea
+                <input
+                    type="text"
                     name="cook"
                     value={cook}
                     onChange={(e) => setCook(e.target.value)}
+                    readOnly
+                    required
                 />
 
-                <button type="submit">Update your meal</button>
-
+                {!isValid && <p>You must fill in all fields to be able to update</p>}
+                <button type="submit" disabled={!isValid}>Update</button>
+                <NavLink to={`/meals/${mealId}`}><button>Back to meal details</button></NavLink>
             </form>
         </div>
     );

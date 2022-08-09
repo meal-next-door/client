@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 
 function HomePage(props) {
 
-
     const users = props.users;
     const meals = props.meals;
 
@@ -15,7 +14,6 @@ function HomePage(props) {
         recentMeals = mealCopy?.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 1);
     }
 
-    console.log(props)
     return (
         <div>
             <div className="cover">

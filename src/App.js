@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar refreshMeals={getAllMeals} />
 
       <Routes>
         <Route path="/" element={<HomePage users={users} meals={meals} />} />
