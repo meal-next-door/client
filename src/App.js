@@ -20,6 +20,9 @@ import CreateMeal from './components/CreateMeal';
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [meals, setMeals] = useState([]);
+  const [mealsCopy, setMealsCopy] = useState([]);
+
 
   const getAllUsers = () => {
     axios
@@ -28,12 +31,14 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  const [meals, setMeals] = useState([]);
 
   const getAllMeals = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/meals`)
-      .then((response) => setMeals(response.data))
+      .then((response) => {
+        setMeals(response.data);
+        setMealsCopy(response.data);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -41,6 +46,8 @@ function App() {
     getAllUsers();
     getAllMeals();
   }, []);
+
+
 
   return (
     <div className="App">
@@ -54,7 +61,7 @@ function App() {
         <Route path="new-comment/:cookId" element={<CreateComment />}></Route>
         <Route path="cooks" element={<CooksList users={users} />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
-        <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} />}></Route>
+        <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} mealsCopy={mealsCopy} refreshMeals={getAllMeals} />}></Route>
         <Route path="create-meal" element={<CreateMeal refreshMeals={getAllMeals} />}></Route>
         <Route path="meals/:mealId" element={<MealDetails meals={meals} refreshMeals={getAllMeals} />}></Route>
         <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
@@ -64,5 +71,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

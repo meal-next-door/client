@@ -2,10 +2,18 @@ import { NavLink } from "react-router-dom";
 
 function HomePage(props) {
 
+
     const users = props.users;
     const meals = props.meals;
-    const cooks = [...users].filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
-    const recentMeals = [...meals].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
+
+    let cooks, recentMeals
+
+    if (users.length > 0 && meals.length > 0) {
+        const userCopy = [...users]
+        const mealCopy = [...meals]
+        cooks = userCopy?.filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 1);
+        recentMeals = mealCopy?.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 1);
+    }
 
 
     return (
@@ -19,11 +27,11 @@ function HomePage(props) {
             </div>
             <div>
                 <h3>Meet the community</h3>
-                {cooks.map((user) => {
+                {users.length > 0 && cooks?.map((user) => {
                     return (
                         <div className="UserCard card" key={user._id} >
-                            <h3>{user.username}</h3>
-                            <p>{user.role}</p>
+                            <h3>{user?.username}</h3>
+                            <p>{user?.role}</p>
                             <NavLink to={`/cooks/${user._id}`}>
                                 <button>Visit Profile</button>
                             </NavLink>
@@ -33,7 +41,7 @@ function HomePage(props) {
             </div>
             <div>
                 <h3>Find your next meal</h3>
-                {recentMeals.map((meal) => {
+                {meals.length > 0 && recentMeals?.map((meal) => {
                     return (
                         <div key={meal._id}>
                             <h3>{meal.title}</h3>

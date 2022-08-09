@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import userEvent from "@testing-library/user-event";
-import {AuthContext} from "../context/auth.context"
+import { AuthContext } from "../context/auth.context"
 import { useParams, useNavigate } from "react-router-dom";
 
 function AddComment() {
@@ -9,16 +9,19 @@ function AddComment() {
     const [description, setDescription] = useState("");
     const [author, setAuthor] = useState("");
     const { user } = useContext(AuthContext);
-    const {cookId} =useParams();
+    const { cookId } = useParams();
     const navigate = useNavigate();
 
     const [errorMsg, setErrorMsg] = useState("");
 
     const storedToken = localStorage.getItem("authToken");
 
+
+    // Functionality to CREATE a comment
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
+
         const requestBody = { title, description, author: user?._id };
 
         axios
@@ -31,7 +34,7 @@ function AddComment() {
                 setTitle("");
                 setDescription("");
                 setAuthor("");
-                return axios.put(`${process.env.REACT_APP_API_URL}/users/${cookId}/comments`,{comments: response.data._id} , { headers: { Authorization: `Bearer ${storedToken}` }})
+                return axios.put(`${process.env.REACT_APP_API_URL}/users/${cookId}/comments`, { comments: response.data._id }, { headers: { Authorization: `Bearer ${storedToken}` } })
             })
             .then(() => {
                 navigate(`/cooks/${cookId}`)
@@ -39,8 +42,9 @@ function AddComment() {
             .catch((error) => {
                 setErrorMsg("oops, error posting a new comment");
                 console.log(error)
-            });     
+            });
     };
+
 
 
     return (
@@ -54,6 +58,7 @@ function AddComment() {
             }
 
             <form onSubmit={handleSubmit}>
+
                 <label>Title:</label>
                 <input
                     type="text"
@@ -71,6 +76,7 @@ function AddComment() {
                 />
 
                 <button type="submit">Submit</button>
+
             </form>
         </div>
     );

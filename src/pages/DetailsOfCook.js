@@ -4,15 +4,16 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 
-function CookDetailsPage(props) {
+function CookDetailsPage() {
     const [cook, setCook] = useState(null);
     const { user } = useContext(AuthContext);
     const { cookId } = useParams();
     let navigate = useNavigate();
+
     const storedToken = localStorage.getItem("authToken");
-    const requestBody = { favorites: cookId }
 
 
+    // Functionality to READ details of one cook
     const getCook = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/users/${cookId}`)
@@ -27,6 +28,9 @@ function CookDetailsPage(props) {
     }, []);
 
 
+    // Funtionality to ADD FAVORITES 
+    const requestBody = { favorites: cookId }
+
     const addFavorite = () => {
         axios
             .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}/favorites`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -38,6 +42,8 @@ function CookDetailsPage(props) {
             .catch((error) => console.log(error));
     }
 
+
+
     return (
         <div className="CookDetails">
 
@@ -47,8 +53,10 @@ function CookDetailsPage(props) {
                     <p>{cook.address}</p>
                 </>
             )}
+
             <h1>Reviews: </h1>
-            {cook?.comments.length >0
+
+            {cook?.comments.length > 0
                 ? cook.comments?.map((comment) => (
                     <>
                         <h3>{comment.title}</h3>
@@ -57,12 +65,16 @@ function CookDetailsPage(props) {
                     </>
                 ))
                 : <p>No reviews yet for this cook</p>}
+
+
             <NavLink to={`/profile/${user?._id}`} >
                 <button onClick={() => { addFavorite(cookId) }}>Add as a favorite</button>
             </NavLink>
+
             <NavLink to="/cooks">
                 <button>Back to the list of cooks</button>
             </NavLink>
+
             <NavLink to={`/new-comment/${cookId}`}>
                 <button>Add a review for this cook</button>
             </NavLink>

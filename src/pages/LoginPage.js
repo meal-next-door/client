@@ -12,6 +12,7 @@ function LoginPage() {
     const navigate = useNavigate();
 
 
+    // Functionality to LOGIN
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -19,8 +20,7 @@ function LoginPage() {
 
         axios.post(`${process.env.REACT_APP_API_URL}/login`, body)
             .then((response) => {
-                // Request to the server's endpoint `/auth/login` returns a response
-                // with the JWT string ->  response.data.authToken
+                // Returns a response with the JWT string
                 storeToken(response.data.authToken); // store token in browser
                 authenticateUser();
                 navigate('/');
@@ -30,8 +30,6 @@ function LoginPage() {
                 setErrorMessage(errorDescription);
             })
     };
-
-
 
 
 
@@ -59,11 +57,11 @@ function LoginPage() {
                 <button type="submit">Login</button>
             </form>
 
-
             <p>Don't have an account yet?</p>
             <NavLink to={"/signup"}> Sign Up</NavLink>
         </div>
     );
 }
+
 
 export default LoginPage;
