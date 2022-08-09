@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function MealsList(props) {
 
     const { user } = useContext(AuthContext);
     const [search, setSearch] = useState("");
 
-
+    // Functionality to SEARCH WITH A SEARCH BAR
     const handleSearch = (event) => {
         setSearch(event)
 
@@ -20,18 +20,20 @@ function MealsList(props) {
         })
     }
 
-
+    // Functionality to SEARCH BY CATEGORY
     const handleDiet = (dietInput) => {
 
         props.setMeals(() => {
             const result = props.mealsCopy?.filter(e => {
                 return e.diet === dietInput;
             })
-            console.log(result)
             return result;
         })
     }
 
+    const refreshList = () => {
+        props.refreshMeals();
+    }
 
 
     return (
@@ -58,6 +60,7 @@ function MealsList(props) {
             <button onClick={() => handleDiet('sugar-free')}>Sugar-free</button>
             <button onClick={() => handleDiet('kosher')}>Kosher</button>
             <button onClick={() => handleDiet('halal')}>Halal</button>
+            <button onClick={() => refreshList()}>Refresh</button>
 
 
             {props.meals?.map((meal) => {
@@ -78,5 +81,6 @@ function MealsList(props) {
         </div>
     );
 }
+
 
 export default MealsList;

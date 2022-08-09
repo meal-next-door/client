@@ -18,6 +18,8 @@ function MealDetails(props) {
     const { mealId } = useParams();
     let navigate = useNavigate();
 
+
+    // Functionality to READ the details of a meal
     const getMeal = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
@@ -30,6 +32,7 @@ function MealDetails(props) {
     }, []);
 
 
+    // Functionality to DELETE a meal
     const deleteMeal = () => {
         axios
             .delete(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
@@ -44,18 +47,21 @@ function MealDetails(props) {
             .catch((error) => console.log(error));
     }
 
+
+    // Functionality to ADD FAVORITES
     const addFavorite = () => {
         axios
-        .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}`)
-        .then(() => {
-            return (
-            navigate(`/users/${user?._id}`, { replace: true })
-            )
+            .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}`)
+            .then(() => {
+                return (
+                    navigate(`/users/${user?._id}`, { replace: true })
+                )
             })
-        .catch((error) => console.log(error));
+            .catch((error) => console.log(error));
     }
 
 
+    // Functionality to SEND EMAIL to the cook
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
@@ -72,10 +78,12 @@ function MealDetails(props) {
                 setMessage("");
             })
             .catch((error) => {
-                setErrorMsg("oops, error sending order");
+                setErrorMsg("oops, there has been an error sending your email");
                 console.log(error)
             });
     };
+
+
 
     return (
         <>
@@ -126,7 +134,11 @@ function MealDetails(props) {
                         <button type="submit">Send Email</button>
                     </form>
                 ) : (
-                    <h3>Email sent!</h3>
+                    <>
+                        <h4>Your email has been successfully sent!</h4>
+                        <h5>{meal.cook?.username} will soon confirm your order</h5>
+                        <NavLink to="/meals"><button>Back to meals</button></NavLink>
+                    </>
                 )}
 
             </div>

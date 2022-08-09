@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 
-function EditMeal(props) {
+function EditMeal() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [diet, setDiet] = useState("");
@@ -48,6 +48,7 @@ function EditMeal(props) {
             <h3>Edit the Project</h3>
 
             <form onSubmit={handleFormSubmit}>
+
                 <label>Title:</label>
                 <input
                     type="text"
@@ -92,6 +93,7 @@ function EditMeal(props) {
                 />
 
                 <button type="submit">Update your meal</button>
+
             </form>
         </div>
     );

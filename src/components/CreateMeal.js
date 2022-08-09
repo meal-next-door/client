@@ -14,9 +14,12 @@ function AddMeal(props) {
     const [errorMsg, setErrorMsg] = useState("");
     const storedToken = localStorage.getItem("authToken");
 
+
+    //Funtionality to CREATE a meal
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
+
         const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
 
         props.refreshMeals((prevMeals) => {
@@ -40,6 +43,8 @@ function AddMeal(props) {
             });
     };
 
+
+
     return (
         <div className="AddMeal">
             <h3>Add Meal</h3>
@@ -51,6 +56,7 @@ function AddMeal(props) {
             }
 
             <form onSubmit={handleSubmit}>
+
                 <label>Title:</label>
                 <input
                     type="text"

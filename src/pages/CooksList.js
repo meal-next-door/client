@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 function CooksList(props) {
     const users = props.users;
 
+    // Functionality to READ one type of users
     const cooks = [...users].filter(user => user.role === "cook")
+
 
     return (
         <div className="CooksList">
