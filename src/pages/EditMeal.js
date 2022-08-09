@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 
@@ -9,10 +9,11 @@ function EditMeal(props) {
     const [diet, setDiet] = useState("");
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
-    const [cook, setCook] = useState("");
+    const [imageSelected, setImageSelected] = useState("")
     const { mealId } = useParams();
     const navigate = useNavigate();
     const storedToken = localStorage.getItem("authToken");
+    let imageUrl;
 
     useEffect(() => {
         axios
@@ -24,7 +25,6 @@ function EditMeal(props) {
                 setDiet(mealToUpdate.diet);
                 setCuisine(mealToUpdate.cuisine);
                 setDate(mealToUpdate.date);
-                setCook(mealToUpdate.cook.username);
             })
             .catch((error) => console.log(error));
 
@@ -33,15 +33,30 @@ function EditMeal(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { title, description, diet, cuisine, date, cook };
+        const requestBody = { title, description, diet, cuisine, date};
+        const formData = new FormData();
+        formData.append("file", imageSelected);
+        formData.append("upload_preset", "Meal-next-door");
 
         axios
-            .put(`${process.env.REACT_APP_API_URL}/meals/${mealId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
+            .then( response => {
+                console.log(response)
+                imageUrl = response.data.url
+                return axios
+            .put(`${process.env.REACT_APP_API_URL}/meals/${mealId}`, { title, description, diet, cuisine, date, image: imageUrl}, { headers: { Authorization: `Bearer ${storedToken}` } })
+            })
             .then((response) => {
                 navigate(`/meals/${mealId}`)
             });
     };
+    
+    const uploadImage = () => {
 
+        const formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset", "Meal-next-door")
+    }
 
     return (
         <div className="EditProjectPage">
@@ -84,14 +99,14 @@ function EditMeal(props) {
                     onChange={(e) => setDate(e.target.value)}
                 />
 
-                <label>Cook:</label>
-                <textarea
-                    name="cook"
-                    value={cook}
-                    onChange={(e) => setCook(e.target.value)}
+                <input 
+                    type="file"
+                    onChange={(e) => {
+                        setImageSelected(e.target.files[0])
+                    }}
                 />
 
-                <button type="submit">Update your meal</button>
+                <button onClick={uploadImage} type="submit">Update your meal</button>
             </form>
         </div>
     );

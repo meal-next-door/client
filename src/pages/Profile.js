@@ -6,6 +6,9 @@ import { NavLink, useParams } from "react-router-dom";
 function ProfilePage(props) {
     const [user, setUser] = useState(null);
     const { userId } = useParams();
+    const [imageSelected, setImageSelected] = useState("");
+    const storedToken = localStorage.getItem("authToken");
+    let imageUrl;
 
     const getUser = () => {
         axios
@@ -20,15 +23,18 @@ function ProfilePage(props) {
         getUser();
     }, []);
 
-
     return (
         <div className="UserDetails">
 
             {user && (
                 <>
                     <h1>{user.username}</h1>
+                    <img src={user.image}/>
                     <p>{user.address}</p>
                     <p>{user.role}</p>
+                    <NavLink to={`/edit-profile/${userId}`}>
+                        <button>Edit profile</button>
+                    </NavLink>
                 </>
             )}
 
