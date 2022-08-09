@@ -19,7 +19,7 @@ function HomePage(props) {
             </div>
             <div>
                 <h3>Meet the community</h3>
-                {cooks.map((user) => {
+                {cooks?.map((user) => {
                     return (
                         <div className="UserCard card" key={user._id} >
                             <h3>{user.username}</h3>
@@ -33,7 +33,7 @@ function HomePage(props) {
             </div>
             <div>
                 <h3>Find your next meal</h3>
-                {recentMeals.map((meal) => {
+                {recentMeals?.map((meal) => {
                     return (
                         <div key={meal._id}>
                             <h3>{meal.title}</h3>
