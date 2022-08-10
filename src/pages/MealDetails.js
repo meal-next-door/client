@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { Image } from "cloudinary-react";
 
 
 function MealDetails(props) {
@@ -89,11 +90,7 @@ function MealDetails(props) {
                 {meal &&
                     <div className="meal card" key={meal._id} >
                         <h3>{meal.title}</h3>
-
-                        {meal.diet?.map(e => {
-                            return <span key={e}>{e} </span>
-                        })}
-
+                        <p>Diet: {meal.diet}</p>
                         <p>Cuisine: {meal.cuisine}</p>
                         <p>Preparation date: {meal.date}</p>
                         <p>Cooked by: {meal.cook?.username}</p>

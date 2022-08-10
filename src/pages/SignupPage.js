@@ -15,8 +15,8 @@ function SignupPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const body = { username, password, address, role };
-
+        const body = { username, password, address, role, image:"https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" };
+        console.log(body)
         // Send input from user to the API
         axios.post(`${process.env.REACT_APP_API_URL}/signup`, body)
             .then((response) => {

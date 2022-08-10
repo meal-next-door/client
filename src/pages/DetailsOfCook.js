@@ -50,6 +50,7 @@ function CookDetailsPage() {
             {cook && (
                 <>
                     <h1>{cook.username}</h1>
+                    <img src={cook.image} />
                     <p>{cook.address}</p>
                 </>
             )}

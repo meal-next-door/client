@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import EditMeal from './pages/EditMeal';
 import CreateMeal from './components/CreateMeal';
+import EditProfile from './pages/EditProfile';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="profile/:userId" element={<ProfilePage />}></Route>
+        <Route path="edit-profile/:userId" element={<EditProfile/>}></Route>
         <Route path="new-comment/:cookId" element={<CreateComment />}></Route>
         <Route path="cooks" element={<CooksList users={users} />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>

@@ -1,35 +1,31 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate, NavLink } from "react-router-dom";
-import Select from 'react-select';
-import { AuthContext } from "../context/auth.context";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-function EditMeal() {
+
+function EditMeal(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [diet, setDiet] = useState("");
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
     const [cook, setCook] = useState("");
-
-    const [isValid, setIsValid] = useState(false);
-
     const { mealId } = useParams();
     const navigate = useNavigate();
 
     const storedToken = localStorage.getItem("authToken");
-    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
             .then((response) => {
-                setTitle(response.data.title);
-                setDescription(response.data.description);
-                setDiet(response.data.diet);
-                setCuisine(response.data.cuisine);
-                setDate(response.data.date);
-                setCook(response.data.cook.username);
+                const mealToUpdate = response.data;
+                setTitle(mealToUpdate.title);
+                setDescription(mealToUpdate.description);
+                setDiet(mealToUpdate.diet);
+                setCuisine(mealToUpdate.cuisine);
+                setDate(mealToUpdate.date);
+                setCook(mealToUpdate.cook.username);
             })
             .catch((error) => console.log(error));
 
@@ -38,37 +34,22 @@ function EditMeal() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const dietArr = diet.map(e => e.value)
-
-        const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
+        const requestBody = { title, description, diet, cuisine, date, cook };
 
         axios
-            .put(`${process.env.REACT_APP_API_URL}/meals/${mealId}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
+            .then( response => {
+                console.log(response)
+                imageUrl = response.data.url
+                return axios
+            .put(`${process.env.REACT_APP_API_URL}/meals/${mealId}`, { title, description, diet, cuisine, date, image: imageUrl}, { headers: { Authorization: `Bearer ${storedToken}` } })
+            })
             .then((response) => {
                 console.log(response)
                 navigate(`/meals/${mealId}`)
             })
             .catch((error) => console.log(error));;
     };
-
-
-    const handleSelect = (e) => {
-        setDiet(e)
-        setIsValid(true)
-    }
-
-    // Select options using React-Select
-    const options = [
-        { value: 'vegetarian', label: 'Vegetarian' },
-        { value: 'vegan', label: 'Vegan' },
-        { value: 'gluten-free', label: 'Gluten-free' },
-        { value: 'dairy-free', label: 'Dairy-free' },
-        { value: 'allergens-free', label: 'Allergens-free' },
-        { value: 'sugar-free', label: 'Sugar-free' },
-        { value: 'kosher', label: 'Kosher' },
-        { value: 'halal', label: 'Halal' }
-    ]
-
 
 
     return (
@@ -123,18 +104,13 @@ function EditMeal() {
                 />
 
                 <label>Cook:</label>
-                <input
-                    type="text"
+                <textarea
                     name="cook"
                     value={cook}
                     onChange={(e) => setCook(e.target.value)}
-                    readOnly
-                    required
                 />
 
-                {!isValid && <p>You must fill in all fields to be able to update</p>}
-                <button type="submit" disabled={!isValid}>Update</button>
-                <NavLink to={`/meals/${mealId}`}><button>Back to meal details</button></NavLink>
+                <button type="submit">Update your meal</button>
             </form>
         </div>
     );

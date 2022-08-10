@@ -10,20 +10,17 @@ function AddMeal(props) {
     const [diet, setDiet] = useState("");
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
-
-    const [isValid, setIsValid] = useState(false);
-
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [errorMsg, setErrorMsg] = useState("");
 
     const { user } = useContext(AuthContext);
     const storedToken = localStorage.getItem("authToken");
 
-
-    //Funtionality to CREATE a meal
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
+        const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
 
         const dietArr = diet.map(e => e.value)
 
@@ -31,7 +28,7 @@ function AddMeal(props) {
 
         props.setMeals((prevMeals) => {
             return [requestBody, ...prevMeals];
-        })
+        });
 
         axios
             .post(
@@ -42,32 +39,13 @@ function AddMeal(props) {
                 setDiet("");
                 setCuisine("");
                 setDate("");
-                navigate(`/meals`);
+                navigate(`/meals`)
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new meal");
                 console.log(error)
             });
     };
-
-
-    const handleSelect = (e) => {
-        setDiet(e)
-        setIsValid(true)
-    }
-
-    // Select options using React-Select
-    const options = [
-        { value: 'vegetarian', label: 'Vegetarian' },
-        { value: 'vegan', label: 'Vegan' },
-        { value: 'gluten-free', label: 'Gluten-free' },
-        { value: 'dairy-free', label: 'Dairy-free' },
-        { value: 'allergens-free', label: 'Allergens-free' },
-        { value: 'sugar-free', label: 'Sugar-free' },
-        { value: 'kosher', label: 'Kosher' },
-        { value: 'halal', label: 'Halal' }
-    ]
-
 
     return (
         <div className="AddMeal">
@@ -99,8 +77,19 @@ function AddMeal(props) {
                     required
                 />
 
-
-                <Select options={options} onChange={handleSelect} placeholder="Select special diet" isMulti />
+                <label>Diet:</label>
+                <select value={diet} onChange={(e) => setDiet(e.target.value)} multiple>
+                    <option value="" disabled selected>Select your options</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="gluten-free">Gluten-free</option>
+                    <option value="dairy-free">Dairy-free</option>
+                    <option value="allergens-free">Allergens-free</option>
+                    <option value="sugar-free">Sugar-free</option>
+                    <option value="kosher">Kosher</option>
+                    <option value="halal">Halal</option>
+                    <option value="none">None</option>
+                </select>
 
                 <label>Cuisine:</label>
                 <select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
@@ -128,11 +117,9 @@ function AddMeal(props) {
                     required
                 />
 
-                <input type="file" />
-
-                {!isValid && <p>You must fill in all fields to be able to submit</p>}
-                <button type="submit" disabled={!isValid}>Submit</button>
+                <button type="submit">Submit</button>
             </form>
+
         </div>
     );
 }
