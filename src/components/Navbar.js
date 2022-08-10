@@ -34,7 +34,7 @@ function NavBar(props) {
                         {isLoggedIn && (
                             <>
                                 <NavLink to={`/profile/${user._id}`} style={{ color: '#FFFFFF', textDecoration: 'none', padding: '0 1rem' }}>Profile</NavLink>
-                                <Button onClick={logOutUser} variant="outline-light" style={{ borderRadius: '20%', padding: '0.8rem 0.8rem' }}>Logout</Button>
+                                <Button onClick={logOutUser} variant="outline-light" style={{ borderRadius: '10%', padding: '0.5rem 1.2rem', margin: '0 0.5rem' }}>Logout</Button>
                             </>
                         )}
 

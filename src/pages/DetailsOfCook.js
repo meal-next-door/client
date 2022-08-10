@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { BsChatSquareTextFill } from 'react-icons/bs';
 
 
 function CookDetailsPage() {
@@ -51,41 +52,42 @@ function CookDetailsPage() {
 
             {cook && (
                 <>
-                    <h1>{cook.username}</h1>
-                    <img src={cook.image} />
-                    <p>{cook.address}</p>
+                    <img src={cook.image} style={{ maxHeight: '15rem', objectFit: 'cover', borderRadius: '50%' }} />
+                    <h1 style={{ margin: '3rem 0 1rem 0' }} >{cook.username}</h1>
+                    <p><strong>Location: </strong>{cook.address}</p>
                 </>
             )}
 
-            <h1>Reviews: </h1>
-
-            {cook?.comments.length > 0
-                ? cook.comments?.map((comment) => (
-                    <>
-                        <h3>{comment.title}</h3>
-                        <p>{comment.description}</p>
-                        <p>Author: {comment.author.username}</p>
-                    </>
-                ))
-                : <p>No reviews yet for this cook</p>}
-
-            { user != null
-            ? <NavLink to={`/profile/${user?._id}`} >
-                <button onClick={() => { addFavorite(cookId) }}>Add as a favorite</button>
-            </NavLink>
-            : <p></p>
+            {user != null
+                ? <NavLink to={`/profile/${user?._id}`} >
+                    <button onClick={() => { addFavorite(cookId) }}>Add to favorites</button>
+                </NavLink>
+                : <p></p>
             }
 
             <NavLink to="/cooks">
-                <button>Back to the list of cooks</button>
+                <button>Back to cooks</button>
             </NavLink>
-            
-            { user?._id !== cook?._id && user != null
-            ? <NavLink to={`/new-comment/${cookId}`}>
-            <button>Add a review for this cook</button>
-            </NavLink>
-            : <p></p>
+
+            {user?._id !== cook?._id && user != null
+                ? <NavLink to={`/new-comment/${cookId}`}>
+                    <button><BsChatSquareTextFill /> Comment</button>
+                </NavLink>
+                : <p></p>
             }
+
+
+            <h3 style={{ margin: '3rem' }} >Reviews </h3>
+
+            {cook?.comments.length > 0
+                ? cook.comments?.map((comment) => (
+                    <div style={{ border: '1px solid' }}>
+                        <h5>{comment.title}</h5>
+                        <p>{comment.description}</p>
+                        <p>Author: {comment.author.username}</p>
+                    </div>
+                ))
+                : <p>No reviews yet for this cook</p>}
 
         </div>
     );
