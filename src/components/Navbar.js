@@ -17,7 +17,9 @@ function NavBar(props) {
     return (
         <Navbar sticky="top" expand="lg" collapseOnSelect style={{ backgroundColor: '#3E5D3E', margin: '0' }}>
             <Container style={{ margin: '0' }}>
+                <NavLink to="/">
                 <img src="/Logo-rectangle.png"/>
+                </NavLink>
                 <NavbarToggle aria-controls="basic-navbar-nav" />
                 <NavbarCollapse id="basic-navbar-nav" style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <Nav>
