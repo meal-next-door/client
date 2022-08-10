@@ -77,7 +77,7 @@ function MealsList(props) {
                             <Col md={6} lg={4}>
                                 <Card key={meal._id} style={{ margin: '0.7rem' }} >
                                     <Card.Body>
-                                        <Card.Img src={meal.image} />
+                                        <Card.Img src={meal.image} style={{ maxHeight: '10rem' }} />
                                         <Card.Title>{meal.title}</Card.Title>
                                         {meal.diet?.map(e => {
                                             return <span>{e} </span>
