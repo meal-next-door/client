@@ -90,6 +90,10 @@ function MealDetails(props) {
                 {meal &&
                     <div className="meal card" key={meal._id} >
                         <h3>{meal.title}</h3>
+                        {meal.image 
+                        ? <img src={meal.image} />
+                        : <p>Noimages for this meal</p>
+                        }
                         <p>Diet: {meal.diet}</p>
                         <p>Cuisine: {meal.cuisine}</p>
                         <p>Preparation date: {meal.date}</p>

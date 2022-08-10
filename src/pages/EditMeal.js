@@ -1,6 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
+import Select from 'react-select';
+import { AuthContext } from "../context/auth.context";
 
 
 function EditMeal(props) {
@@ -10,22 +12,24 @@ function EditMeal(props) {
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
     const [cook, setCook] = useState("");
+    const [isValid, setIsValid] = useState(false);
+    const [imageSelected, setImageSelected] = useState("");
     const { mealId } = useParams();
     const navigate = useNavigate();
-
+    let imageUrl;
     const storedToken = localStorage.getItem("authToken");
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
             .then((response) => {
-                const mealToUpdate = response.data;
-                setTitle(mealToUpdate.title);
-                setDescription(mealToUpdate.description);
-                setDiet(mealToUpdate.diet);
-                setCuisine(mealToUpdate.cuisine);
-                setDate(mealToUpdate.date);
-                setCook(mealToUpdate.cook.username);
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+                setDiet(response.data.diet);
+                setCuisine(response.data.cuisine);
+                setDate(response.data.date);
+                setCook(response.data.cook.username);
             })
             .catch((error) => console.log(error));
 
@@ -34,23 +38,48 @@ function EditMeal(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { title, description, diet, cuisine, date, cook };
+        const dietArr = diet.map(e => e.value)
+        const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
+        const formData = new FormData();
+        formData.append("file", imageSelected);
+        formData.append("upload_preset", "Meal-next-door");
 
         axios
             .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
             .then( response => {
-                console.log(response)
                 imageUrl = response.data.url
                 return axios
             .put(`${process.env.REACT_APP_API_URL}/meals/${mealId}`, { title, description, diet, cuisine, date, image: imageUrl}, { headers: { Authorization: `Bearer ${storedToken}` } })
             })
-            .then((response) => {
-                console.log(response)
+            .then(response => {
                 navigate(`/meals/${mealId}`)
             })
             .catch((error) => console.log(error));;
     };
 
+    const uploadImage = () => {
+
+        const formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset", "Meal-next-door")
+    };
+
+    const handleSelect = (e) => {
+        setDiet(e)
+        setIsValid(true)
+    }
+
+    // Select options using React-Select
+    const options = [
+        { value: 'vegetarian', label: 'Vegetarian' },
+        { value: 'vegan', label: 'Vegan' },
+        { value: 'gluten-free', label: 'Gluten-free' },
+        { value: 'dairy-free', label: 'Dairy-free' },
+        { value: 'allergens-free', label: 'Allergens-free' },
+        { value: 'sugar-free', label: 'Sugar-free' },
+        { value: 'kosher', label: 'Kosher' },
+        { value: 'halal', label: 'Halal' }
+    ]    
 
     return (
         <div className="EditMeal">
@@ -104,13 +133,26 @@ function EditMeal(props) {
                 />
 
                 <label>Cook:</label>
-                <textarea
+                <input
+                    type="text"
                     name="cook"
                     value={cook}
                     onChange={(e) => setCook(e.target.value)}
+                    readOnly
+                    required
+                /> 
+
+                <input 
+                    type="file"
+                    onChange={(e) => {
+                        setImageSelected(e.target.files[0])
+                    }}
                 />
 
-                <button type="submit">Update your meal</button>
+                {!isValid && <p>You must fill in all fields to be able to update</p>}
+                <button onClick={uploadImage}type="submit" disabled={!isValid}>Update</button>
+                <NavLink to={`/meals/${mealId}`}><button>Back to meal details</button></NavLink>
+                {/* <button onClick={uploadImage} type="submit">Update your meal</button> */}
             </form>
         </div>
     );

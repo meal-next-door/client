@@ -10,42 +10,71 @@ function AddMeal(props) {
     const [diet, setDiet] = useState("");
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
+    const [imageSelected, setImageSelected] = useState("")
     const { user } = useContext(AuthContext);
+    const [isValid, setIsValid] = useState(false);
     const navigate = useNavigate();
     const [errorMsg, setErrorMsg] = useState("");
-
-    const { user } = useContext(AuthContext);
     const storedToken = localStorage.getItem("authToken");
+    let imageUrl;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
-        const requestBody = { title, description, diet, cuisine, date, cookId: user?._id };
-
+        const formData = new FormData();
+        formData.append("file", imageSelected);
+        formData.append("upload_preset", "Meal-next-door");
         const dietArr = diet.map(e => e.value)
-
         const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
 
-        props.setMeals((prevMeals) => {
-            return [requestBody, ...prevMeals];
-        });
-
         axios
-            .post(
-                `${process.env.REACT_APP_API_URL}/meals`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
-            .then((response) => {
+            .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
+                .then( response => {
+                imageUrl = response.data.url
+                return axios
+                    .post(
+                        `${process.env.REACT_APP_API_URL}/meals`, { title, description, diet: dietArr, cuisine, date, cookId: user?._id, image: imageUrl}, { headers: { Authorization: `Bearer ${storedToken}` } })
+                })
+                .then((response) => {
                 setTitle("");
                 setDescription("");
                 setDiet("");
                 setCuisine("");
                 setDate("");
-                navigate(`/meals`)
+                navigate(`/meals`);
+                // props.setMeals((prevMeals) => {
+                //     return [requestBody, ...prevMeals];
+                // });
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new meal");
                 console.log(error)
             });
     };
+
+    const uploadImage = () => {
+
+        const formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset", "Meal-next-door")
+    };
+
+    const handleSelect = (e) => {
+        setDiet(e)
+        setIsValid(true)
+    };
+
+    // Select options using React-Select
+    const options = [
+        { value: 'vegetarian', label: 'Vegetarian' },
+        { value: 'vegan', label: 'Vegan' },
+        { value: 'gluten-free', label: 'Gluten-free' },
+        { value: 'dairy-free', label: 'Dairy-free' },
+        { value: 'allergens-free', label: 'Allergens-free' },
+        { value: 'sugar-free', label: 'Sugar-free' },
+        { value: 'kosher', label: 'Kosher' },
+        { value: 'halal', label: 'Halal' }
+    ]
 
     return (
         <div className="AddMeal">
@@ -77,20 +106,8 @@ function AddMeal(props) {
                     required
                 />
 
-                <label>Diet:</label>
-                <select value={diet} onChange={(e) => setDiet(e.target.value)} multiple>
-                    <option value="" disabled selected>Select your options</option>
-                    <option value="vegetarian">Vegetarian</option>
-                    <option value="vegan">Vegan</option>
-                    <option value="gluten-free">Gluten-free</option>
-                    <option value="dairy-free">Dairy-free</option>
-                    <option value="allergens-free">Allergens-free</option>
-                    <option value="sugar-free">Sugar-free</option>
-                    <option value="kosher">Kosher</option>
-                    <option value="halal">Halal</option>
-                    <option value="none">None</option>
-                </select>
-
+                <Select options={options} onChange={handleSelect} placeholder="Select special diet" isMulti />
+                
                 <label>Cuisine:</label>
                 <select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
                     <option value="" disabled selected>Select an option</option>
@@ -117,7 +134,17 @@ function AddMeal(props) {
                     required
                 />
 
-                <button type="submit">Submit</button>
+                <input 
+                    type="file"
+                    onChange={(e) => {
+                        setImageSelected(e.target.files[0])
+                    }}
+                />
+
+                {!isValid && <p>You must fill in all fields to be able to submit</p>}
+                <button onSubmit={uploadImage} type="submit" disabled={!isValid}>Submit</button>
+
+                {/* <button onSubmit={uploadImage} type="submit">Submit</button> */}
             </form>
 
         </div>
