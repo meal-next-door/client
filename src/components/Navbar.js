@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 import { NavLink } from "react-router-dom";
+import { Button, Container, Nav, Navbar, NavbarBrand } from "react-bootstrap";
+import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
+import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 
-function Navbar(props) {
+function NavBar(props) {
 
     const { isLoggedIn, logOutUser } = useContext(AuthContext);
     const { user } = useContext(AuthContext);
@@ -12,35 +15,46 @@ function Navbar(props) {
     }
 
     return (
-        <nav className="Navbar">
-            <NavLink to="/">Home</NavLink> |
-            <NavLink to="/cooks">Cooks</NavLink> |
-            <NavLink to="/meals" onClick={() => refreshList()}>Meals</NavLink> |
+        <Navbar sticky="top" expand="lg" collapseOnSelect style={{ backgroundColor: '#3E5D3E', margin: '0' }}>
+            <Container style={{ margin: '0' }}>
+                <NavbarBrand href="/" style={{ color: '#FFFFFF' }}><strong>Meal-Next-Door</strong></NavbarBrand>
+                <NavbarToggle aria-controls="basic-navbar-nav" />
+                <NavbarCollapse id="basic-navbar-nav" style={{ display: 'flex', justifyContent: 'space-around' }}>
+                    <Nav>
+                        <div>
+                            <NavLink to="/cooks" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Cooks</NavLink> |
+                            <NavLink to="/meals" onClick={() => refreshList()} style={{ color: '#FFFFFF', textDecoration: 'none' }}>Meals</NavLink> |
 
-            {user?.role === "cook" && (
-                <>
-                    <NavLink to="/create-meal">Create</NavLink> |
-                </>
-            )}
+                            {user?.role === "cook" && (
+                                <>
+                                    <NavLink to="/create-meal" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Create</NavLink> |
+                                </>
+                            )}
 
-            {isLoggedIn && (
-                <>
-                    <NavLink to={`/profile/${user._id}`}>Profile</NavLink> |
-                    <button onClick={logOutUser}>Logout</button>
-                </>
-            )}
+                        </div>
 
-            {!isLoggedIn && (
-                <>
-                    <NavLink to="/signup">Sign Up</NavLink> |
-                    <NavLink to="/login">Login</NavLink>
-                </>
-            )}
+                        <div>
+                            {isLoggedIn && (
+                                <>
+                                    <NavLink to={`/profile/${user._id}`} style={{ color: '#FFFFFF', textDecoration: 'none' }}>Profile</NavLink>
+                                    <Button onClick={logOutUser} variant="outline-light" style={{ borderRadius: '20%' }}>Logout</Button>
+                                </>
+                            )}
 
+                            {!isLoggedIn && (
+                                <>
+                                    <NavLink to="/signup" style={{ color: '#FFFFFF' }}>Sign Up</NavLink> |
+                                    <NavLink to="/login" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Login</NavLink>
+                                </>
+                            )}
+                        </div>
 
-        </nav>
+                    </Nav>
+                </NavbarCollapse>
+            </Container>
+        </Navbar>
     );
 }
 
 
-export default Navbar;
+export default NavBar;

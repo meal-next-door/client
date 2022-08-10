@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 function HomePage(props) {
 
@@ -10,8 +11,8 @@ function HomePage(props) {
     if (users.length > 0 && meals.length > 0) {
         const userCopy = [...users]
         const mealCopy = [...meals]
-        cooks = userCopy?.filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 1);
-        recentMeals = mealCopy?.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 1);
+        cooks = userCopy?.filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
+        recentMeals = mealCopy?.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
     }
 
     return (
@@ -23,34 +24,59 @@ function HomePage(props) {
                 <h3>How does it work?</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
+
+
             <div>
                 <h3>Meet the community</h3>
-                {users.length > 0 && cooks?.map((user) => {
-                    return (
-                        <div className="UserCard card" key={user._id} >
-                            <h3>{user?.username}</h3>
-                            <p>{user?.role}</p>
-                            <NavLink to={`/cooks/${user._id}`}>
-                                <button>Visit Profile</button>
-                            </NavLink>
-                        </div>
-                    )
-                })}
+
+                <Container>
+                    <Row>
+                        {users.length > 0 && cooks?.map((user) => {
+                            return (
+
+                                <Col md={6} lg={4}>
+                                    <Card key={user._id} style={{ margin: '0.7rem' }}>
+                                        <Card.Body>
+                                            <Card.Img src={user.image} />
+                                            <Card.Title>{user?.username}</Card.Title>
+                                            <p>{user?.role}</p>
+                                            <NavLink to={`/cooks/${user._id}`}>
+                                                <button>Visit Profile</button>
+                                            </NavLink>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+
+                            )
+                        })}
+                    </Row>
+                </Container>
             </div>
+
             <div>
                 <h3>Find your next meal</h3>
-                {meals.length > 0 && recentMeals?.map((meal) => {
-                    return (
-                        <div key={meal._id}>
-                            <h3>{meal.title}</h3>
-                            <p>{meal.date}</p>
-                            <p>{meal.cook?.username}</p>
-                            <NavLink to={`/meals/${meal._id}`}>
-                                <button>See details</button>
-                            </NavLink>
-                        </div>
-                    )
-                })}
+
+                <Container>
+                    <Row>
+                        {meals.length > 0 && recentMeals?.map((meal) => {
+                            return (
+
+                                <Col md={6} lg={4}>
+                                    <Card key={meal._id} style={{ margin: '0.7rem' }}>
+                                        <Card.Body>
+                                            <Card.Img src={meal.image} />
+                                            <Card.Title>{meal?.title}</Card.Title>
+                                            <p>{meal.cook?.username}</p>
+                                            <NavLink to={`/meals/${meal._id}`}>
+                                                <button>See details</button>
+                                            </NavLink>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            )
+                        })}
+                    </Row>
+                </Container>
             </div>
         </div>
     );
