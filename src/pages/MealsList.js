@@ -36,6 +36,7 @@ function MealsList(props) {
         props.refreshMeals();
     }
 
+    console.log(props.meals)  
 
     return (
         <div className="MealsList">

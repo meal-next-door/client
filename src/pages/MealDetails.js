@@ -83,8 +83,6 @@ function MealDetails(props) {
             });
     };
 
-
-
     return (
         <>
             <div className="MealsList">
