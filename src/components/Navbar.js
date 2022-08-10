@@ -17,7 +17,7 @@ function NavBar(props) {
     return (
         <Navbar sticky="top" expand="lg" collapseOnSelect style={{ backgroundColor: '#3E5D3E', margin: '0' }}>
             <Container style={{ margin: '0' }}>
-                <NavbarBrand href="/" style={{ color: '#FFFFFF' }}><strong>Meal-Next-Door</strong></NavbarBrand>
+                <img src="/Logo-rectangle.png"/>
                 <NavbarToggle aria-controls="basic-navbar-nav" />
                 <NavbarCollapse id="basic-navbar-nav" style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <Nav>
