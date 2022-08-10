@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 function SignupPage() {
@@ -30,47 +32,48 @@ function SignupPage() {
 
 
     return (
-        <div className="SignupPage">
-            <h1>Sign Up</h1>
+        
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="Choose a username" value={username}
+                    onChange={(e) => setUsername(e.target.value)} />
+                <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
 
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" value={password}
+                    onChange={(e) => setPassword(e.target.value)} />
+            </Form.Group>
 
-            <form onSubmit={handleSubmit}>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+            <Form.Group className="mb-3" controlId="formBasicAddress">
+                <Form.Label>Address</Form.Label>
+                <Form.Control type="text" placeholder="Enter address" value={address}
+                    onChange={(e) => setAddress(e.target.value)} />
+                <Form.Text className="text-muted">
+                    Enter your address so that customers can find your delicious meals
+                </Form.Text>
+            </Form.Group>
 
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+            <Form.Select aria-label="select role">
+                <option value="cook">Cook</option>
+                <option value="customer">Customer</option>
+            </Form.Select>
 
-                <label>Address:</label>
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                />
-
-                <label>Role:</label>
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                    <option value="" disabled selected>Select your role</option>
-                    <option value="cook">Cook</option>
-                    <option value="customer">Customer</option>
-                </select>
-
-                <button type="submit">Sign Up</button>
-            </form>
-
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Check me out" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
 
             <p>Already have account?</p>
             <NavLink to={"/login"}> Login</NavLink>
-        </div>
+        </Form>
+
     );
 }
 
