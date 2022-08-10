@@ -20,7 +20,7 @@ function SignupPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const body = { username, password, address, role, image:"https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" };
+        const body = { username, password, address, role, image: "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" };
         console.log(body)
         // Send input from user to the API
         axios.post(`${process.env.REACT_APP_API_URL}/signup`, body)
@@ -35,67 +35,69 @@ function SignupPage() {
 
 
     return (
-        
+
         <Container >
-        <Form onSubmit={handleSubmit}>
-        <Row className="justify-content-md-center">
-        <Col xs={4} xl={6} align>
-            <Form.Group className="mb-3" controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Choose a username" value={username}
-                    onChange={(e) => setUsername(e.target.value)} />
-                <Form.Text className="text-muted">
-                </Form.Text>
-            </Form.Group>
-            </Col>
-            </Row>
+            <Form onSubmit={handleSubmit}>
 
-            <Row className="justify-content-md-center">
-            <Col xs={4} xl={6} align>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} />
-            </Form.Group>
-            </Col>
-            </Row>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Choose a username" value={username}
+                                onChange={(e) => setUsername(e.target.value)} />
+                            <Form.Text className="text-muted">
+                            </Form.Text>
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <Row className="justify-content-md-center">
-            <Col xs={4} xl={6} align>
-            <Form.Group className="mb-3" controlId="formBasicAddress">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="text" placeholder="Enter address" value={address}
-                    onChange={(e) => setAddress(e.target.value)} />
-                <Form.Text className="text-muted">
-                    Enter your address so that customers can find your delicious meals
-                </Form.Text>
-            </Form.Group>
-            </Col>
-            </Row>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <Row className="justify-content-md-center">
-            <Col xs={4} xl={6} align>
-            <Form.Select aria-label="select role">
-                <option value="cook">Cook</option>
-                <option value="customer">Customer</option>
-            </Form.Select>
-            </Col>
-            </Row>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group className="mb-3" controlId="formBasicAddress">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control type="text" placeholder="Enter address" value={address}
+                                onChange={(e) => setAddress(e.target.value)} />
+                            <Form.Text className="text-muted">
+                                Enter your address so that customers can find your delicious meals
+                            </Form.Text>
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <Row className="justify-content-md-center">
-            <Col xs={4} xl={6} align>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-            </Col>
-            </Row>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Select aria-label="select role">
+                            <option value="cook">Cook</option>
+                            <option value="customer">Customer</option>
+                        </Form.Select>
+                    </Col>
+                </Row>
 
-            <p>Already have account?</p>
-            <NavLink to={"/login"}> Login</NavLink>
-        </Form>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                            <Form.Check type="checkbox" label="Check me out" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Col>
+                </Row>
+
+                <p>Already have account?</p>
+                <NavLink to={"/login"}> Login</NavLink>
+            </Form>
+
         </Container>
     );
 }

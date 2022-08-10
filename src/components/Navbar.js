@@ -1,12 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 import { NavLink } from "react-router-dom";
-import { Button, Container, Nav, Navbar, NavbarBrand, Row, Col } from "react-bootstrap";
-import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
-import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
+import { Button, Container, Nav, Navbar, Image } from "react-bootstrap";
 
 function NavBar(props) {
-
     const { isLoggedIn, logOutUser } = useContext(AuthContext);
     const { user } = useContext(AuthContext);
 
@@ -14,46 +11,41 @@ function NavBar(props) {
         props.refreshMeals();
     }
 
+
     return (
-        <Navbar sticky="top" expand="lg" collapseOnSelect style={{ backgroundColor: '#3E5D3E', margin: '0' }}>
-            <Container style={{ margin: '0' }}>
+        <Navbar sticky="top" expand="lg" collapseOnSelect style={{ backgroundColor: '#3E5D3E', margin: '0', display: "flex" }}>
+            <Container style={{ margin: '0', maxWidth: '100vw' }}>
+
                 <NavLink to="/">
-                <img src="/Logo-rectangle.png"/>
+                    <Image src="/Logo-rectangle.png" style={{ maxWidth: '70%' }} />
                 </NavLink>
-                <NavbarToggle aria-controls="basic-navbar-nav" />
-                <NavbarCollapse id="basic-navbar-nav" style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" style={{ display: 'flex', justifyContent: 'space-between', display: "flex", width: '100%' }}>
                     <Nav>
-                        <Row>
-                            <Col>
-                                <NavLink to="/cooks" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Cooks</NavLink> |
-                                <NavLink to="/meals" onClick={() => refreshList()} style={{ color: '#FFFFFF', textDecoration: 'none' }}>Meals</NavLink> |
-
-                                {user?.role === "cook" && (
-                                    <>
-                                        <NavLink to="/create-meal" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Create</NavLink> |
-                                    </>
-                                )}
-
-                            </Col>
-
-                            <Col>
-                                {isLoggedIn && (
-                                    <>
-                                        <NavLink to={`/profile/${user._id}`} style={{ color: '#FFFFFF', textDecoration: 'none' }}>Profile</NavLink>
-                                        <Button onClick={logOutUser} variant="outline-light" style={{ borderRadius: '20%' }}>Logout</Button>
-                                    </>
-                                )}
-
-                                {!isLoggedIn && (
-                                    <>
-                                        <NavLink to="/signup" style={{ color: '#FFFFFF' }}>Sign Up</NavLink> |
-                                        <NavLink to="/login" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Login</NavLink>
-                                    </>
-                                )}
-                            </Col>
-                        </Row>
+                        <NavLink to="/cooks" style={{ color: '#FFFFFF', textDecoration: 'none', padding: '0 1rem' }}>Cooks</NavLink>
+                        <NavLink to="/meals" onClick={() => refreshList()} style={{ color: '#FFFFFF', textDecoration: 'none', padding: '0 1rem' }}>Meals</NavLink>
+                        {user?.role === "cook" && (
+                            <>
+                                <NavLink to="/create-meal" style={{ color: '#FFFFFF', textDecoration: 'none', padding: '0 1rem' }}>Create</NavLink>
+                            </>
+                        )}
                     </Nav>
-                </NavbarCollapse>
+                    <Nav style={{ display: 'flex', alignItems: 'center', padding: '0 3em' }}>
+                        {isLoggedIn && (
+                            <>
+                                <NavLink to={`/profile/${user._id}`} style={{ color: '#FFFFFF', textDecoration: 'none', padding: '0 1rem' }}>Profile</NavLink>
+                                <Button onClick={logOutUser} variant="outline-light" style={{ borderRadius: '20%', padding: '0.8rem 0.8rem' }}>Logout</Button>
+                            </>
+                        )}
+
+                        {!isLoggedIn && (
+                            <>
+                                <NavLink to="/signup" style={{ color: '#FFFFFF', padding: '0 1rem' }}>Sign Up</NavLink> |
+                                <NavLink to="/login" style={{ color: '#FFFFFF', textDecoration: 'none', padding: '0 1rem' }}>Login</NavLink>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );

@@ -42,7 +42,7 @@ function MealsList(props) {
 
             {user?.role === "cook"
                 ? <NavLink to="/create-meal">
-                    <Button style={{ margin: '3rem', backgroundColor: '#3E5D3E', border: 'none' }}>Add your own meal</Button>
+                    <Button style={{ margin: '5rem 0 3rem', backgroundColor: '#3E5D3E', border: 'none' }}>Add your own meal</Button>
                 </NavLink>
 
                 : <p> </p>
@@ -65,8 +65,8 @@ function MealsList(props) {
             <Button onClick={() => handleDiet('allergens-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Allergens-free</Button>
             <Button onClick={() => handleDiet('sugar-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Sugar-free</Button>
             <Button onClick={() => handleDiet('kosher')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Kosher</Button>
-            <Button onClick={() => handleDiet('halal')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Halal</Button>
-            <Button onClick={() => refreshList()} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', borderColor: '#3E5D3E', borderRadius: '20px' }}>Refresh</Button>
+            <Button onClick={() => handleDiet('halal')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px', padding: '5px 18px' }}>Halal</Button>
+            <Button onClick={() => refreshList()} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px' }}>All</Button>
 
             <Container style={{ marginTop: '3rem' }}>
                 <Row>
@@ -77,16 +77,16 @@ function MealsList(props) {
                             <Col md={6} lg={4}>
                                 <Card key={meal._id} style={{ margin: '0.7rem' }} >
                                     <Card.Body>
-                                        <Card.Img src={meal.image} style={{ maxHeight: '10rem' }} />
-                                        <Card.Title>{meal.title}</Card.Title>
+                                        <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                        <Card.Title style={{ margin: '1rem' }}>{meal.title}</Card.Title>
                                         {meal.diet?.map(e => {
-                                            return <span>{e} </span>
+                                            return <span style={{ margin: '0.3rem', backgroundColor: '#E8F2E8', color: 'black', border: '0.03rem solid', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px' }}>{e} </span>
                                         })}
-                                        <p><strong>Cooked by:</strong> {meal.cook?.username}</p>
+                                        <p style={{ margin: '1rem' }}><strong>Cooked by:</strong> {meal.cook?.username}</p>
                                         <p>{meal.description}</p>
 
                                         <NavLink to={`/meals/${meal._id}`}>
-                                            <button>View details</button>
+                                            <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>View details</button>
                                         </NavLink>
                                     </Card.Body>
                                 </Card>

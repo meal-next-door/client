@@ -69,7 +69,7 @@ function EditMeal(props) {
         setIsValid(true)
     }
 
-    // Select options using React-Select
+    // Diet options for select form
     const options = [
         { value: 'vegetarian', label: 'Vegetarian' },
         { value: 'vegan', label: 'Vegan' },
