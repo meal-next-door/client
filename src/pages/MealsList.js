@@ -66,7 +66,7 @@ function MealsList(props) {
             <Button onClick={() => handleDiet('sugar-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Sugar-free</Button>
             <Button onClick={() => handleDiet('kosher')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Kosher</Button>
             <Button onClick={() => handleDiet('halal')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Halal</Button>
-            <Button onClick={() => refreshList()} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Refresh</Button>
+            <Button onClick={() => refreshList()} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', borderColor: '#3E5D3E', borderRadius: '20px' }}>Refresh</Button>
 
             <Container style={{ marginTop: '3rem' }}>
                 <Row>
