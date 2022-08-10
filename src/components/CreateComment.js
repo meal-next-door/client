@@ -3,6 +3,7 @@ import axios from "axios";
 import userEvent from "@testing-library/user-event";
 import { AuthContext } from "../context/auth.context"
 import { useParams, useNavigate } from "react-router-dom";
+import Select from 'react-select';
 
 function AddComment() {
     const [title, setTitle] = useState("");
@@ -82,4 +83,4 @@ function AddComment() {
     );
 }
 
-export default AddComment;
+export default Comment;

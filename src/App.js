@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import EditMeal from './pages/EditMeal';
 import CreateMeal from './components/CreateMeal';
+import EditProfile from './pages/EditProfile';
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/meals`)
       .then((response) => {
-        setMeals(response.data);
+        setMeals(response.data.reverse());
         setMealsCopy(response.data);
       })
       .catch((error) => console.log(error));
@@ -58,11 +59,12 @@ function App() {
         <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="profile/:userId" element={<ProfilePage />}></Route>
+        <Route path="edit-profile/:userId" element={<EditProfile/>}></Route>
         <Route path="new-comment/:cookId" element={<CreateComment />}></Route>
         <Route path="cooks" element={<CooksList users={users} />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
         <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} mealsCopy={mealsCopy} refreshMeals={getAllMeals} />}></Route>
-        <Route path="create-meal" element={<CreateMeal setMeals={setMeals} />}></Route>
+        <Route path="create-meal" element={<CreateMeal setMeals={setMeals} getAllMeals={getAllMeals}/>}></Route>
         <Route path="meals/:mealId" element={<MealDetails meals={meals} refreshMeals={getAllMeals} />}></Route>
         <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
       </Routes>

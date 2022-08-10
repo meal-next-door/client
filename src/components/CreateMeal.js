@@ -10,39 +10,38 @@ function AddMeal(props) {
     const [diet, setDiet] = useState("");
     const [cuisine, setCuisine] = useState("");
     const [date, setDate] = useState("");
-
+    const [imageSelected, setImageSelected] = useState("")
+    const { user } = useContext(AuthContext);
     const [isValid, setIsValid] = useState(false);
-
     const navigate = useNavigate();
     const [errorMsg, setErrorMsg] = useState("");
-
-    const { user } = useContext(AuthContext);
     const storedToken = localStorage.getItem("authToken");
+    let imageUrl;
 
-
-    //Funtionality to CREATE a meal
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
-
+        const formData = new FormData();
+        formData.append("file", imageSelected);
+        formData.append("upload_preset", "Meal-next-door");
         const dietArr = diet.map(e => e.value)
 
-        const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
-
-        props.setMeals((prevMeals) => {
-            return [requestBody, ...prevMeals];
-        })
-
         axios
-            .post(
-                `${process.env.REACT_APP_API_URL}/meals`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
-            .then((response) => {
+            .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
+                .then( response => {
+                imageUrl = response.data.url
+                return axios
+                    .post(
+                        `${process.env.REACT_APP_API_URL}/meals`, { title, description, diet: dietArr, cuisine, date, cookId: user?._id, image: imageUrl}, { headers: { Authorization: `Bearer ${storedToken}` } })
+                })
+                .then((response) => {
                 setTitle("");
                 setDescription("");
                 setDiet("");
                 setCuisine("");
                 setDate("");
                 navigate(`/meals`);
+                props.getAllMeals();
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new meal");
@@ -50,11 +49,17 @@ function AddMeal(props) {
             });
     };
 
+    const uploadImage = () => {
+
+        const formData = new FormData()
+        formData.append("file", imageSelected)
+        formData.append("upload_preset", "Meal-next-door")
+    };
 
     const handleSelect = (e) => {
         setDiet(e)
         setIsValid(true)
-    }
+    };
 
     // Select options using React-Select
     const options = [
@@ -67,7 +72,6 @@ function AddMeal(props) {
         { value: 'kosher', label: 'Kosher' },
         { value: 'halal', label: 'Halal' }
     ]
-
 
     return (
         <div className="AddMeal">
@@ -99,9 +103,8 @@ function AddMeal(props) {
                     required
                 />
 
-
                 <Select options={options} onChange={handleSelect} placeholder="Select special diet" isMulti />
-
+                
                 <label>Cuisine:</label>
                 <select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
                     <option value="" disabled selected>Select an option</option>
@@ -128,11 +131,19 @@ function AddMeal(props) {
                     required
                 />
 
-                <input type="file" />
+                <input 
+                    type="file"
+                    onChange={(e) => {
+                        setImageSelected(e.target.files[0])
+                    }}
+                />
 
                 {!isValid && <p>You must fill in all fields to be able to submit</p>}
-                <button type="submit" disabled={!isValid}>Submit</button>
+                <button onSubmit={uploadImage} type="submit" disabled={!isValid}>Submit</button>
+
+                {/* <button onSubmit={uploadImage} type="submit">Submit</button> */}
             </form>
+
         </div>
     );
 }
