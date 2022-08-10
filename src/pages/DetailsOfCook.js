@@ -75,10 +75,13 @@ function CookDetailsPage() {
             <NavLink to="/cooks">
                 <button>Back to the list of cooks</button>
             </NavLink>
-
-            <NavLink to={`/new-comment/${cookId}`}>
-                <button>Add a review for this cook</button>
+            
+            { user?._id !== cook?._id
+            ? <NavLink to={`/new-comment/${cookId}`}>
+            <button>Add a review for this cook</button>
             </NavLink>
+            : <p></p>
+            }
 
         </div>
     );
