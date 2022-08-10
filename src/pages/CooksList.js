@@ -21,11 +21,11 @@ function CooksList(props) {
                                 {cook.role === 'cook'
                                     ? <Card key={cook._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
-                                            <Card.Img src={cook.image} />
-                                            <Card.Title>{cook.username}</Card.Title>
-                                            <p><strong>Location:</strong>{cook.address}</p>
+                                            <Card.Img src={cook.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                            <Card.Title style={{ margin: '1rem' }}>{cook.username}</Card.Title>
+                                            <p><strong>Location: </strong>{cook.address}</p>
                                             <NavLink to={`/cooks/${cook._id}`}>
-                                                <button>Visit Profile</button>
+                                                <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>Visit Profile</button>
                                             </NavLink>
                                         </Card.Body>
                                     </Card>

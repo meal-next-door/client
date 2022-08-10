@@ -38,11 +38,12 @@ function HomePage(props) {
                                 <Col md={6} lg={4}>
                                     <Card key={user._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
-                                            <Card.Img src={user.image} style={{ maxHeight: '10rem' }} />
+                                            <Card.Img src={user.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
                                             <Card.Title>{user?.username}</Card.Title>
                                             <p>{user?.role}</p>
+                                            <p><strong>Location: </strong>{user?.address}</p>
                                             <NavLink to={`/cooks/${user._id}`}>
-                                                <button>Visit Profile</button>
+                                                <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>Visit profile</button>
                                             </NavLink>
                                         </Card.Body>
                                     </Card>
@@ -62,11 +63,14 @@ function HomePage(props) {
                                 <Col md={6} lg={4}>
                                     <Card key={meal._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
-                                            <Card.Img src={meal.image} style={{ maxHeight: '10rem' }} />
-                                            <Card.Title>{meal?.title}</Card.Title>
-                                            <p>{meal.cook?.username}</p>
+                                            <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                            <Card.Title style={{ margin: '1rem' }}>{meal?.title}</Card.Title>
+                                            {meal.diet?.map(e => {
+                                                return <span style={{ margin: '0.3rem', backgroundColor: '#E8F2E8', color: 'black', border: '0.03rem solid', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px' }}>{e} </span>
+                                            })}
+                                            <p style={{ margin: '1rem' }}><strong>Cooked by: </strong>{meal.cook?.username}</p>
                                             <NavLink to={`/meals/${meal._id}`}>
-                                                <button>See details</button>
+                                                <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>See details</button>
                                             </NavLink>
                                         </Card.Body>
                                     </Card>
