@@ -25,7 +25,6 @@ function AddMeal(props) {
         formData.append("file", imageSelected);
         formData.append("upload_preset", "Meal-next-door");
         const dietArr = diet.map(e => e.value)
-        const requestBody = { title, description, diet: dietArr, cuisine, date, cookId: user?._id };
 
         axios
             .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
@@ -42,9 +41,7 @@ function AddMeal(props) {
                 setCuisine("");
                 setDate("");
                 navigate(`/meals`);
-                // props.setMeals((prevMeals) => {
-                //     return [requestBody, ...prevMeals];
-                // });
+                props.getAllMeals();
             })
             .catch((error) => {
                 setErrorMsg("oops, error posting a new meal");

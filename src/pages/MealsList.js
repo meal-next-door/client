@@ -63,7 +63,7 @@ function MealsList(props) {
             <button onClick={() => refreshList()}>Refresh</button>
 
 
-            {props.meals?.map((meal) => {
+            {props?.meals?.map((meal) => {
                 return (
                     <div className="meals card" key={meal._id} >
                         <h3>{meal.title}</h3>

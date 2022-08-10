@@ -37,7 +37,7 @@ function App() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/meals`)
       .then((response) => {
-        setMeals(response.data);
+        setMeals(response.data.reverse());
         setMealsCopy(response.data);
       })
       .catch((error) => console.log(error));
@@ -64,7 +64,7 @@ function App() {
         <Route path="cooks" element={<CooksList users={users} />}></Route>
         <Route path="cooks/:cookId" element={<CookDetailsPage />}></Route>
         <Route path="meals" element={<MealsList setMeals={setMeals} meals={meals} mealsCopy={mealsCopy} refreshMeals={getAllMeals} />}></Route>
-        <Route path="create-meal" element={<CreateMeal setMeals={setMeals} />}></Route>
+        <Route path="create-meal" element={<CreateMeal setMeals={setMeals} getAllMeals={getAllMeals}/>}></Route>
         <Route path="meals/:mealId" element={<MealDetails meals={meals} refreshMeals={getAllMeals} />}></Route>
         <Route path="edit-meal/:mealId" element={<EditMeal />}></Route>
       </Routes>
