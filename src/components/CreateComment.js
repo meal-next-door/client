@@ -83,4 +83,4 @@ function AddComment() {
     );
 }
 
-export default Comment;
+export default AddComment;

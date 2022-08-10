@@ -143,49 +143,51 @@ function MealDetails(props) {
                 </p>
             }
 
+            {user != null
+                ? <Container style={{ marginTop: '2.5rem' }}>
+                    <h3>Contact</h3>
 
-            <Container style={{ marginTop: '2.5rem' }}>
-                <h3>Contact</h3>
+                    {!sent ? (
+                        <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
+                            <Form.Group style={{ marginTop: '1rem' }}>
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></Form.Control>
+                            </Form.Group>
 
-                {!sent ? (
-                    <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
-                        <Form.Group style={{ marginTop: '1rem' }}>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></Form.Control>
-                        </Form.Group>
+                            <Form.Group style={{ marginTop: '1rem' }}>
+                                <Form.Label>Subject</Form.Label>
+                                <Form.Control type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required></Form.Control>
+                            </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1rem' }}>
-                            <Form.Label>Subject</Form.Label>
-                            <Form.Control type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required></Form.Control>
-                        </Form.Group>
+                            <Form.Group style={{ marginTop: '1rem' }}>
+                                <Form.Label>Message</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    required
+                                    as="textarea"
+                                    placeholder="Leave a comment here"
+                                    style={{ height: '100px' }}>
+                                </Form.Control>
+                            </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1rem' }}>
-                            <Form.Label>Message</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="message"
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
-                                required
-                                as="textarea"
-                                placeholder="Leave a comment here"
-                                style={{ height: '100px' }}>
-                            </Form.Control>
-                        </Form.Group>
+                            <button type="submit" style={{ marginTop: '2rem' }}>Send Email</button>
+                        </Form>
+                    ) : (
+                        <>
+                            <h5>Your email has been successfully sent!</h5>
+                            <h6>{meal.cook?.username} will soon confirm your order</h6>
+                            <NavLink to="/meals"><button>Back to meals</button></NavLink>
+                        </>
+                    )}
+
+                </Container>
+                : <p></p>
+            }
 
 
-
-                        <button type="submit" style={{ marginTop: '2rem' }}>Send Email</button>
-                    </Form>
-                ) : (
-                    <>
-                        <h5>Your email has been successfully sent!</h5>
-                        <h6>{meal.cook?.username} will soon confirm your order</h6>
-                        <NavLink to="/meals"><button>Back to meals</button></NavLink>
-                    </>
-                )}
-
-            </Container>
 
         </>
     );

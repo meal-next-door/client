@@ -38,7 +38,6 @@ function SignupPage() {
 
         <Container >
             <Form onSubmit={handleSubmit}>
-
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
                         <Form.Group className="mb-3" controlId="formBasicUsername">
@@ -88,6 +87,9 @@ function SignupPage() {
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" label="Check me out" />
                         </Form.Group>
+                        <div>
+                            {errorMessage}
+                        </div>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
@@ -97,7 +99,6 @@ function SignupPage() {
                 <p>Already have account?</p>
                 <NavLink to={"/login"}> Login</NavLink>
             </Form>
-
         </Container>
     );
 }
