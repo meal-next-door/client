@@ -3,6 +3,7 @@ import axios from "axios";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Image } from "cloudinary-react";
+import { Container, Col, Row, Form } from "react-bootstrap";
 
 
 function MealDetails(props) {
@@ -86,37 +87,55 @@ function MealDetails(props) {
 
     return (
         <>
-            <div className="MealsList">
-                {meal &&
-                    <div className="meal card" key={meal._id} >
-                        <h3>{meal.title}</h3>
-                        {meal.image 
-                        ? <img src={meal.image} />
+
+            {meal &&
+                <div className="meal card" key={meal._id} >
+
+                    {meal.image
+                        ? <img src={meal.image} style={{ width: '100%', maxHeight: '60vh', backgroundSize: 'cover', backgroundPosition: 'center', objectFit: 'cover' }} />
                         : <p>Noimages for this meal</p>
-                        }
-                        <p>Diet: {meal.diet}</p>
-                        <p>Cuisine: {meal.cuisine}</p>
-                        <p>Preparation date: {meal.date}</p>
-                        <p>Cooked by: {meal.cook?.username}</p>
+                    }
 
-                        <NavLink to={`/cooks/${meal.cook?._id}`} >
-                            <button>View {meal.cook?.username}'s profile</button>
-                        </NavLink>
-
-                        {user?._id === meal.cook?._id
-                            ? <>
-                                <NavLink to={`/edit-meal/${mealId}`} >
-                                    <button>Edit</button>
+                    <Container>
+                        <Row>
+                            <Col></Col>
+                            <Col style={{ marginTop: '1.5rem' }}>
+                                <NavLink to={`/cooks/${meal.cook?._id}`} >
+                                    <button>View {meal.cook?.username}'s profile</button>
                                 </NavLink>
-                                <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
-                            </>
-                            : <p> </p>
-                        }
 
-                        <p>Description: {meal.description}</p>
-                    </div>
-                }
-            </div>
+                                {user?._id === meal.cook?._id
+                                    ? <>
+                                        <NavLink to={`/edit-meal/${mealId}`} >
+                                            <button>Edit</button>
+                                        </NavLink>
+                                        <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
+                                    </>
+                                    : <p> </p>
+                                }
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col>
+                                <h3 style={{ margin: '2rem' }}>{meal.title}</h3>
+
+                                {meal.diet?.map(e => {
+                                    return <span style={{ margin: '0.4rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px', padding: '10px 20px' }}>{e}</span>
+                                })}
+
+                                <p style={{ marginTop: '2rem' }}><strong>Cuisine:</strong>  {meal.cuisine}</p>
+                                <p><strong>Preparation date:</strong>  {meal.date}</p>
+                                <p><strong>Cooked by:</strong> {meal.cook?.username}</p>
+
+                                <p style={{ margin: '2rem' }}>{meal.description}</p>
+                            </Col>
+                        </Row>
+                    </Container>
+
+                </div>
+            }
+
 
             {errorMsg &&
                 <p className="error">
@@ -124,31 +143,49 @@ function MealDetails(props) {
                 </p>
             }
 
-            <div className="nodemailer">
+
+            <Container style={{ marginTop: '2.5rem' }}>
                 <h3>Contact</h3>
 
                 {!sent ? (
-                    <form onSubmit={handleSubmit}>
-                        <label>Email</label>
-                        <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
+                        <Form.Group style={{ marginTop: '1rem' }}>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></Form.Control>
+                        </Form.Group>
 
-                        <label>Subject</label>
-                        <input type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
+                        <Form.Group style={{ marginTop: '1rem' }}>
+                            <Form.Label>Subject</Form.Label>
+                            <Form.Control type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required></Form.Control>
+                        </Form.Group>
 
-                        <label>Message</label>
-                        <textarea type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)} required />
+                        <Form.Group style={{ marginTop: '1rem' }}>
+                            <Form.Label>Message</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                required
+                                as="textarea"
+                                placeholder="Leave a comment here"
+                                style={{ height: '100px' }}>
+                            </Form.Control>
+                        </Form.Group>
 
-                        <button type="submit">Send Email</button>
-                    </form>
+
+
+                        <button type="submit" style={{ marginTop: '2rem' }}>Send Email</button>
+                    </Form>
                 ) : (
                     <>
-                        <h4>Your email has been successfully sent!</h4>
-                        <h5>{meal.cook?.username} will soon confirm your order</h5>
+                        <h5>Your email has been successfully sent!</h5>
+                        <h6>{meal.cook?.username} will soon confirm your order</h6>
                         <NavLink to="/meals"><button>Back to meals</button></NavLink>
                     </>
                 )}
 
-            </div>
+            </Container>
 
         </>
     );

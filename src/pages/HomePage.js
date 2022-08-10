@@ -37,7 +37,7 @@ function HomePage(props) {
                                 <Col md={6} lg={4}>
                                     <Card key={user._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
-                                            <Card.Img src={user.image} />
+                                            <Card.Img src={user.image} style={{ maxHeight: '10rem' }} />
                                             <Card.Title>{user?.username}</Card.Title>
                                             <p>{user?.role}</p>
                                             <NavLink to={`/cooks/${user._id}`}>
@@ -64,7 +64,7 @@ function HomePage(props) {
                                 <Col md={6} lg={4}>
                                     <Card key={meal._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
-                                            <Card.Img src={meal.image} />
+                                            <Card.Img src={meal.image} style={{ maxHeight: '10rem' }} />
                                             <Card.Title>{meal?.title}</Card.Title>
                                             <p>{meal.cook?.username}</p>
                                             <NavLink to={`/meals/${meal._id}`}>
