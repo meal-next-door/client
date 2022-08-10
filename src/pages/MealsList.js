@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"
 import { useState } from "react";
+import { Container, Row, Col, Card, Form, FormLabel, FormControl, Button } from "react-bootstrap";
 
 function MealsList(props) {
 
@@ -41,46 +42,61 @@ function MealsList(props) {
 
             {user?.role === "cook"
                 ? <NavLink to="/create-meal">
-                    <button>Add your own meal</button>
+                    <Button style={{ margin: '3rem', backgroundColor: '#3E5D3E', border: 'none' }}>Add your own meal</Button>
                 </NavLink>
 
                 : <p> </p>
             }
 
-            <form>
-                <label>Search</label>
-                <input type="text" value={search} onChange={(e) => handleSearch(e.target.value)} />
-            </form>
-
-            <button onClick={() => handleDiet('vegetarian')}>Vegetarian</button>
-            <button onClick={() => handleDiet('vegan')}>Vegan</button>
-            <button onClick={() => handleDiet('gluten-free')}>Gluten-free</button>
-            <button onClick={() => handleDiet('dairy-free')}>Dairy-free</button>
-            <button onClick={() => handleDiet('allergens-free')}>Allergens-free</button>
-            <button onClick={() => handleDiet('sugar-free')}>Sugar-free</button>
-            <button onClick={() => handleDiet('kosher')}>Kosher</button>
-            <button onClick={() => handleDiet('halal')}>Halal</button>
-            <button onClick={() => refreshList()}>Refresh</button>
+            <Container>
+                <Form style={{ margin: '3rem', textAlign: 'left' }}>
+                    <Form.Group>
+                        <FormLabel style={{ fontSize: '1.5rem' }}>Search</FormLabel>
+                        <FormControl type="text" value={search} onChange={(e) => handleSearch(e.target.value)} ></FormControl>
+                    </Form.Group>
+                </Form>
+            </Container>
 
 
-            {props?.meals?.map((meal) => {
-                return (
-                    <div className="meals card" key={meal._id} >
-                        <h3>{meal.title}</h3>
+            <Button onClick={() => handleDiet('vegetarian')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Vegetarian</Button>
+            <Button onClick={() => handleDiet('vegan')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Vegan</Button>
+            <Button onClick={() => handleDiet('gluten-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Gluten-free</Button>
+            <Button onClick={() => handleDiet('dairy-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Dairy-free</Button>
+            <Button onClick={() => handleDiet('allergens-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Allergens-free</Button>
+            <Button onClick={() => handleDiet('sugar-free')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Sugar-free</Button>
+            <Button onClick={() => handleDiet('kosher')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Kosher</Button>
+            <Button onClick={() => handleDiet('halal')} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Halal</Button>
+            <Button onClick={() => refreshList()} style={{ margin: '0.5rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px' }}>Refresh</Button>
 
-                        {meal.diet?.map(e => {
-                            return <span>{e} </span>
-                        })}
+            <Container style={{ marginTop: '3rem' }}>
+                <Row>
 
-                        <p>Cook: {meal.cook?.username}</p>
-                        <p>{meal.description}</p>
+                    {props.meals?.map((meal) => {
+                        return (
 
-                        <NavLink to={`/meals/${meal._id}`}>
-                            <button>View details</button>
-                        </NavLink>
-                    </div>
-                );
-            })}
+                            <Col md={6} lg={4}>
+                                <Card key={meal._id} style={{ margin: '0.7rem' }} >
+                                    <Card.Body>
+                                        <Card.Img src={meal.image} />
+                                        <Card.Title>{meal.title}</Card.Title>
+                                        {meal.diet?.map(e => {
+                                            return <span>{e} </span>
+                                        })}
+                                        <p><strong>Cooked by:</strong> {meal.cook?.username}</p>
+                                        <p>{meal.description}</p>
+
+                                        <NavLink to={`/meals/${meal._id}`}>
+                                            <button>View details</button>
+                                        </NavLink>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+
+                        );
+                    })}
+
+                </Row>
+            </Container>
 
         </div>
     );

@@ -1,3 +1,4 @@
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 
@@ -10,20 +11,30 @@ function CooksList(props) {
 
     return (
         <div className="CooksList">
+            <h2 style={{ marginTop: '3rem' }}>Meet our community of cooks</h2>
 
-            {cooks?.map((cook) => {
-                return (
-                    cook.role === 'cook'
-                        ? <div className="cooks card" key={cook._id} >
-                            <h3>{cook.username}</h3>
-                            <p>{cook.address}</p>
-                            <NavLink to={`/cooks/${cook._id}`}>
-                                <button>Visit Profile</button>
-                            </NavLink>
-                        </div>
-                        : <p> </p>
-                );
-            })}
+            <Container style={{ marginTop: '3rem' }}>
+                <Row>
+                    {cooks?.map((cook) => {
+                        return (
+                            <Col md={6} lg={4}>
+                                {cook.role === 'cook'
+                                    ? <Card key={cook._id} style={{ margin: '0.7rem' }}>
+                                        <Card.Body>
+                                            <Card.Img src={cook.image} />
+                                            <Card.Title>{cook.username}</Card.Title>
+                                            <p><strong>Location:</strong>{cook.address}</p>
+                                            <NavLink to={`/cooks/${cook._id}`}>
+                                                <button>Visit Profile</button>
+                                            </NavLink>
+                                        </Card.Body>
+                                    </Card>
+                                    : <p> </p>}
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </Container>
 
         </div>
     );

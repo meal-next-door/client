@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
+import NavBar from './components/Navbar';
 import CreateComment from './components/CreateComment';
 import Footer from './components/Footer';
 import CooksList from './pages/CooksList';
@@ -52,7 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar refreshMeals={getAllMeals} />
+      <NavBar refreshMeals={getAllMeals} />
 
       <Routes>
         <Route path="/" element={<HomePage users={users} meals={meals} />} />
