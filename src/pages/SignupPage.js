@@ -87,6 +87,9 @@ function SignupPage() {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
+            <div>
+                {errorMessage}
+            </div>
             <Button variant="primary" type="submit">
                 Submit
             </Button>

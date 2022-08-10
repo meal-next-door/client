@@ -10,6 +10,8 @@ function CookDetailsPage() {
     const { cookId } = useParams();
     let navigate = useNavigate();
 
+    console.log(user)
+
     const storedToken = localStorage.getItem("authToken");
 
 
@@ -67,16 +69,18 @@ function CookDetailsPage() {
                 ))
                 : <p>No reviews yet for this cook</p>}
 
-
-            <NavLink to={`/profile/${user?._id}`} >
+            { user != null
+            ? <NavLink to={`/profile/${user?._id}`} >
                 <button onClick={() => { addFavorite(cookId) }}>Add as a favorite</button>
             </NavLink>
+            : <p></p>
+            }
 
             <NavLink to="/cooks">
                 <button>Back to the list of cooks</button>
             </NavLink>
             
-            { user?._id !== cook?._id
+            { user?._id !== cook?._id && user != null
             ? <NavLink to={`/new-comment/${cookId}`}>
             <button>Add a review for this cook</button>
             </NavLink>
