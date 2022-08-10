@@ -69,7 +69,7 @@ function MealsList(props) {
                     <div className="meals card" key={meal._id} >
                         <h3>{meal.title}</h3>
 
-                        {meal.diet.map(e => {
+                        {meal.diet?.map(e => {
                             return <span>{e} </span>
                         })}
 
