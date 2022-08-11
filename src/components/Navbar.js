@@ -44,6 +44,7 @@ function NavBar(props) {
                             }}>
                             Cooks
                         </NavLink>
+
                         <NavLink
                             to="/meals"
                             onClick={() => refreshList()}
@@ -90,7 +91,7 @@ function NavBar(props) {
                                         margin: '0 0.5rem',
                                         textTransform: 'uppercase',
                                         letterSpacing: '2px',
-                                        fontSize: '16px',
+                                        fontSize: '16px'
                                     }}>
                                     Logout
                                 </Button>
@@ -103,7 +104,8 @@ function NavBar(props) {
                                     to="/signup"
                                     style={{
                                         color: '#FFFFFF',
-                                        padding: '0 1rem'
+                                        padding: '0 1rem',
+                                        textDecoration: 'none'
                                     }}>
                                     Sign Up
                                 </NavLink>
