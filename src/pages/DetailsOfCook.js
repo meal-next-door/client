@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth.context";
 import { BsChatLeftText } from 'react-icons/bs';
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { GrFavorite } from 'react-icons/gr';
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Button } from "react-bootstrap";
 
 
 function CookDetailsPage() {
@@ -19,7 +19,7 @@ function CookDetailsPage() {
     const storedToken = localStorage.getItem("authToken");
 
 
-    // Functionality to READ details of one cook
+    // READ details of one cook
     const getCook = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/users/${cookId}`)
@@ -34,7 +34,7 @@ function CookDetailsPage() {
     }, []);
 
 
-    // Funtionality to ADD FAVORITES 
+    // ADD FAVORITES 
     const requestBody = { favorites: cookId }
 
     const addFavorite = () => {
@@ -70,27 +70,52 @@ function CookDetailsPage() {
                     <Col>
                         {user != null
                             ? <NavLink to={`/profile/${user?._id}`} >
-                                <button onClick={() => { addFavorite(cookId) }} style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><GrFavorite /></button>
+                                <Button
+                                    onClick={() => { addFavorite(cookId) }}
+                                    style={{
+                                        padding: '0.2rem 1rem',
+                                        backgroundColor: '#E8F2E8',
+                                        borderColor: 'black',
+                                        color: 'black'
+                                    }}>
+                                    <GrFavorite />
+                                </Button>
                             </NavLink>
                             : <p></p>
                         }
 
                         {user?._id !== cook?._id && user != null
                             ? <NavLink to={`/new-comment/${cookId}`}>
-                                <button style={{ padding: '0.2rem 1rem', margin: '0.5rem', borderRadius: '10px' }}><BsChatLeftText /></button>
+                                <Button
+                                    style={{
+                                        padding: '0.2rem 1rem',
+                                        margin: '0.5rem',
+                                        backgroundColor: '#E8F2E8',
+                                        borderColor: 'black',
+                                        color: 'black'
+                                    }}>
+                                    <BsChatLeftText />
+                                </Button>
                             </NavLink>
                             : <p></p>
                         }
 
                         <NavLink to="/cooks">
-                            <button style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><RiArrowGoBackLine /></button>
+                            <Button
+                                style={{
+                                    padding: '0.2rem 1rem',
+                                    backgroundColor: '#E8F2E8',
+                                    borderColor: 'black',
+                                    color: 'black'
+                                }}>
+                                <RiArrowGoBackLine />
+                            </Button>
                         </NavLink>
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
-
                         <h3
                             style={{
                                 margin: '3rem',

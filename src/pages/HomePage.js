@@ -51,18 +51,18 @@ function HomePage(props) {
                                         <p>{user?.role}</p>
                                         <p><strong>Location: </strong>{user?.address}</p>
                                         <NavLink to={`/cooks/${user._id}`}>
-                                            <button
+                                            <Button
                                                 style={{
                                                     backgroundColor: '#3E5D3E',
                                                     color: '#fff',
-                                                    borderRadius: '15px',
+                                                    border: 'none',
                                                     padding: '5px 20px',
                                                     textTransform: 'uppercase',
                                                     letterSpacing: '2px',
                                                     fontSize: '14px'
                                                 }}>
                                                 Visit profile
-                                            </button>
+                                            </Button>
                                         </NavLink>
                                     </Card.Body>
                                 </Card>
@@ -113,18 +113,18 @@ function HomePage(props) {
                                         <p style={{ margin: '1rem' }}><strong>Cooked by: </strong>{meal.cook?.username}</p>
 
                                         <NavLink to={`/meals/${meal._id}`}>
-                                            <button
+                                            <Button
                                                 style={{
                                                     backgroundColor: '#3E5D3E',
                                                     color: '#fff',
-                                                    borderRadius: '15px',
+                                                    border: 'none',
                                                     padding: '5px 20px',
                                                     textTransform: 'uppercase',
                                                     letterSpacing: '2px',
                                                     fontSize: '14px'
                                                 }}>
                                                 See details
-                                            </button>
+                                            </Button>
                                         </NavLink>
 
                                     </Card.Body>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Image } from "cloudinary-react";
-import { Container, Col, Row, Form } from "react-bootstrap";
+import { Container, Col, Row, Form, Button } from "react-bootstrap";
 import { FaTrashAlt } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
@@ -23,7 +23,7 @@ function MealDetails(props) {
     let navigate = useNavigate();
 
 
-    // Functionality to READ the details of a meal
+    // READ details of a meal
     const getMeal = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
@@ -36,7 +36,7 @@ function MealDetails(props) {
     }, []);
 
 
-    // Functionality to DELETE a meal
+    // DELETE a meal
     const deleteMeal = () => {
         axios
             .delete(`${process.env.REACT_APP_API_URL}/meals/${mealId}`)
@@ -52,7 +52,7 @@ function MealDetails(props) {
     }
 
 
-    // Functionality to ADD FAVORITES
+    // ADD FAVORITES
     const addFavorite = () => {
         axios
             .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}`)
@@ -65,7 +65,7 @@ function MealDetails(props) {
     }
 
 
-    // Functionality to SEND EMAIL to the cook
+    // SEND EMAIL to the cook
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
@@ -103,15 +103,40 @@ function MealDetails(props) {
                             <Col md={4} lg={6}></Col>
                             <Col md={8} lg={6} style={{ marginTop: '1.5rem' }}>
                                 <NavLink to={`/cooks/${meal.cook?._id}`} >
-                                    <button style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><CgProfile /> {meal.cook?.username}'s</button>
+                                    <Button
+                                        style={{
+                                            padding: '0.2rem 1rem',
+                                            backgroundColor: '#E8F2E8',
+                                            borderColor: 'black',
+                                            color: 'black'
+                                        }}>
+                                        <CgProfile style={{ color: 'black' }} />
+                                        {meal.cook?.username}
+                                    </Button>
                                 </NavLink>
 
                                 {user?._id === meal.cook?._id
                                     ? <>
                                         <NavLink to={`/edit-meal/${mealId}`} >
-                                            <button style={{ padding: '0.2rem 1rem', margin: '0.5rem', borderRadius: '10px' }}><FiEdit /></button>
+                                            <Button
+                                                style={{
+                                                    padding: '0.2rem 1rem',
+                                                    margin: '0.5rem',
+                                                    backgroundColor: '#E8F2E8',
+                                                    borderColor: 'black'
+                                                }}>
+                                                <FiEdit style={{ color: 'black' }} />
+                                            </Button>
                                         </NavLink>
-                                        <button onClick={() => { deleteMeal(mealId) }} style={{ padding: '0.2rem 1rem', borderRadius: '10px', borderColor: 'red' }}><FaTrashAlt style={{ color: 'red' }} /></button>
+                                        <Button
+                                            onClick={() => { deleteMeal(mealId) }}
+                                            style={{
+                                                padding: '0.2rem 1rem',
+                                                backgroundColor: '#E8F2E8',
+                                                borderColor: 'red'
+                                            }}>
+                                            <FaTrashAlt style={{ color: 'red' }} />
+                                        </Button>
                                     </>
                                     : <p> </p>
                                 }
@@ -123,7 +148,17 @@ function MealDetails(props) {
                                 <h3 style={{ margin: '2rem' }}>{meal.title}</h3>
 
                                 {meal.diet?.map(e => {
-                                    return <span style={{ margin: '0.4rem', backgroundColor: '#E8F2E8', color: 'black', border: 'none', borderRadius: '20px', padding: '10px 20px' }}>{e}</span>
+                                    return <span
+                                        style={{
+                                            margin: '0.4rem',
+                                            backgroundColor: '#E8F2E8',
+                                            color: 'black',
+                                            border: 'none',
+                                            borderRadius: '20px',
+                                            padding: '10px 20px'
+                                        }}>
+                                        {e}
+                                    </span>
                                 })}
 
                                 <p style={{ marginTop: '2rem' }}><strong>Cuisine:</strong>  {meal.cuisine}</p>
@@ -176,12 +211,12 @@ function MealDetails(props) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <button
+                            <Button
                                 type="submit"
                                 style={{
                                     backgroundColor: '#3E5D3E',
                                     color: '#fff',
-                                    borderRadius: '15px',
+                                    border: 'none',
                                     padding: '5px 20px',
                                     marginTop: '2rem',
                                     textTransform: 'uppercase',
@@ -189,7 +224,7 @@ function MealDetails(props) {
                                     fontSize: '14px'
                                 }}>
                                 Send message
-                            </button>
+                            </Button>
 
                         </Form>
                     ) : (
