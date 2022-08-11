@@ -89,11 +89,15 @@ function MealsList(props) {
                                     <Card.Body>
                                         <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
                                         <Card.Title style={{ margin: '1rem' }}>{meal.title}</Card.Title>
-
+                                        <div display="flex" alignItems="flex-start">
                                         {meal.diet?.map(e => {
-                                            return <span style={{ margin: '0.3rem', backgroundColor: '#E8F2E8', color: 'black', border: '0.03rem solid', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px' }}>{e} </span>
+                                            return (
+                                                
+                                            <span style={{ margin: '0.3rem', backgroundColor: '#E8F2E8', color: 'black', border: '0.03rem solid', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px', display: 'inline-block'}}>{e} </span>
+                                            
+                                            )
                                         })}
-
+                                        </div>
                                         <p style={{ margin: '1rem' }}><strong>Cooked by:</strong> {meal.cook?.username}</p>
 
                                         <NavLink to={`/meals/${meal._id}`}>

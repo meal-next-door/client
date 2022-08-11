@@ -6,6 +6,7 @@ import { BsChatLeftText } from 'react-icons/bs';
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { GrFavorite } from 'react-icons/gr';
 import { Container, Col, Row, Button } from "react-bootstrap";
+import { MDBCard, MDBCardText, MDBCardBody, MDBCardTitle, MDBCardFooter} from 'mdb-react-ui-kit';
 
 
 function CookDetailsPage() {
@@ -54,7 +55,7 @@ function CookDetailsPage() {
     return (
         <div className="CookDetails">
 
-            <Container>
+            <Container style={{marginTop:'1em'}}>
                 <Row>
                     <Col>
                         {cook && (
@@ -129,11 +130,16 @@ function CookDetailsPage() {
 
                         {cook?.comments.length > 0
                             ? cook.comments?.map((comment) => (
-                                <div style={{ margin: '1rem', border: '1px solid' }}>
-                                    <h5 style={{ margin: '1rem' }}>{comment.title}</h5>
-                                    <p>{comment.description}</p>
-                                    <p><strong>Author: </strong> {comment.author.username}</p>
-                                </div>
+                                <MDBCard style={{margin:'1em'}}>
+                                    <MDBCardBody>
+                                        <MDBCardTitle>{comment.title}</MDBCardTitle>
+                                        <MDBCardText>{comment.description}</MDBCardText>
+                                        <NavLink to={`/cooks/${comment.author._id}`}>
+                                            <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>View profile</Button>
+                                        </NavLink>
+                                    </MDBCardBody>
+                                    <MDBCardFooter className='text-muted'>Author: {comment.author.username}</MDBCardFooter>
+                                </MDBCard>
                             ))
                             : <p>No reviews yet for this cook</p>}
                     </Col>

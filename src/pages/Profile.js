@@ -70,7 +70,7 @@ function ProfilePage() {
                     <MDBCol className="mb-2">
                       {user?.comments?.map((comment) => {
                         return (
-                          <MDBCard>
+                          <MDBCard style={{margin:'1em'}}>
                             <MDBCardBody>
                               <MDBCardTitle>{comment.title}</MDBCardTitle>
                               <MDBCardText>{comment.description}</MDBCardText>
@@ -78,7 +78,7 @@ function ProfilePage() {
                                 <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:'none' }}>View profile</Button>
                               </NavLink>
                             </MDBCardBody>
-                            <MDBCardFooter className='text-muted'>{comment.author.username}</MDBCardFooter>
+                            <MDBCardFooter className='text-muted'>Author: {comment.author.username}</MDBCardFooter>
                           </MDBCard>
                         )
                       })}
@@ -96,7 +96,7 @@ function ProfilePage() {
                     <MDBCol className="mb-2">
                       {user?.favorites?.map((favorite) => {
                         return (
-                          <MDBCard>
+                          <MDBCard style={{margin:'1em'}}>
                             <MDBCardBody>
                               <MDBCardTitle>{favorite.username}</MDBCardTitle>
                               <MDBCardText>{favorite.address}</MDBCardText>
