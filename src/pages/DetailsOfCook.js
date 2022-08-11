@@ -6,7 +6,7 @@ import { BsChatLeftText } from 'react-icons/bs';
 import { RiArrowGoBackLine } from 'react-icons/ri';
 import { GrFavorite } from 'react-icons/gr';
 import { Container, Col, Row, Button } from "react-bootstrap";
-import { MDBCard, MDBCardText, MDBCardBody, MDBCardTitle, MDBCardFooter} from 'mdb-react-ui-kit';
+import { MDBCard, MDBCardText, MDBCardBody, MDBCardTitle, MDBCardFooter } from 'mdb-react-ui-kit';
 
 
 function CookDetailsPage() {
@@ -55,7 +55,7 @@ function CookDetailsPage() {
     return (
         <div className="CookDetails">
 
-            <Container style={{marginTop:'1em'}}>
+            <Container style={{ marginTop: '1em' }}>
                 <Row>
                     <Col>
                         {cook && (
@@ -130,7 +130,7 @@ function CookDetailsPage() {
 
                         {cook?.comments.length > 0
                             ? cook.comments?.map((comment) => (
-                                <MDBCard style={{margin:'1em'}}>
+                                <MDBCard style={{ margin: '1em' }}>
                                     <MDBCardBody>
                                         <MDBCardTitle>{comment.title}</MDBCardTitle>
                                         <MDBCardText>{comment.description}</MDBCardText>

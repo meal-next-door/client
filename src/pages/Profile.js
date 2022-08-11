@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
 import React from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBCardTitle, MDBCardFooter} from 'mdb-react-ui-kit';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBCardTitle, MDBCardFooter } from 'mdb-react-ui-kit';
 import Button from 'react-bootstrap/Button';
 
 
@@ -43,12 +43,12 @@ function ProfilePage() {
               </div>
               <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                 <div className="d-flex justify-content-end text-center py-1">
-                  { user?.role === "cook"
-                  ? <div>
-                  <MDBCardText className="mb-1 h5">{user?.comments?.length}</MDBCardText>
-                  <MDBCardText className="small text-muted mb-0">Reviews</MDBCardText>
-                </div>
-                :<p></p>
+                  {user?.role === "cook"
+                    ? <div>
+                      <MDBCardText className="mb-1 h5">{user?.comments?.length}</MDBCardText>
+                      <MDBCardText className="small text-muted mb-0">Reviews</MDBCardText>
+                    </div>
+                    : <p></p>
                   }
                   <div className="px-3">
                     <MDBCardText className="mb-1 h5">{user?.favorites?.length}</MDBCardText>
@@ -58,10 +58,10 @@ function ProfilePage() {
               </div>
               <div display="flex">
                 <NavLink to={`/edit-profile/${userId}`}>
-                  <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:'none' }}>Edit profile</Button>
+                  <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>Edit profile</Button>
                 </NavLink>
               </div>
-              {user?.comments?.length > 0 
+              {user?.comments?.length > 0
                 ? <MDBCardBody className="text-black p-4">
                   <div className="d-flex justify-content-between align-items-center mb-4">
                     <MDBCardText className="lead fw-normal mb-0">Reviews</MDBCardText>
@@ -70,12 +70,12 @@ function ProfilePage() {
                     <MDBCol className="mb-2">
                       {user?.comments?.map((comment) => {
                         return (
-                          <MDBCard style={{margin:'1em'}}>
+                          <MDBCard style={{ margin: '1em' }}>
                             <MDBCardBody>
                               <MDBCardTitle>{comment.title}</MDBCardTitle>
                               <MDBCardText>{comment.description}</MDBCardText>
                               <NavLink to={`/cooks/${comment.author._id}`}>
-                                <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:'none' }}>View profile</Button>
+                                <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>View profile</Button>
                               </NavLink>
                             </MDBCardBody>
                             <MDBCardFooter className='text-muted'>Author: {comment.author.username}</MDBCardFooter>
@@ -96,12 +96,12 @@ function ProfilePage() {
                     <MDBCol className="mb-2">
                       {user?.favorites?.map((favorite) => {
                         return (
-                          <MDBCard style={{margin:'1em'}}>
+                          <MDBCard style={{ margin: '1em' }}>
                             <MDBCardBody>
                               <MDBCardTitle>{favorite.username}</MDBCardTitle>
                               <MDBCardText>{favorite.address}</MDBCardText>
                               <NavLink to={`/cooks/${favorite._id}`}>
-                                <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:'none'  }}>View profile</Button>
+                                <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>View profile</Button>
                               </NavLink>
                             </MDBCardBody>
                           </MDBCard>

@@ -92,10 +92,10 @@ function EditMeal() {
             <Form onSubmit={handleFormSubmit}>
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group  style={{textAlign:"left", fontWeight:"bold"}}className="mb-3" controlId="formBasicTitle">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control  type="text" placeholder="Change the Title" value={title}
-                                onChange={(e) => setTitle(e.target.value)} required/>
+                            <Form.Control type="text" placeholder="Change the Title" value={title}
+                                onChange={(e) => setTitle(e.target.value)} required />
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
@@ -104,48 +104,48 @@ function EditMeal() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicDescription">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicDescription">
                             <Form.Label>Description</Form.Label>
                             <Form.Control type="text" placeholder="Description" value={description}
-                                onChange={(e) => setDescription(e.target.value)} as="textarea" style={{ height: '100px' }} required/>
+                                onChange={(e) => setDescription(e.target.value)} as="textarea" style={{ height: '100px' }} required />
                         </Form.Group>
                     </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                    <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicDescription">
-                        <label>Select the cuisine</label>
-                        <Form.Select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
-                            <option value="chinese">Chinese</option>
-                            <option value="french">French</option>
-                            <option value="greek">Greek</option>
-                            <option value="indian">Indian</option>
-                            <option value="italian">Italian</option>
-                            <option value="japanese">Japanese</option>
-                            <option value="lebanese">Lebanese</option>
-                            <option value="mediterranean">Mediterranean</option>
-                            <option value="mexican">Mexican</option>
-                            <option value="peruvian">Peruvian</option>
-                            <option value="spanish">Spanish</option>
-                            <option value="thai">Thai</option>
-                        </Form.Select>
-                    </Form.Group>
-                    </Col>
-                </Row>
-
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                    <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicDescription">
-                        <label>Select the diet</label>
-                        <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti required />
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicDescription">
+                            <label>Select the cuisine</label>
+                            <Form.Select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
+                                <option value="chinese">Chinese</option>
+                                <option value="french">French</option>
+                                <option value="greek">Greek</option>
+                                <option value="indian">Indian</option>
+                                <option value="italian">Italian</option>
+                                <option value="japanese">Japanese</option>
+                                <option value="lebanese">Lebanese</option>
+                                <option value="mediterranean">Mediterranean</option>
+                                <option value="mexican">Mexican</option>
+                                <option value="peruvian">Peruvian</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="thai">Thai</option>
+                            </Form.Select>
                         </Form.Group>
                     </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicDescription">
+                            <label>Select the diet</label>
+                            <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti required />
+                        </Form.Group>
+                    </Col>
+                </Row>
+
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3">
                             <Form.Label>Cook</Form.Label>
                             <Form.Control placeholder="Disabled input" disabled type="text" name="cook" value={cook} onChange={(e) => setCook(e.target.value)} />
                         </Form.Group>
@@ -154,7 +154,7 @@ function EditMeal() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} controlId="dob">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} controlId="dob">
                             <Form.Label>When did you cook this meal</Form.Label>
                             <Form.Control type="date" name="date" placeholder="Preparation date" value={date} onChange={(e) => setDate(e.target.value)} required />
                         </Form.Group>
@@ -163,7 +163,7 @@ function EditMeal() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} controlId="formFile" className="mb-3">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} controlId="formFile" className="mb-3">
                             <Form.Label>Your meal's picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
@@ -173,13 +173,13 @@ function EditMeal() {
                 </Row>
 
                 {!isValid &&
-                            <p style={{ marginTop: '3rem', backgroundColor: '#E8F2E8' }}>
-                                You must fill in all fields to be able to submit
-                            </p>}
+                    <p style={{ marginTop: '3rem', backgroundColor: '#E8F2E8' }}>
+                        You must fill in all fields to be able to submit
+                    </p>}
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Button  disabled={!isValid} type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
+                        <Button disabled={!isValid} type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
                             Save edits
                         </Button>
                     </Col>

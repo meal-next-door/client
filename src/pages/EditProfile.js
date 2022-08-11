@@ -62,13 +62,13 @@ function EditProfile(props) {
 
         <Container >
             <h1>Edit your profile information</h1>
-            <Form style={{marginTop:"1.5rem"}} onSubmit={handleFormSubmit}>
+            <Form style={{ marginTop: "1.5rem" }} onSubmit={handleFormSubmit}>
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicUsername">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Change your username" value={username}
-                                onChange={(e) => setUsername(e.target.value)} required/>
+                                onChange={(e) => setUsername(e.target.value)} required />
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
@@ -77,7 +77,7 @@ function EditProfile(props) {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicAddress">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicAddress">
                             <Form.Label>Address</Form.Label>
                             <Form.Control type="text" placeholder="Address" value={address}
                                 onChange={(e) => setAddress(e.target.value)} required />
@@ -87,7 +87,7 @@ function EditProfile(props) {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} controlId="formFile" className="mb-3">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} controlId="formFile" className="mb-3">
                             <Form.Label>Your profile picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
@@ -96,11 +96,11 @@ function EditProfile(props) {
                     </Col>
                 </Row>
 
-                
+
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', margin: '1rem', border:'none' }}>
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', margin: '1rem', border: 'none' }}>
                             Save your changes
                         </Button>
                     </Col>
