@@ -85,7 +85,7 @@ function MealsList(props) {
                     {props.meals?.map((meal) => {
                         return (
                             <Col md={6} lg={4}>
-                                <Card key={meal._id} style={{ margin: '0.7rem' }} >
+                                <Card className="Card" key={meal._id} style={{ margin: '0.7rem' }} >
                                     <Card.Body>
                                         <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
                                         <Card.Title style={{ margin: '1rem' }}>{meal.title}</Card.Title>

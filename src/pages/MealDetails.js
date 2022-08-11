@@ -91,7 +91,7 @@ function MealDetails(props) {
         <>
 
             {meal &&
-                <div className="meal card" key={meal._id} >
+                <div key={meal._id} >
 
                     {meal.image
                         ? <img src={meal.image} style={{ width: '100%', maxHeight: '60vh', backgroundSize: 'cover', backgroundPosition: 'center', objectFit: 'cover' }} />

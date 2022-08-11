@@ -17,7 +17,7 @@ function HomePage(props) {
 
     return (
         <>
-            <Image src="/cover-picture.jpg" alt="cover"
+            <Image src="/cover-picture.jpg" alt="cover" className="disable"
                 style={{
                     width: '100%',
                     maxHeight: '60vh',
@@ -57,9 +57,11 @@ function HomePage(props) {
                     {users.length > 0 && cooks?.map((user) => {
                         return (
                             <Col md={6} lg={4}>
-                                <Card key={user._id} style={{ margin: '0.7rem' }}>
+                                <Card className="Card" key={user._id} style={{ margin: '0.7rem' }} >
                                     <Card.Body>
-                                        <Card.Img src={user.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                        <NavLink to={`/cooks/${user._id}`}>
+                                            <Card.Img src={user.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                        </NavLink>
                                         <Card.Title style={{ margin: '1rem' }}>{user?.username}</Card.Title>
                                         <p>{user?.role}</p>
                                         <p><strong>Location: </strong>{user?.address}</p>
@@ -98,9 +100,11 @@ function HomePage(props) {
                     {meals.length > 0 && recentMeals?.map((meal) => {
                         return (
                             <Col md={6} lg={4}>
-                                <Card key={meal._id} style={{ margin: '0.7rem' }}>
+                                <Card className="Card" key={meal._id} style={{ margin: '0.7rem' }}>
                                     <Card.Body>
-                                        <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                        <NavLink to={`/meals/${meal._id}`}>
+                                            <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
+                                        </NavLink>
                                         <Card.Title style={{ margin: '1rem' }}>{meal?.title}</Card.Title>
 
                                         {meal.diet?.map(e => {
