@@ -76,8 +76,8 @@ function AddMeal(props) {
     return (
 
         <Container style={{ marginTop: '5rem' }}>
-            <Row>
-                <Col>
+            <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                <Col lg={6}>
                     <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px' }}>Add a meal</h3>
 
                     {errorMsg &&
@@ -87,7 +87,7 @@ function AddMeal(props) {
                     }
 
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group style={{ marginTop: '1.5rem' }}>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                             <Form.Label>Title</Form.Label>
                             <Form.Control
                                 type="text"
@@ -98,7 +98,7 @@ function AddMeal(props) {
                             ></Form.Control>
                         </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1.5rem' }}>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                             <Form.Label>Description</Form.Label>
                             <Form.Control
                                 type="text"
@@ -112,12 +112,12 @@ function AddMeal(props) {
                             ></Form.Control>
                         </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1.5rem' }}>
-                            <Form.Label>Diet</Form.Label>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left' }}>
+                            <Form.Label><strong>Diet</strong></Form.Label>
                             <Select options={options} onChange={handleSelect} placeholder="Select special diet" isMulti />
                         </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1.5rem' }}>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                             <Form.Label>Cuisine</Form.Label>
                             <Form.Select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
                                 <option value="" disabled selected>Select an option</option>
@@ -136,7 +136,7 @@ function AddMeal(props) {
                             </Form.Select>
                         </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1.5rem' }}>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                             <Form.Label>Preparation Date</Form.Label>
                             <Form.Control
                                 type="date"
@@ -147,7 +147,7 @@ function AddMeal(props) {
                             ></Form.Control>
                         </Form.Group>
 
-                        <Form.Group style={{ marginTop: '1.5rem' }}>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                             <Form.Label>Picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => { setImageSelected(e.target.files[0]) }} />
                         </Form.Group>
