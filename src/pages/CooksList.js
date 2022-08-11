@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 
 function CooksList(props) {
     const users = props.users;
-
-    // Functionality to READ one type of users
     const cooks = [...users].filter(user => user.role === "cook")
 
 
@@ -27,6 +25,7 @@ function CooksList(props) {
                     {cooks?.map((cook) => {
                         return (
                             <Col md={6} lg={4}>
+
                                 {cook.role === 'cook'
                                     ? <Card key={cook._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
@@ -34,22 +33,23 @@ function CooksList(props) {
                                             <Card.Title style={{ margin: '1rem' }}>{cook.username}</Card.Title>
                                             <p><strong>Location: </strong>{cook.address}</p>
                                             <NavLink to={`/cooks/${cook._id}`}>
-                                                <button
+                                                <Button
                                                     style={{
                                                         backgroundColor: '#3E5D3E',
                                                         color: '#fff',
-                                                        borderRadius: '15px',
+                                                        border: 'none',
                                                         padding: '5px 20px',
                                                         textTransform: 'uppercase',
                                                         letterSpacing: '2px',
                                                         fontSize: '14px'
                                                     }}>
                                                     Visit profile
-                                                </button>
+                                                </Button>
                                             </NavLink>
                                         </Card.Body>
                                     </Card>
                                     : <p> </p>}
+
                             </Col>
                         );
                     })}

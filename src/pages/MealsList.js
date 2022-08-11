@@ -5,11 +5,11 @@ import { useState } from "react";
 import { Container, Row, Col, Card, Form, FormLabel, FormControl, Button } from "react-bootstrap";
 
 function MealsList(props) {
-
     const { user } = useContext(AuthContext);
     const [search, setSearch] = useState("");
 
-    // Functionality to SEARCH WITH A SEARCH BAR
+
+    // SEARCH BAR
     const handleSearch = (event) => {
         setSearch(event)
 
@@ -22,7 +22,7 @@ function MealsList(props) {
     }
 
 
-    // Functionality to SEARCH BY DIET
+    // SEARCH BY DIET
     const handleDiet = (dietInput) => {
 
         props.setMeals(() => {
@@ -37,18 +37,30 @@ function MealsList(props) {
         props.refreshMeals();
     }
 
+
     return (
         <div className="MealsList">
 
             {user?.role === "cook"
                 ? <NavLink to="/create-meal">
-                    <Button style={{ margin: '5rem 0 3rem', backgroundColor: '#3E5D3E', border: 'none' }}>Add your own meal</Button>
+                    <Button
+                        style={{
+                            margin: '5rem 0 3rem',
+                            backgroundColor: '#3E5D3E',
+                            border: 'none',
+                            color: '#fff',
+                            padding: '10px 20px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px',
+                            fontSize: '14px'
+                        }}>
+                        Add your own meal
+                    </Button>
                 </NavLink>
-
                 : <p> </p>
             }
 
-            <Container>
+            <Container className="search-bar">
                 <Form style={{ margin: '3rem', textAlign: 'left' }}>
                     <Form.Group>
                         <FormLabel style={{ fontSize: '1.5rem' }}>Search</FormLabel>
@@ -70,30 +82,39 @@ function MealsList(props) {
 
             <Container style={{ marginTop: '3rem' }}>
                 <Row>
-
                     {props.meals?.map((meal) => {
                         return (
-
                             <Col md={6} lg={4}>
                                 <Card key={meal._id} style={{ margin: '0.7rem' }} >
                                     <Card.Body>
                                         <Card.Img src={meal.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
                                         <Card.Title style={{ margin: '1rem' }}>{meal.title}</Card.Title>
+
                                         {meal.diet?.map(e => {
                                             return <span style={{ margin: '0.3rem', backgroundColor: '#E8F2E8', color: 'black', border: '0.03rem solid', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px' }}>{e} </span>
                                         })}
+
                                         <p style={{ margin: '1rem' }}><strong>Cooked by:</strong> {meal.cook?.username}</p>
 
                                         <NavLink to={`/meals/${meal._id}`}>
-                                            <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>View details</button>
+                                            <Button
+                                                style={{
+                                                    backgroundColor: '#3E5D3E',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    padding: '5px 20px',
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: '2px',
+                                                    fontSize: '14px'
+                                                }}>
+                                                View details
+                                            </Button>
                                         </NavLink>
                                     </Card.Body>
                                 </Card>
                             </Col>
-
                         );
                     })}
-
                 </Row>
             </Container>
 

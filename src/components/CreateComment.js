@@ -1,9 +1,8 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-import userEvent from "@testing-library/user-event";
 import { AuthContext } from "../context/auth.context"
 import { useParams, useNavigate } from "react-router-dom";
-import Select from 'react-select';
+import { Container, Form, Button } from "react-bootstrap";
 
 function AddComment() {
     const [title, setTitle] = useState("");
@@ -17,8 +16,6 @@ function AddComment() {
 
     const storedToken = localStorage.getItem("authToken");
 
-
-    // Functionality to CREATE a comment
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
@@ -49,37 +46,57 @@ function AddComment() {
 
 
     return (
-        <div className="AddComment">
-            <h3>Add Comment</h3>
+        <Container>
+            <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px' }}>Add a comment</h3>
 
             {errorMsg &&
-                <p className="error">
+                <p style={{ marginTop: '3rem', backgroundColor: '#E8F2E8' }}>
                     {errorMsg}
                 </p>
             }
 
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
 
-                <label>Title:</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+                <Form.Group>
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}>
+                    </Form.Control>
+                </Form.Group>
 
-                <label>Description:</label>
-                <textarea
-                    type="text"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
+                <Form.Group style={{ marginTop: '1rem' }}>
+                    <Form.Label>Message</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        as="textarea"
+                        placeholder="Your comment goes here"
+                        style={{ height: '100px' }}>
+                    </Form.Control>
+                </Form.Group>
 
-                <button type="submit">Submit</button>
+                <Button
+                    type="submit"
+                    style={{
+                        backgroundColor: '#3E5D3E',
+                        color: '#fff',
+                        border: 'none',
+                        padding: '5px 20px',
+                        marginTop: '2rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '2px',
+                        fontSize: '14px'
+                    }}>
+                    Submit
+                </Button>
 
-            </form>
-        </div>
+            </Form>
+        </Container>
     );
 }
 
