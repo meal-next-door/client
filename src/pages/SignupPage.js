@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from '../context/auth.context';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -15,6 +16,7 @@ function SignupPage() {
     const [role, setRole] = useState("cook");
     const [errorMessage, setErrorMessage] = useState(undefined);
     const navigate = useNavigate();
+    const { storeToken, authenticateUser } = useContext(AuthContext);
 
 
     const handleSubmit = (e) => {
@@ -24,7 +26,10 @@ function SignupPage() {
         // Send input from user to the API
         axios.post(`${process.env.REACT_APP_API_URL}/signup`, body)
             .then((response) => {
-                navigate('/login'); // If request is successful, redirect to login page
+                storeToken(response.data.authToken); // store token in browser
+                authenticateUser();
+                navigate('/');
+                // navigate('/login'); // If request is successful, redirect to login page
             })
             .catch((error) => {
                 const errorDescription = error.response.data.errorMessage;

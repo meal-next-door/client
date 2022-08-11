@@ -54,7 +54,7 @@ function LoginPage() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicPassword">
+                        <Form.Group  className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" value={password}
                                 onChange={(e) => setPassword(e.target.value)} />

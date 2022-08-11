@@ -42,7 +42,8 @@ function CookDetailsPage() {
             .put(`${process.env.REACT_APP_API_URL}/users/${user?._id}/favorites`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
                 return (
-                    navigate(`/profile/${user?._id}`, { replace: true })
+                    navigate(`/profile/${user?._id}`, { replace: true }),
+                    window.location.reload()
                 )
             })
             .catch((error) => console.log(error));
