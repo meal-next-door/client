@@ -29,14 +29,13 @@ function NavBar(props) {
             <Container style={{ margin: '0', maxWidth: '100vw' }}>
 
                 <NavLink to="/">
-                    <Image src="/Logo-rectangle.png" style={{ maxWidth: '70%' }} />
+                    <Image src="/Logo-rectangle.png" style={{ maxWidth: '70%' }} className="logo" />
                 </NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse style={{ display: 'flex', justifyContent: 'space-between', display: "flex", width: '100%' }}>
 
                     <Nav>
-                        <NavLink
-                            to="/cooks"
+                        <NavLink to="/cooks" className="nav-bar"
                             style={{
                                 color: '#FFFFFF',
                                 textDecoration: 'none',
@@ -45,8 +44,7 @@ function NavBar(props) {
                             Cooks
                         </NavLink>
 
-                        <NavLink
-                            to="/meals"
+                        <NavLink to="/meals" className="nav-bar"
                             onClick={() => refreshList()}
                             style={{
                                 color: '#FFFFFF',
@@ -58,8 +56,7 @@ function NavBar(props) {
 
                         {user?.role === "cook" && (
                             <>
-                                <NavLink
-                                    to="/create-meal"
+                                <NavLink to="/create-meal" className="nav-bar"
                                     style={{
                                         color: '#FFFFFF',
                                         textDecoration: 'none',
@@ -74,8 +71,7 @@ function NavBar(props) {
                     <Nav style={{ display: 'flex', alignItems: 'center', padding: '0 3em' }}>
                         {isLoggedIn && (
                             <>
-                                <NavLink
-                                    to={`/profile/${user._id}`}
+                                <NavLink to={`/profile/${user._id}`} className="nav-bar"
                                     style={{
                                         color: '#FFFFFF',
                                         textDecoration: 'none',
@@ -83,9 +79,7 @@ function NavBar(props) {
                                     }}>
                                     Profile
                                 </NavLink>
-                                <Button
-                                    onClick={logOutUser}
-                                    variant="outline-light"
+                                <Button onClick={logOutUser} variant="outline-light"
                                     style={{
                                         padding: '0.5rem 1.2rem',
                                         margin: '0 0.5rem',
@@ -100,8 +94,7 @@ function NavBar(props) {
 
                         {!isLoggedIn && (
                             <>
-                                <NavLink
-                                    to="/signup"
+                                <NavLink to="/signup" className="nav-bar"
                                     style={{
                                         color: '#FFFFFF',
                                         padding: '0 1rem',
@@ -109,8 +102,7 @@ function NavBar(props) {
                                     }}>
                                     Sign Up
                                 </NavLink>
-                                <NavLink
-                                    to="/login"
+                                <NavLink to="/login" className="nav-bar"
                                     style={{
                                         color: '#FFFFFF',
                                         textDecoration: 'none',

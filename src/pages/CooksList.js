@@ -27,7 +27,7 @@ function CooksList(props) {
                             <Col md={6} lg={4}>
 
                                 {cook.role === 'cook'
-                                    ? <Card key={cook._id} style={{ margin: '0.7rem' }}>
+                                    ? <Card className="Card" key={cook._id} style={{ margin: '0.7rem' }}>
                                         <Card.Body>
                                             <Card.Img src={cook.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
                                             <Card.Title style={{ margin: '1rem' }}>{cook.username}</Card.Title>
