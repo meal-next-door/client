@@ -64,43 +64,14 @@ function LoginPage() {
             <div>
                             {errorMessage}
                         </div>
-            <Button variant="primary" type="submit">
-                Submit
+            <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:"none" }}>
+                Login
             </Button>
             </Col>
             </Row>
             
             </Form>
         </Container>
-
-
-
-        // <div className="LoginPage">
-        //     <h1>Login</h1>
-
-        //     {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-        //     <form onSubmit={handleSubmit}>
-        //         <label>Username:</label>
-        //         <input
-        //             type="text"
-        //             value={username}
-        //             onChange={(e) => setUsername(e.target.value)}
-        //         />
-
-        //         <label>Password:</label>
-        //         <input
-        //             type="password"
-        //             value={password}
-        //             onChange={(e) => setPassword(e.target.value)}
-        //         />
-
-        //         <button type="submit">Login</button>
-        //     </form>
-
-        //     <p>Don't have an account yet?</p>
-        //     <NavLink to={"/signup"}> Sign Up</NavLink>
-        // </div>
     );
 }
 
