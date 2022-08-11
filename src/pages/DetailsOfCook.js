@@ -2,7 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { BsChatSquareTextFill } from 'react-icons/bs';
+import { BsChatLeftText } from 'react-icons/bs';
+import { RiArrowGoBackLine } from 'react-icons/ri';
+import { GrFavorite } from 'react-icons/gr';
+import { Container, Col, Row } from "react-bootstrap";
 
 
 function CookDetailsPage() {
@@ -50,44 +53,66 @@ function CookDetailsPage() {
     return (
         <div className="CookDetails">
 
-            {cook && (
-                <>
-                    <img src={cook.image} style={{ maxHeight: '15rem', objectFit: 'cover', borderRadius: '50%' }} />
-                    <h1 style={{ margin: '3rem 0 1rem 0' }} >{cook.username}</h1>
-                    <p><strong>Location: </strong>{cook.address}</p>
-                </>
-            )}
+            <Container>
+                <Row>
+                    <Col>
+                        {cook && (
+                            <>
+                                <img src={cook.image} style={{ maxHeight: '15rem', objectFit: 'cover', borderRadius: '50%' }} />
+                                <h1 style={{ margin: '3rem 0 1rem 0' }} >{cook.username}</h1>
+                                <p><strong>Location: </strong>{cook.address}</p>
+                            </>
+                        )}
+                    </Col>
+                </Row>
 
-            {user != null
-                ? <NavLink to={`/profile/${user?._id}`} >
-                    <button onClick={() => { addFavorite(cookId) }}>Add to favorites</button>
-                </NavLink>
-                : <p></p>
-            }
+                <Row>
+                    <Col>
+                        {user != null
+                            ? <NavLink to={`/profile/${user?._id}`} >
+                                <button onClick={() => { addFavorite(cookId) }} style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><GrFavorite /></button>
+                            </NavLink>
+                            : <p></p>
+                        }
 
-            <NavLink to="/cooks">
-                <button>Back to cooks</button>
-            </NavLink>
+                        {user?._id !== cook?._id && user != null
+                            ? <NavLink to={`/new-comment/${cookId}`}>
+                                <button style={{ padding: '0.2rem 1rem', margin: '0.5rem', borderRadius: '10px' }}><BsChatLeftText /></button>
+                            </NavLink>
+                            : <p></p>
+                        }
 
-            {user?._id !== cook?._id && user != null
-                ? <NavLink to={`/new-comment/${cookId}`}>
-                    <button><BsChatSquareTextFill /> Comment</button>
-                </NavLink>
-                : <p></p>
-            }
+                        <NavLink to="/cooks">
+                            <button style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><RiArrowGoBackLine /></button>
+                        </NavLink>
+                    </Col>
+                </Row>
 
+                <Row>
+                    <Col>
 
-            <h3 style={{ margin: '3rem' }} >Reviews </h3>
+                        <h3
+                            style={{
+                                margin: '3rem',
+                                textTransform: 'uppercase',
+                                letterSpacing: '1.5px',
+                                fontSize: '24px'
+                            }}>
+                            Reviews
+                        </h3>
 
-            {cook?.comments.length > 0
-                ? cook.comments?.map((comment) => (
-                    <div style={{ border: '1px solid' }}>
-                        <h5>{comment.title}</h5>
-                        <p>{comment.description}</p>
-                        <p>Author: {comment.author.username}</p>
-                    </div>
-                ))
-                : <p>No reviews yet for this cook</p>}
+                        {cook?.comments.length > 0
+                            ? cook.comments?.map((comment) => (
+                                <div style={{ margin: '1rem', border: '1px solid' }}>
+                                    <h5 style={{ margin: '1rem' }}>{comment.title}</h5>
+                                    <p>{comment.description}</p>
+                                    <p><strong>Author: </strong> {comment.author.username}</p>
+                                </div>
+                            ))
+                            : <p>No reviews yet for this cook</p>}
+                    </Col>
+                </Row>
+            </Container>
 
         </div>
     );

@@ -11,7 +11,16 @@ function CooksList(props) {
 
     return (
         <div className="CooksList">
-            <h2 style={{ marginTop: '3rem' }}>Meet our community of cooks</h2>
+
+            <h2
+                style={{
+                    marginTop: '3rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1.5px',
+                    fontSize: '24px'
+                }}>
+                Meet our community of cooks
+            </h2>
 
             <Container style={{ marginTop: '3rem' }}>
                 <Row>
@@ -25,7 +34,18 @@ function CooksList(props) {
                                             <Card.Title style={{ margin: '1rem' }}>{cook.username}</Card.Title>
                                             <p><strong>Location: </strong>{cook.address}</p>
                                             <NavLink to={`/cooks/${cook._id}`}>
-                                                <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>Visit Profile</button>
+                                                <button
+                                                    style={{
+                                                        backgroundColor: '#3E5D3E',
+                                                        color: '#fff',
+                                                        borderRadius: '15px',
+                                                        padding: '5px 20px',
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '2px',
+                                                        fontSize: '14px'
+                                                    }}>
+                                                    Visit profile
+                                                </button>
                                             </NavLink>
                                         </Card.Body>
                                     </Card>

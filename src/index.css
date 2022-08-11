@@ -1,11 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Gantari&family=Roboto:wght@300;400&display=swap');
+
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

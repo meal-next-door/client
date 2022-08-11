@@ -103,15 +103,15 @@ function MealDetails(props) {
                             <Col md={4} lg={6}></Col>
                             <Col md={8} lg={6} style={{ marginTop: '1.5rem' }}>
                                 <NavLink to={`/cooks/${meal.cook?._id}`} >
-                                    <button style={{ padding: '0.5rem 1rem' }}><CgProfile /> {meal.cook?.username}'s profile</button>
+                                    <button style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><CgProfile /> {meal.cook?.username}'s</button>
                                 </NavLink>
 
                                 {user?._id === meal.cook?._id
                                     ? <>
                                         <NavLink to={`/edit-meal/${mealId}`} >
-                                            <button style={{ padding: '0.5rem 1rem', margin: '0.5rem' }}><FiEdit /> Edit</button>
+                                            <button style={{ padding: '0.2rem 1rem', margin: '0.5rem', borderRadius: '10px' }}><FiEdit /></button>
                                         </NavLink>
-                                        <button onClick={() => { deleteMeal(mealId) }} style={{ padding: '0.5rem 1rem' }}><FaTrashAlt style={{ color: 'red' }} /> Delete</button>
+                                        <button onClick={() => { deleteMeal(mealId) }} style={{ padding: '0.2rem 1rem', borderRadius: '10px', borderColor: 'red' }}><FaTrashAlt style={{ color: 'red' }} /></button>
                                     </>
                                     : <p> </p>
                                 }
@@ -148,7 +148,7 @@ function MealDetails(props) {
 
             {user != null
                 ? <Container style={{ marginTop: '5rem' }}>
-                    <h3>Contact</h3>
+                    <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px' }}>Contact</h3>
 
                     {!sent ? (
                         <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
@@ -176,7 +176,21 @@ function MealDetails(props) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', marginTop: '2rem' }}>Send Email</button>
+                            <button
+                                type="submit"
+                                style={{
+                                    backgroundColor: '#3E5D3E',
+                                    color: '#fff',
+                                    borderRadius: '15px',
+                                    padding: '5px 20px',
+                                    marginTop: '2rem',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    fontSize: '14px'
+                                }}>
+                                Send message
+                            </button>
+
                         </Form>
                     ) : (
                         <>
