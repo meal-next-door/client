@@ -17,6 +17,7 @@ function EditProfile(props) {
     const navigate = useNavigate();
     const storedToken = localStorage.getItem("authToken");
     let imageUrl;
+    const [isValid, setIsValid] = useState(false);
 
     useEffect(() => {
         axios
@@ -54,7 +55,7 @@ function EditProfile(props) {
         const formData = new FormData()
         formData.append("file", imageSelected)
         formData.append("upload_preset", "Meal-next-door")
-    }
+    };
 
     return (
 
@@ -67,7 +68,7 @@ function EditProfile(props) {
                         <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Change your username" value={username}
-                                onChange={(e) => setUsername(e.target.value)} />
+                                onChange={(e) => setUsername(e.target.value)} required/>
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
@@ -79,7 +80,7 @@ function EditProfile(props) {
                         <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicAddress">
                             <Form.Label>Address</Form.Label>
                             <Form.Control type="text" placeholder="Address" value={address}
-                                onChange={(e) => setAddress(e.target.value)} />
+                                onChange={(e) => setAddress(e.target.value)} required />
                         </Form.Group>
                     </Col>
                 </Row>
@@ -90,10 +91,12 @@ function EditProfile(props) {
                             <Form.Label>Your profile picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
-                            }} />
+                            }} required />
                         </Form.Group>
                     </Col>
                 </Row>
+
+                
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
