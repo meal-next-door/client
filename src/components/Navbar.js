@@ -83,6 +83,7 @@ function NavBar(props) {
                                     }}>
                                     Profile
                                 </NavLink>
+                                <NavLink to={"/login"}>
                                 <Button
                                     onClick={logOutUser}
                                     variant="outline-light"
@@ -95,6 +96,8 @@ function NavBar(props) {
                                     }}>
                                     Logout
                                 </Button>
+                                </NavLink>
+                                
                             </>
                         )}
 
