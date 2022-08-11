@@ -45,3 +45,9 @@ Button:hover {
 .nav-bar:hover {
   transform: translateY(-5px);
 }
+
+.nav-bar {
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 0 1rem;
+}
