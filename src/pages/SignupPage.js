@@ -20,8 +20,7 @@ function SignupPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const body = { username, password, address, role, image: "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" };
-        console.log(body)
+        const body = { username, password, address, role, image: "/sbcf-default-avatar.png" };
         // Send input from user to the API
         axios.post(`${process.env.REACT_APP_API_URL}/signup`, body)
             .then((response) => {
@@ -40,7 +39,7 @@ function SignupPage() {
             <Form onSubmit={handleSubmit}>
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Choose a username" value={username}
                                 onChange={(e) => setUsername(e.target.value)} />
@@ -52,7 +51,7 @@ function SignupPage() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" value={password}
                                 onChange={(e) => setPassword(e.target.value)} />
@@ -62,7 +61,7 @@ function SignupPage() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group className="mb-3" controlId="formBasicAddress">
+                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicAddress">
                             <Form.Label>Address</Form.Label>
                             <Form.Control type="text" placeholder="Enter address" value={address}
                                 onChange={(e) => setAddress(e.target.value)} />
@@ -75,7 +74,7 @@ function SignupPage() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Select aria-label="select role">
+                        <Form.Select value={role} onChange={(e) => setRole(e.target.value)} required>
                             <option value="cook">Cook</option>
                             <option value="customer">Customer</option>
                         </Form.Select>
@@ -90,7 +89,7 @@ function SignupPage() {
                         <div>
                             {errorMessage}
                         </div>
-                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:"none" }}>
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
                             Sign up
                         </Button>
                     </Col>
