@@ -13,18 +13,10 @@ function NavBar(props) {
 
 
     return (
-        < Navbar collapseOnSelect expand="lg" sticky="top"
-            style={{
-                backgroundColor: '#3E5D3E',
-                margin: '0',
-                display: "flex",
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                fontSize: '16px',
-            }}>
+        < Navbar collapseOnSelect expand="lg" sticky="top" className="nav-wrapper">
             <Container style={{ margin: '0', maxWidth: '100vw' }}>
                 <NavLink to="/">
-                    <Image src="/Logo-rectangle.png" style={{ maxWidth: '70%' }} className="logo" />
+                    <Image src="/Logo-rectangle.png" className="logo" />
                 </NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" >
@@ -41,25 +33,9 @@ function NavBar(props) {
                     <Nav style={{ display: 'flex', alignItems: 'center' }}>
                         {isLoggedIn && (
                             <>
-                                <NavLink to={`/profile/${user._id}`} className="nav-bar"
-                                    style={{
-                                        color: '#FFFFFF',
-                                        textDecoration: 'none',
-                                        padding: '0 1rem'
-                                    }}>
-                                    Profile
-                                </NavLink>
+                                <NavLink to={`/profile/${user._id}`} className="nav-bar">Profile</NavLink>
                                 <NavLink to="/login">
-                                <Button onClick={logOutUser} variant="outline-light"
-                                    style={{
-                                        padding: '0.5rem 1.2rem',
-                                        margin: '0 0.5rem',
-                                        textTransform: 'uppercase',
-                                        letterSpacing: '2px',
-                                        fontSize: '16px'
-                                    }}>
-                                    Logout
-                                </Button>
+                                    <Button onClick={logOutUser} variant="outline-light" className="logout">Logout</Button>
                                 </NavLink>
                             </>
                         )}
