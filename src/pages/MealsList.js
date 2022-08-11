@@ -83,7 +83,6 @@ function MealsList(props) {
                                             return <span style={{ margin: '0.3rem', backgroundColor: '#E8F2E8', color: 'black', border: '0.03rem solid', borderColor: '#3E5D3E', borderRadius: '20px', padding: '5px 20px' }}>{e} </span>
                                         })}
                                         <p style={{ margin: '1rem' }}><strong>Cooked by:</strong> {meal.cook?.username}</p>
-                                        <p>{meal.description}</p>
 
                                         <NavLink to={`/meals/${meal._id}`}>
                                             <button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px' }}>View details</button>

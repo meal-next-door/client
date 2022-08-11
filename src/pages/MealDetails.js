@@ -4,7 +4,9 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Image } from "cloudinary-react";
 import { Container, Col, Row, Form } from "react-bootstrap";
-
+import { FaTrashAlt } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
+import { CgProfile } from 'react-icons/cg';
 
 function MealDetails(props) {
     const [meal, setMeal] = useState([]);
@@ -98,18 +100,18 @@ function MealDetails(props) {
 
                     <Container>
                         <Row>
-                            <Col></Col>
-                            <Col style={{ marginTop: '1.5rem' }}>
+                            <Col md={4} lg={6}></Col>
+                            <Col md={8} lg={6} style={{ marginTop: '1.5rem' }}>
                                 <NavLink to={`/cooks/${meal.cook?._id}`} >
-                                    <button>View {meal.cook?.username}'s profile</button>
+                                    <button style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><CgProfile /> {meal.cook?.username}'s</button>
                                 </NavLink>
 
                                 {user?._id === meal.cook?._id
                                     ? <>
                                         <NavLink to={`/edit-meal/${mealId}`} >
-                                            <button>Edit</button>
+                                            <button style={{ padding: '0.2rem 1rem', margin: '0.5rem', borderRadius: '10px' }}><FiEdit /></button>
                                         </NavLink>
-                                        <button onClick={() => { deleteMeal(mealId) }}>Delete</button>
+                                        <button onClick={() => { deleteMeal(mealId) }} style={{ padding: '0.2rem 1rem', borderRadius: '10px', borderColor: 'red' }}><FaTrashAlt style={{ color: 'red' }} /></button>
                                     </>
                                     : <p> </p>
                                 }
@@ -128,7 +130,7 @@ function MealDetails(props) {
                                 <p><strong>Preparation date:</strong>  {meal.date}</p>
                                 <p><strong>Cooked by:</strong> {meal.cook?.username}</p>
 
-                                <p style={{ margin: '2rem' }}>{meal.description}</p>
+                                <p style={{ margin: '4rem' }}>{meal.description}</p>
                             </Col>
                         </Row>
                     </Container>
@@ -143,20 +145,21 @@ function MealDetails(props) {
                 </p>
             }
 
+
             {user != null
-                ? <Container style={{ marginTop: '2.5rem' }}>
-                    <h3>Contact</h3>
+                ? <Container style={{ marginTop: '5rem' }}>
+                    <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px' }}>Contact</h3>
 
                     {!sent ? (
                         <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
                             <Form.Group style={{ marginTop: '1rem' }}>
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></Form.Control>
+                                <Form.Control type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Your email address"></Form.Control>
                             </Form.Group>
 
                             <Form.Group style={{ marginTop: '1rem' }}>
                                 <Form.Label>Subject</Form.Label>
-                                <Form.Control type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required></Form.Control>
+                                <Form.Control type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required placeholder="The purpose of your email"></Form.Control>
                             </Form.Group>
 
                             <Form.Group style={{ marginTop: '1rem' }}>
@@ -168,12 +171,26 @@ function MealDetails(props) {
                                     onChange={(e) => setMessage(e.target.value)}
                                     required
                                     as="textarea"
-                                    placeholder="Leave a comment here"
+                                    placeholder="Your message to the cook"
                                     style={{ height: '100px' }}>
                                 </Form.Control>
                             </Form.Group>
 
-                            <button type="submit" style={{ marginTop: '2rem' }}>Send Email</button>
+                            <button
+                                type="submit"
+                                style={{
+                                    backgroundColor: '#3E5D3E',
+                                    color: '#fff',
+                                    borderRadius: '15px',
+                                    padding: '5px 20px',
+                                    marginTop: '2rem',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    fontSize: '14px'
+                                }}>
+                                Send message
+                            </button>
+
                         </Form>
                     ) : (
                         <>
