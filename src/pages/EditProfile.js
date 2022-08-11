@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 
 function EditProfile(props) {
@@ -36,17 +41,17 @@ function EditProfile(props) {
 
         axios
             .post("https://api.cloudinary.com/v1_1/dz4ahgzwz/image/upload", formData)
-            .then( response => {
+            .then(response => {
                 console.log(response)
                 imageUrl = response.data.url
                 return axios
-            .put(`${process.env.REACT_APP_API_URL}/users/${userId}`, { username, address, image: imageUrl}, { headers: { Authorization: `Bearer ${storedToken}` } })
+                    .put(`${process.env.REACT_APP_API_URL}/users/${userId}`, { username, address, image: imageUrl }, { headers: { Authorization: `Bearer ${storedToken}` } })
             })
             .then((response) => {
                 navigate(`/profile/${userId}`)
             });
     };
-    
+
     const uploadImage = () => {
 
         const formData = new FormData()
@@ -55,35 +60,53 @@ function EditProfile(props) {
     }
 
     return (
-        <div className="EditUser">
-            <h3>Edit your profile</h3>
 
-            <form onSubmit={handleFormSubmit}>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    name="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
 
-                <label>Address:</label>
-                <textarea
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                />
+        <Container >
+            <h1>Edit your profile information</h1>
+            <Form onSubmit={handleFormSubmit}>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group className="mb-3" controlId="formBasicUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Change your username" value={username}
+                                onChange={(e) => setUsername(e.target.value)} />
+                            <Form.Text className="text-muted">
+                            </Form.Text>
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                <input 
-                    type="file"
-                    onChange={(e) => {
-                        setImageSelected(e.target.files[0])
-                    }}
-                />          
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group className="mb-3" controlId="formBasicAddress">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control type="text" placeholder="Address" value={address}
+                                onChange={(e) => setAddress(e.target.value)} />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                <button onClick={uploadImage} type="submit">Update your profile</button>
-            </form>
-        </div>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <input
+                            type="file"
+                            onChange={(e) => {
+                                setImageSelected(e.target.files[0])
+                            }}
+                        />
+                    </Col>
+                </Row>
+
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Button variant="primary" type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', margin: '1rem' }}>
+                            Submit
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
+        </Container>
     );
 }
 
