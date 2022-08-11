@@ -61,6 +61,9 @@ function LoginPage() {
                 <Form.Control type="password" placeholder="Password" value={password}
                     onChange={(e) => setPassword(e.target.value)} />
             </Form.Group>
+            <div>
+                            {errorMessage}
+                        </div>
             <Button variant="primary" type="submit">
                 Submit
             </Button>

@@ -68,7 +68,7 @@ function CookDetailsPage() {
 
                 <Row>
                     <Col>
-                        {user != null
+                        {user != null && user._id != cookId
                             ? <NavLink to={`/profile/${user?._id}`} >
                                 <button onClick={() => { addFavorite(cookId) }} style={{ padding: '0.2rem 1rem', borderRadius: '10px' }}><GrFavorite /></button>
                             </NavLink>
