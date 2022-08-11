@@ -55,7 +55,7 @@ function App() {
       <NavBar refreshMeals={getAllMeals} />
 
       <Routes>
-        <Route path="/" element={<HomePage users={users} meals={meals} />} />
+        <Route path="/" element={<HomePage users={users} meals={meals} refreshUsers={getAllUsers} />} />
         <Route path='/signup' element={<IsAnon><SignupPage /></IsAnon>} />
         <Route path='/login' element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="profile/:userId" element={<ProfilePage />}></Route>

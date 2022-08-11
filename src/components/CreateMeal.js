@@ -149,7 +149,7 @@ function AddMeal(props) {
 
                         <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                             <Form.Label>Picture</Form.Label>
-                            <Form.Control type="file" onChange={(e) => { setImageSelected(e.target.files[0]) }} />
+                            <Form.Control type="file" onChange={(e) => { setImageSelected(e.target.files[0]) }} required />
                         </Form.Group>
 
                         {!isValid &&

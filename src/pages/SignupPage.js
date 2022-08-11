@@ -79,22 +79,22 @@ function SignupPage() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
+                    <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicAddress">
+                            <Form.Label>Role</Form.Label>
                         <Form.Select value={role} onChange={(e) => setRole(e.target.value)} required>
                             <option value="cook">Cook</option>
                             <option value="customer">Customer</option>
                         </Form.Select>
+                        </Form.Group>
                     </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
                         <div>
                             {errorMessage}
                         </div>
-                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none", marginTop:"1em" }}>
                             Sign up
                         </Button>
                     </Col>

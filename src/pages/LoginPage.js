@@ -29,6 +29,7 @@ function LoginPage() {
                 storeToken(response.data.authToken); // store token in browser
                 authenticateUser();
                 navigate('/');
+                window.location.reload();
             })
             .catch((error) => {
                 const errorDescription = error.response.data.errorMessage;
@@ -67,7 +68,8 @@ function LoginPage() {
                         </Button>
                     </Col>
                 </Row>
-
+                <p>Not registered yet?</p>
+                <NavLink to={"/signup"}>Sign up</NavLink>
             </Form>
         </Container>
     );

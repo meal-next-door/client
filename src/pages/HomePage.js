@@ -5,10 +5,10 @@ function HomePage(props) {
 
     const users = props.users;
     const meals = props.meals;
-
-    let cooks, recentMeals
+    let cooks, recentMeals;
 
     if (users.length > 0 && meals.length > 0) {
+        props.refreshUsers();
         const userCopy = [...users]
         const mealCopy = [...meals]
         cooks = userCopy?.filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);

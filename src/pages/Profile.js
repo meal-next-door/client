@@ -110,56 +110,13 @@ function ProfilePage() {
                     </MDBCol>
                   </MDBRow>
                 </MDBCardBody>
-                : <p>No favourites yet</p>
+                : <p>No favorites yet</p>
               }
             </MDBCard>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
     </div>
-
-
-    // <div className="UserDetails">
-
-    //     {user && (
-    //         <>
-    //             <h1>{user.username}</h1>
-    //             <img src={user.image}/>
-    //             <p>{user.address}</p>
-    //             <p>{user.role}</p>
-    //             <NavLink to={`/edit-profile/${userId}`}>
-    //                 <button>Edit profile</button>
-    //             </NavLink>
-    //         </>
-    //     )}
-
-    //     <h1>Favorites</h1>        
-    //     { user?.favorites 
-    //     ? user?.favorites.map((favorite) => (
-    //             <div id={favorite._id}>
-    //                 <h3>{favorite.username}</h3>
-    //                 <h4>Address:</h4>
-    //                 <p>{favorite.address}</p>
-    //             </div>
-    //             ))
-    //     :<p>You don't have any favorite cooks yet</p>
-    //     }        
-
-    //     <h1>Reviews</h1>
-    //     { user?.comments 
-    //     ? user?.comments.map((comment) => (
-    //             <div id={comment._id}>
-    //                 <h3>{comment.title}</h3>
-    //                 <p>{comment.description}</p>
-    //                 <p>{comment.author.username}</p>
-    //             </div>
-    //             ))
-    //     :<p>You don't have any reviews yet</p>
-    //     } 
-    //     <NavLink to="/">
-    //         <button>Back to home</button>
-    //     </NavLink>
-    // </div>
   );
 }
 

@@ -187,17 +187,17 @@ function MealDetails(props) {
 
                     {!sent ? (
                         <Form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
-                            <Form.Group style={{ marginTop: '1rem' }}>
+                            <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="Your email address"></Form.Control>
                             </Form.Group>
 
-                            <Form.Group style={{ marginTop: '1rem' }}>
+                            <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                                 <Form.Label>Subject</Form.Label>
                                 <Form.Control type="text" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required placeholder="The purpose of your email"></Form.Control>
                             </Form.Group>
 
-                            <Form.Group style={{ marginTop: '1rem' }}>
+                            <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }}>
                                 <Form.Label>Message</Form.Label>
                                 <Form.Control
                                     type="text"
@@ -231,7 +231,18 @@ function MealDetails(props) {
                         <>
                             <h5>Your email has been successfully sent!</h5>
                             <h6>{meal.cook?.username} will soon confirm your order</h6>
-                            <NavLink to="/meals"><button>Back to meals</button></NavLink>
+                            <NavLink to="/meals">
+                                <Button style={{
+                                    backgroundColor: '#3E5D3E',
+                                    color: '#fff',
+                                    border: 'none',
+                                    padding: '5px 20px',
+                                    marginTop: '2rem',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    fontSize: '14px'
+                                }}>Back to meals</Button>
+                            </NavLink>
                         </>
                     )}
 

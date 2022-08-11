@@ -134,9 +134,13 @@ function CookDetailsPage() {
                                     <MDBCardBody>
                                         <MDBCardTitle>{comment.title}</MDBCardTitle>
                                         <MDBCardText>{comment.description}</MDBCardText>
-                                        <NavLink to={`/cooks/${comment.author._id}`}>
-                                            <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>View profile</Button>
-                                        </NavLink>
+                                        {comment.author.role === "cook"
+                                            ? <NavLink to={`/cooks/${comment.author._id}`}>
+                                                <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>View profile</Button>
+                                            </NavLink>
+                                            : <p></p>
+                                        }
+
                                     </MDBCardBody>
                                     <MDBCardFooter className='text-muted'>Author: {comment.author.username}</MDBCardFooter>
                                 </MDBCard>
