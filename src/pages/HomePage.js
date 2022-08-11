@@ -17,7 +17,14 @@ function HomePage(props) {
 
     return (
         <>
-            <Image src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="cover" style={{ width: '100%', maxHeight: '60vh', backgroundSize: 'cover', backgroundPosition: 'center', objectFit: 'cover' }} />
+            <Image src="/cover-picture.jpg" alt="cover"
+                style={{
+                    width: '100%',
+                    maxHeight: '60vh',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    objectFit: 'cover'
+                }} />
 
             <Container className="about" style={{ marginTop: '4.5rem' }}>
                 <h3
@@ -45,6 +52,7 @@ function HomePage(props) {
                     }}>
                     Meet the community
                 </h3>
+
                 <Row>
                     {users.length > 0 && cooks?.map((user) => {
                         return (
@@ -52,7 +60,7 @@ function HomePage(props) {
                                 <Card key={user._id} style={{ margin: '0.7rem' }}>
                                     <Card.Body>
                                         <Card.Img src={user.image} style={{ maxHeight: '10rem', objectFit: 'cover' }} />
-                                        <Card.Title>{user?.username}</Card.Title>
+                                        <Card.Title style={{ margin: '1rem' }}>{user?.username}</Card.Title>
                                         <p>{user?.role}</p>
                                         <p><strong>Location: </strong>{user?.address}</p>
                                         <NavLink to={`/cooks/${user._id}`}>
@@ -76,9 +84,6 @@ function HomePage(props) {
                     })}
                 </Row>
             </Container>
-
-
-
 
             <Container className="meals" style={{ marginTop: '7rem' }}>
                 <h3
