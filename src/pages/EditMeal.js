@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate, NavLink } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import { AuthContext } from "../context/auth.context";
 import Button from 'react-bootstrap/Button';
@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 
-function EditMeal(props) {
+function EditMeal() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [diet, setDiet] = useState("");
@@ -23,7 +23,6 @@ function EditMeal(props) {
     const navigate = useNavigate();
     let imageUrl;
     const storedToken = localStorage.getItem("authToken");
-    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         axios
@@ -108,55 +107,54 @@ function EditMeal(props) {
                         <Form.Group className="mb-3" controlId="formBasicDescription">
                             <Form.Label>Description</Form.Label>
                             <Form.Control type="text" placeholder="Description" value={description}
-                                onChange={(e) => setDescription(e.target.value)} as="textarea"
-                                placeholder="Describe your meal" style={{ height: '100px' }} />
+                                onChange={(e) => setDescription(e.target.value)} as="textarea" style={{ height: '100px' }} />
                         </Form.Group>
                     </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                <label>Select the cuisine</label>
-                <Form.Select className="mb-3" aria-label="Default select example">
-                    <option value="chinese">Chinese</option>
-                    <option value="french">French</option>
-                    <option value="greek">Greek</option>
-                    <option value="indian">Indian</option>
-                    <option value="italian">Italian</option>
-                    <option value="japanese">Japanese</option>
-                    <option value="lebanese">Lebanese</option>
-                    <option value="mediterranean">Mediterranean</option>
-                    <option value="mexican">Mexican</option>
-                    <option value="peruvian">Peruvian</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="thai">Thai</option>
-                </Form.Select>
-                </Col>
-                </Row>
-                
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                <label>Select the diet</label>
-                <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti />
-                </Col>
+                        <label>Select the cuisine</label>
+                        <Form.Select className="mb-3" aria-label="Default select example">
+                            <option value="chinese">Chinese</option>
+                            <option value="french">French</option>
+                            <option value="greek">Greek</option>
+                            <option value="indian">Indian</option>
+                            <option value="italian">Italian</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="lebanese">Lebanese</option>
+                            <option value="mediterranean">Mediterranean</option>
+                            <option value="mexican">Mexican</option>
+                            <option value="peruvian">Peruvian</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="thai">Thai</option>
+                        </Form.Select>
+                    </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                <Form.Group className="mb-3">
-                    <Form.Label>Cook</Form.Label>
-                    <Form.Control placeholder="Disabled input" disabled type="text" name="cook" value={cook} onChange={(e) => setCook(e.target.value)} />
-                </Form.Group>
-                </Col>
+                        <label>Select the diet</label>
+                        <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti />
+                    </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                <Form.Group controlId="dob">
-                    <Form.Label>When did you cook this meal</Form.Label>
-                    <Form.Control type="date" name="date" placeholder="Preparation date" value={date} onChange={(e) => setDate(e.target.value)} />
-                </Form.Group>
-                </Col>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Cook</Form.Label>
+                            <Form.Control placeholder="Disabled input" disabled type="text" name="cook" value={cook} onChange={(e) => setCook(e.target.value)} />
+                        </Form.Group>
+                    </Col>
+                </Row>
+
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group controlId="dob">
+                            <Form.Label>When did you cook this meal</Form.Label>
+                            <Form.Control type="date" name="date" placeholder="Preparation date" value={date} onChange={(e) => setDate(e.target.value)} />
+                        </Form.Group>
+                    </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
@@ -165,14 +163,14 @@ function EditMeal(props) {
                             <Form.Label>Your meal's picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
-                            }}/>
+                            }} />
                         </Form.Group>
                     </Col>
                 </Row>
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                    <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:"none" }}>
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
                             Save edits
                         </Button>
                     </Col>

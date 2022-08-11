@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink, useParams } from "react-router-dom";
 import React from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBCardTitle, MDBCardFooter, } from 'mdb-react-ui-kit';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBCardTitle, MDBCardFooter, } from 'mdb-react-ui-kit';
 
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
   const { userId } = useParams();
-  const [imageSelected, setImageSelected] = useState("");
-  const storedToken = localStorage.getItem("authToken");
-  let imageUrl;
 
   const getUser = () => {
     axios
@@ -28,7 +25,7 @@ function ProfilePage() {
 
   return (
 
-    <div className="gradient-custom-2" style={{ backgroundColor: '#E3E3E3' }}>
+    <div className="gradient-custom-2" style={{ backgroundColor: '' }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">

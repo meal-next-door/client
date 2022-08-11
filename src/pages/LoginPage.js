@@ -36,40 +36,38 @@ function LoginPage() {
             })
     };
 
-
-
     return (
-        
+
         <Container>
             <Form onSubmit={handleSubmit}>
                 <Row className="justify-content-md-center">
-                <Col xs={4} xl={6} align>
-                <Form.Group className="mb-3" controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Username" value={username}
-                    onChange={(e) => setUsername(e.target.value)} />
-                <Form.Text className="text-muted">
-                </Form.Text>
-            </Form.Group>
-            </Col>
-            </Row>
+                    <Col xs={4} xl={6} align>
+                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicUsername">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Username" value={username}
+                                onChange={(e) => setUsername(e.target.value)} />
+                            <Form.Text className="text-muted">
+                            </Form.Text>
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <Row className="justify-content-md-center">
-            <Col xs={4} xl={6} align>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} />
-            </Form.Group>
-            <div>
+                <Row className="justify-content-md-center">
+                    <Col xs={4} xl={6} align>
+                        <Form.Group style={{textAlign:"left", fontWeight:"bold"}} className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                        </Form.Group>
+                        <div>
                             {errorMessage}
                         </div>
-            <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:"none" }}>
-                Login
-            </Button>
-            </Col>
-            </Row>
-            
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
+                            Login
+                        </Button>
+                    </Col>
+                </Row>
+
             </Form>
         </Container>
     );
