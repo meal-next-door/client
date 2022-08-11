@@ -90,7 +90,7 @@ function EditProfile(props) {
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
                         <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Default file input example</Form.Label>
+                            <Form.Label>Your profile picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
                             }}/>
