@@ -74,7 +74,7 @@ function SignupPage() {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <Form.Select aria-label="select role">
+                        <Form.Select value={role} onChange={(e) => setRole(e.target.value)} required>
                             <option value="cook">Cook</option>
                             <option value="customer">Customer</option>
                         </Form.Select>
