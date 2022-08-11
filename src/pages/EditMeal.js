@@ -108,7 +108,8 @@ function EditMeal(props) {
                         <Form.Group className="mb-3" controlId="formBasicDescription">
                             <Form.Label>Description</Form.Label>
                             <Form.Control type="text" placeholder="Description" value={description}
-                                onChange={(e) => setDescription(e.target.value)} />
+                                onChange={(e) => setDescription(e.target.value)} as="textarea"
+                                placeholder="Describe your meal" style={{ height: '100px' }} />
                         </Form.Group>
                     </Col>
                 </Row>
@@ -178,80 +179,6 @@ function EditMeal(props) {
                 </Row>
             </Form>
         </Container>
-
-        // <div className="EditMeal">
-        //     <h3>Edit your meal</h3>
-
-        //     <form onSubmit={handleFormSubmit}>
-
-        //         <label>Title:</label>
-        //         <input
-        //             type="text"
-        //             name="title"
-        //             value={title}
-        //             onChange={(e) => setTitle(e.target.value)}
-        //             required
-        //         />
-
-        //         <label>Description:</label>
-        //         <textarea
-        //             name="description"
-        //             value={description}
-        //             onChange={(e) => setDescription(e.target.value)}
-        //             required
-        //         />
-
-        //         <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti />
-
-        //         <label>Cuisine:</label>
-        //         <select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
-        //             <option value="" disabled>Select the cuisine</option>
-        //             <option value="chinese">Chinese</option>
-        //             <option value="french">French</option>
-        //             <option value="greek">Greek</option>
-        //             <option value="indian">Indian</option>
-        //             <option value="italian">Italian</option>
-        //             <option value="japanese">Japanese</option>
-        //             <option value="lebanese">Lebanese</option>
-        //             <option value="mediterranean">Mediterranean</option>
-        //             <option value="mexican">Mexican</option>
-        //             <option value="lebanese">Peruvian</option>
-        //             <option value="lebanese">Spanish</option>
-        //             <option value="thai">Thai</option>
-        //         </select>
-
-        //         <label>Date:</label>
-        //         <input
-        //             type="date"
-        //             name="date"
-        //             value={date}
-        //             onChange={(e) => setDate(e.target.value)}
-        //             required
-        //         />
-
-        //         <label>Cook:</label>
-        //         <input
-        //             type="text"
-        //             name="cook"
-        //             value={cook}
-        //             onChange={(e) => setCook(e.target.value)}
-        //             readOnly
-        //             required
-        //         />
-
-        //         <input
-        //             type="file"
-        //             onChange={(e) => {
-        //                 setImageSelected(e.target.files[0])
-        //             }}
-        //         />
-
-        //         {!isValid && <p>You must fill in all fields to be able to update</p>}
-        //         <button onClick={uploadImage} type="submit" disabled={!isValid}>Update</button>
-        //         <NavLink to={`/meals/${mealId}`}><button>Back to meal details</button></NavLink>
-
-        //     </form>
-        // </div>
     );
 }
 
