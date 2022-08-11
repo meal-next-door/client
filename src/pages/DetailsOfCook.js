@@ -68,7 +68,7 @@ function CookDetailsPage() {
 
                 <Row>
                     <Col>
-                        {user != null
+                        {user != null && user._id != cookId
                             ? <NavLink to={`/profile/${user?._id}`} >
                                 <Button
                                     onClick={() => { addFavorite(cookId) }}

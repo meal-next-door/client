@@ -90,8 +90,8 @@ function SignupPage() {
                         <div>
                             {errorMessage}
                         </div>
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border:"none" }}>
+                            Sign up
                         </Button>
                     </Col>
                 </Row>

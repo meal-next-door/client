@@ -89,12 +89,12 @@ function EditProfile(props) {
 
                 <Row className="justify-content-md-center">
                     <Col xs={4} xl={6} align>
-                        <input
-                            type="file"
-                            onChange={(e) => {
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Your profile picture</Form.Label>
+                            <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
-                            }}
-                        />
+                            }}/>
+                        </Form.Group>
                     </Col>
                 </Row>
 
