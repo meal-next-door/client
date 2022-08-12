@@ -39,11 +39,12 @@ function SignupPage() {
 
 
     return (
+        <Container style={{ marginTop: '5rem' }}>
+            <Row style={{ display: 'flex', justifyContent: 'center' }}  >
+                <Col lg={6}>
+                    <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px', margin: '2rem' }}>Sign Up</h3>
 
-        <Container >
-            <Form onSubmit={handleSubmit}>
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Choose a username" value={username}
@@ -51,21 +52,13 @@ function SignupPage() {
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
                         <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" value={password}
                                 onChange={(e) => setPassword(e.target.value)} />
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
                         <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicAddress">
                             <Form.Label>Address</Form.Label>
                             <Form.Control type="text" placeholder="Enter address" value={address}
@@ -74,35 +67,29 @@ function SignupPage() {
                                 Enter your address so that customers can find your delicious meals
                             </Form.Text>
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                    <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicAddress">
+                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicAddress">
                             <Form.Label>Role</Form.Label>
-                        <Form.Select value={role} onChange={(e) => setRole(e.target.value)} required>
-                            <option value="cook">Cook</option>
-                            <option value="customer">Customer</option>
-                        </Form.Select>
+                            <Form.Select value={role} onChange={(e) => setRole(e.target.value)} required>
+                                <option value="cook">Cook</option>
+                                <option value="customer">Customer</option>
+                            </Form.Select>
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
                         <div>
                             {errorMessage}
                         </div>
-                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none", marginTop:"1em" }}>
+
+                        <Button type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', border: 'none', padding: '5px 20px', margin: "2em", textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px' }}>
                             Sign up
                         </Button>
-                    </Col>
-                </Row>
 
-                <p>Already have account?</p>
-                <NavLink to={"/login"}> Login</NavLink>
-            </Form>
+                        <p>Already have account? <NavLink to={"/login"}> Login</NavLink></p>
+
+                    </Form>
+
+                </Col>
+            </Row>
         </Container>
     );
 }
