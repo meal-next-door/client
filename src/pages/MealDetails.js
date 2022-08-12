@@ -181,7 +181,7 @@ function MealDetails(props) {
             }
 
 
-            {user != null
+            {user?._id !== meal.cook?._id
                 ? <Container style={{ marginTop: '5rem' }}>
                     <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px' }}>Contact</h3>
 
