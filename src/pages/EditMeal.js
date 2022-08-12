@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Select from 'react-select';
-import { AuthContext } from "../context/auth.context";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -87,35 +86,28 @@ function EditMeal() {
 
     return (
 
-        <Container >
-            <h1>Edit your meal</h1>
-            <Form onSubmit={handleFormSubmit}>
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicTitle">
+        <Container style={{ marginTop: '5rem' }} >
+            <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                <Col lg={6}>
+                    <h3 style={{ textTransform: 'uppercase', letterSpacing: '1.5px' }}>Edit your meal</h3>
+
+                    <Form onSubmit={handleFormSubmit}>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }} className="mb-3" controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" placeholder="Change the Title" value={title}
                                 onChange={(e) => setTitle(e.target.value)} required />
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicDescription">
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }} className="mb-3" controlId="formBasicDescription">
                             <Form.Label>Description</Form.Label>
                             <Form.Control type="text" placeholder="Description" value={description}
                                 onChange={(e) => setDescription(e.target.value)} as="textarea" style={{ height: '100px' }} required />
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicDescription">
-                            <label>Select the cuisine</label>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }} className="mb-3" controlId="formBasicDescription">
+                            <Form.Label>Cuisine</Form.Label>
                             <Form.Select value={cuisine} onChange={(e) => setCuisine(e.target.value)} required>
                                 <option value="chinese">Chinese</option>
                                 <option value="french">French</option>
@@ -131,60 +123,47 @@ function EditMeal() {
                                 <option value="thai">Thai</option>
                             </Form.Select>
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3" controlId="formBasicDescription">
-                            <label>Select the diet</label>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left' }} className="mb-3" controlId="formBasicDescription">
+                            <Form.Label><strong>Diet</strong></Form.Label>
                             <Select options={options} value={diet.value} onChange={handleSelect} placeholder="Select special diet" isMulti required />
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} className="mb-3">
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }} className="mb-3">
                             <Form.Label>Cook</Form.Label>
                             <Form.Control placeholder="Disabled input" disabled type="text" name="cook" value={cook} onChange={(e) => setCook(e.target.value)} />
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} controlId="dob">
-                            <Form.Label>When did you cook this meal</Form.Label>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }} controlId="dob">
+                            <Form.Label>Preparation Date</Form.Label>
                             <Form.Control type="date" name="date" placeholder="Preparation date" value={date} onChange={(e) => setDate(e.target.value)} required />
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
-                        <Form.Group style={{ textAlign: "left", fontWeight: "bold" }} controlId="formFile" className="mb-3">
-                            <Form.Label>Your meal's picture</Form.Label>
+                        <Form.Group style={{ marginTop: '1.5rem', textAlign: 'left', fontWeight: 'bold' }} controlId="formFile" className="mb-3">
+                            <Form.Label>Picture</Form.Label>
                             <Form.Control type="file" onChange={(e) => {
                                 setImageSelected(e.target.files[0])
                             }} required />
                         </Form.Group>
-                    </Col>
-                </Row>
 
-                {!isValid &&
-                    <p style={{ marginTop: '3rem', backgroundColor: '#E8F2E8' }}>
-                        You must fill in all fields to be able to submit
-                    </p>}
 
-                <Row className="justify-content-md-center">
-                    <Col xs={4} xl={6} align>
+                        {!isValid &&
+                            <p style={{ marginTop: '3rem', backgroundColor: '#E8F2E8' }}>
+                                You must fill in all fields to be able to submit
+                            </p>}
+
+
                         <Button disabled={!isValid} type="submit" style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: "none" }}>
                             Save edits
                         </Button>
-                    </Col>
-                </Row>
-            </Form>
+                    </Form>
+
+
+
+                </Col>
+            </Row>
+
+
         </Container>
     );
 }
