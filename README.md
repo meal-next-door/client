@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+------------------------
+DESCRIPTION
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In the context of our bootcamp at Ironhack we were asked to build an app where users could login and logout and add, create, update and delete content for at least two models.
 
-## Available Scripts
+With these instructions in mind, we decided to create an app to would allow anyone that doesn't know what to eat and doesn't want to cook to look for chefs (amateur or professionals) nearby and see what they have to offer. This app is an alternative to restaurant and food delivry services/app.
 
-In the project directory, you can run:
+By connecting customers and cooks it allows customers to connect with cooks and enjoy their delicious meal. 
 
-### `npm start`
+For cooks: if you are an amateur cook and have leftovers, this can be a way to find people with the same tastes and avoid wasting. For professional chefs you can use this app as your own "restaurant" and connect with customers near you.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+For customers: this is an innovative way of finding what delicious meals are being prepared next to you.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Waste is a global problem and our app is a humble try at tackling this problem.
 
-### `npm test`
+We hope that you enjoy it as much as we do ! 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Disclaimer : this is the frontend repository, the backend can be found here : https://github.com/meal-next-door/meal-next-door-server
 
-### `npm run build`
+------------------------
+INSTRUCTIONS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In order to run this app on your local machine you will need to :
+- create a .env file with the following varaiables :
+    - PORT : the local port you want to host your app on
+    - you will also need to define a "REACT_APP_API_UR" variable with the port of your backend.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Cloudinary:
+Our app is using the services of Cloudinary to manage picture uploads. In order to use, no backend configurations required but you will need to do the following in order to be able to use it:
+    - set up a Cloudinary account on : https://cloudinary.com/
+    - get your CLOUDINARY_NAME
+    - get your CLOUDINARY_KEY
+    - and your CLOUDINARY_SECRET
+    - You will then need to create an "upload preset" (you can find this in the settings tab of Cloudinary) and create an unsigned preset (if you don't mind it being unsigned, otherwise you can secure it by signing it). In this step don't forget to give a name to your folder so that your pictures get uploaded to this particular file and not the general folder of your account ;).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Before running your app you will also need to add dependencies. You can simply run the command 'npm install' in your terminal.
 
-### `npm run eject`
+Then run the application with magic words : 'npm start'.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Enjoy !
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+------------------------
+If you want to try the live version, is here the link to the demo : https://meal-next-door.netlify.app/
