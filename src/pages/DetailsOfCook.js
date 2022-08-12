@@ -15,8 +15,6 @@ function CookDetailsPage() {
     const { cookId } = useParams();
     let navigate = useNavigate();
 
-    console.log(user)
-
     const storedToken = localStorage.getItem("authToken");
 
 
@@ -32,8 +30,7 @@ function CookDetailsPage() {
 
     useEffect(() => {
         getCook();
-    }, []);
-
+    }, [cookId]);
 
     // ADD FAVORITES 
     const requestBody = { favorites: cookId }
@@ -138,7 +135,7 @@ function CookDetailsPage() {
                                             ? <NavLink to={`/cooks/${comment.author._id}`}>
                                                 <Button style={{ backgroundColor: '#3E5D3E', color: '#fff', borderRadius: '15px', padding: '5px 20px', border: 'none' }}>View profile</Button>
                                             </NavLink>
-                                            : <p></p>
+                                            : null
                                         }
 
                                     </MDBCardBody>
