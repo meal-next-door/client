@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Image } from "react-bootstrap";
+import { useEffect } from "react";
 
 function HomePage(props) {
 
@@ -7,8 +8,11 @@ function HomePage(props) {
     const meals = props.meals;
     let cooks, recentMeals;
 
+    useEffect(() => {
+        props.refreshUsers()
+    }, []);
+
     if (users.length > 0 && meals.length > 0) {
-        props.refreshUsers();
         const userCopy = [...users]
         const mealCopy = [...meals]
         cooks = userCopy?.filter(user => user.role === "cook").sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3);
