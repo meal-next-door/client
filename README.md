@@ -1,4 +1,10 @@
 ------------------------
+
+DISCLAIMER 
+
+This is the FRONTEND repository, the BACKEND can be found here : https://github.com/meal-next-door/meal-next-door-server
+
+------------------------
 DESCRIPTION
 
 In the context of our bootcamp at Ironhack we were asked to build an app where users could login and logout and add, create, update and delete content for at least two models.
@@ -14,8 +20,6 @@ For customers: this is an innovative way of finding what delicious meals are bei
 Waste is a global problem and our app is a humble try at tackling this problem.
 
 We hope that you enjoy it as much as we do ! 
-
-Disclaimer : this is the frontend repository, the backend can be found here : https://github.com/meal-next-door/meal-next-door-server
 
 ------------------------
 INSTRUCTIONS
